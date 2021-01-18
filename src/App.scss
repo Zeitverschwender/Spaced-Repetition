@@ -3,7 +3,7 @@
 
 $colors: (
   primary: #43a680,
-  dark: #445F4D,
+  dark: darken(#43a680, 25%),
   blue: #489cc1,
   blue-dark: #39636a,
   red: #931621,
@@ -40,7 +40,8 @@ body {
 
 .main-wrapper {
   background-image: url("./assets/images/repeat.svg");
-  background-size: 13%;
+  background-size: 18%;
+  background-position: center center;
 
   display: flex;
   flex-direction: column;
@@ -56,11 +57,11 @@ header {
   box-shadow: 0 0 1em -0.15em black;
 
   .title {
-    font-family: $font-mono;
+    font-family: $font-main;
     font-size: 2.5rem;
     font-weight: 700;
     color: white;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.08em;
   }
 }
 
