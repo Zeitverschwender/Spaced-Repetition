@@ -20,6 +20,8 @@ class App extends Component {
           items.push(Object.assign(new RepeatingItem(), item));
         });
         this.setState({ repeatingItems:  items});
+      }).catch((err) => {
+          alert(`couldn't get items. error: ${err}`)
       })
   }
 
