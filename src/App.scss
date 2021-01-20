@@ -35,6 +35,10 @@ body {
   background: color(primary);
 
   color: color(text-color);
+
+  background-image: url("./assets/images/repeat.svg");
+  background-size: 18%;
+  background-position: center center;
 }
 
 #root {
@@ -42,10 +46,6 @@ body {
 }
 
 .main-wrapper {
-  background-image: url("./assets/images/repeat.svg");
-  background-size: 18%;
-  background-position: center center;
-
   display: flex;
   flex-direction: column;
 
