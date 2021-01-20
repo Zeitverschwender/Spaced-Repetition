@@ -178,3 +178,13 @@ footer {
     font-size: 1.25rem;
   }
 }
+
+.loading-item {
+  animation: loading-item-animation 1.5s infinite ease-in-out;
+  opacity: 0.85;
+}
+@keyframes loading-item-animation{
+  50% {
+    opacity: 0.4;
+  }
+}
