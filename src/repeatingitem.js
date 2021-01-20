@@ -8,7 +8,7 @@ export class RepeatingItem extends Component {
       <div className="repeating-item">
         <div className="streak-part">
           <span className="streak">Streak</span>
-          <span className="streak-count">43</span>
+          <span className="streak-count">{this.props.item.streak}</span>
         </div>
         <div className="vertical-sep"></div>
         <div className="item-details">
@@ -19,7 +19,7 @@ export class RepeatingItem extends Component {
           </div>
         </div>
         <div className="item-end">
-          <span>after 1 hr</span>
+          <span>after {this.props.item.getNextNotification()}</span>
         </div>
       </div>
     );

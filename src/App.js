@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import {RepeatingItem} from "./models/repeatingitem";
+
 import RepeatingList from "./repeatinglist";
 
 import "./App.scss";
@@ -7,18 +9,9 @@ import "./App.scss";
 class App extends Component {
   state = {
     repeatingItems: [
-      {
-        id: 1,
-        title: "title 1"
-      },
-      {
-        id: 2,
-        title: "title 2"
-      },
-      {
-        id: 3,
-        title: "title 3"
-      }
+      new RepeatingItem(1, "A normal title", 5),
+      new RepeatingItem(2, "Short", 54),
+      new RepeatingItem(3, "A longer than normal title", 12),
     ]
   };
 
