@@ -13,9 +13,12 @@ $colors: (
       $color: #000000,
       $alpha: 0.35,
     ),
+  repeating-item-back: whitesmoke,
 );
 
-$border-radius: 0.125em;
+$border-radius: 0.15em;
+$transition-time: 0.19s;
+$box-shadow: 6px 9px 1em -0.3em black;
 
 $font-main: "Roboto", sans-serif;
 $font-mono: "Roboto Mono", sans-serif;
@@ -80,10 +83,98 @@ footer {
   }
 }
 
-
-.repeating-list{
+.repeating-list {
   background: color(transparent-black-back);
   padding: 1em;
+  border-radius: $border-radius;
 
-  box-shadow: 6px 9px 1em -0.3em black;
+  box-shadow: $box-shadow;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.repeating-item {
+  background: color(repeating-item-back);
+  padding: 0.7em 1.25em;
+
+  border-radius: $border-radius;
+
+  cursor: pointer;
+
+  display: flex;
+  gap: 1em;
+  align-items: center;
+
+  height: 100%;
+
+  transition: $transition-time;
+  &:hover {
+    transform: translateY(-0.1em) scale(1.01);
+    box-shadow: $box-shadow;
+  }
+}
+.streak-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $font-mono;
+  .streak {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+  .streak-count {
+    color: color(blue);
+    font-size: 1.38rem;
+  }
+}
+.vertical-sep {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  height: 90%;
+  border-radius: $border-radius;
+}
+
+.x-line-text-trim {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.one-line-text-trim {
+  @extend .x-line-text-trim;
+  -webkit-line-clamp: 1;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.15em;
+  .item-title {
+    @extend .one-line-text-trim;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+}
+
+.item-end {
+  margin-left: auto;
+
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: 400;
+
+  align-self: flex-start;
+}
+
+.item-icons {
+  display: flex;
+  gap: 0.05em;
+  .material-icons {
+    color: color(blue-dark);
+    font-size: 1.25rem;
+  }
 }
