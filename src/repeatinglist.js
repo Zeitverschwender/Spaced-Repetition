@@ -8,7 +8,7 @@ export class RepeatingList extends Component {
     return (
       <div className="repeating-list">
         {this.props.repeatingItems.map((item) => (
-          <RepeatingItem key={item.id} item={item}></RepeatingItem>
+          <RepeatingItem key={item._id} item={item}></RepeatingItem>
         ))}
       </div>
     );

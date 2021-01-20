@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import {RepeatingItem} from "./models/repeatingitem";
 
@@ -8,12 +9,19 @@ import "./App.scss";
 
 class App extends Component {
   state = {
-    repeatingItems: [
-      new RepeatingItem(1, "A normal title", 5),
-      new RepeatingItem(2, "Short", 54),
-      new RepeatingItem(3, "A longer than normal title", 12),
-    ]
+    repeatingItems: []
   };
+
+  componentDidMount() {
+    axios.get(process.env.REACT_APP_API_URL)
+      .then(res => {
+        const items = [];
+        res.data.forEach(item => {
+          items.push(Object.assign(new RepeatingItem(), item));
+        });
+        this.setState({ repeatingItems:  items});
+      })
+  }
 
   render() {
     return (
