@@ -15,7 +15,7 @@ export class RepeatingItem extends Component {
           <span className="item-title">{this.props.item.title}</span>
           <div className="item-icons">
             <span className="material-icons">notifications</span>
-            <span class="material-icons">subject</span>
+            <span className="material-icons">subject</span>
           </div>
         </div>
         <div className="item-end">
