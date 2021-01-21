@@ -25,7 +25,7 @@ export class RepeatingList extends Component {
           <RepeatingItem key={item._id} item={item}></RepeatingItem>
         ))}
         <div className="create-item" onClick={this.createItemOnClick}>
-          <span class="material-icons">add</span>Create Item
+          <span className="material-icons">add</span>Create Item
         </div>
       </div>
     );
