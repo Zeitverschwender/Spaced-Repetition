@@ -19,6 +19,7 @@ $colors: (
 $border-radius: 0.15em;
 $transition-time: 0.19s;
 $box-shadow: 6px 9px 1em -0.3em black;
+$item-padding: 0.85em 1.25em;
 
 $font-main: "Roboto", sans-serif;
 $font-mono: "Roboto Mono", sans-serif;
@@ -97,7 +98,7 @@ footer {
 
 .repeating-item {
   background: color(repeating-item-back);
-  padding: 0.85em 1.25em;
+  padding: $item-padding;
 
   border-radius: $border-radius;
 
@@ -179,8 +180,33 @@ footer {
   animation: loading-item-animation 1.5s infinite ease-in-out;
   opacity: 0.85;
 }
-@keyframes loading-item-animation{
+@keyframes loading-item-animation {
   50% {
     opacity: 0.4;
+  }
+}
+
+.create-item {
+  color: white;
+
+  cursor: pointer;
+
+  padding: $item-padding;
+
+  border-radius: $border-radius;
+
+  background: rgba($color: white, $alpha: 0.1);
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.25em;
+
+  font-size: 1.05rem;
+
+  transition: $transition-time;
+
+  &:hover {
+    background: rgba($color: white, $alpha: 0.2);
   }
 }
