@@ -13,7 +13,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios.get(process.env.REACT_APP_API_URL)
+    axios.get(process.env.REACT_APP_API_URL + 'repeatingitems')
       .then(res => {
         const items = [];
         res.data.forEach(item => {

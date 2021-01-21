@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import "./createitem.scss";
 
 export class CreateItem extends Component {
   state = {
+    intervals: [],
     isCreateItemShown: false,
     newItem: {
       title: "",
@@ -14,6 +16,16 @@ export class CreateItem extends Component {
   constructor(props) {
     super(props);
     this.createItemTextbox = React.createRef();
+  }
+  componentDidMount() {
+    axios
+      .get(process.env.REACT_APP_API_URL + 'repeatingintervals')
+      .then((res) => {
+        this.setState({ intervals: res.data });
+      })
+      .catch((err) => {
+        alert(`couldn't get intervals. error: ${err}`);
+      });
   }
 
   cancelOnClick = (e) => {
@@ -66,11 +78,11 @@ export class CreateItem extends Component {
               <option value="" disabled hidden>
                 Interval
               </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              {this.state.intervals.map((item) => (
+                <option key={item._id} value={item._id}>
+                  {item.title} ({item.days.toString()})
+                </option>
+              ))}
             </select>
             <div className="create-item-buttons">
               <button
