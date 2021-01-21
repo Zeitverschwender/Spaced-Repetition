@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import './createitem.scss';
+import "./createitem.scss";
 
 export class CreateItem extends Component {
   state = {
@@ -16,6 +16,18 @@ export class CreateItem extends Component {
     this.createItemTextbox = React.createRef();
   }
 
+  cancelOnClick = (e) => {
+    e.preventDefault();
+    this.setState({
+      isCreateItemShown: false,
+    });
+    this.setState({
+      newItem: {
+        title: "",
+        interval: "",
+      },
+    });
+  };
   createItemOnClick = (e) => {
     e.preventDefault();
     this.setState(
@@ -70,7 +82,7 @@ export class CreateItem extends Component {
                 Create
               </button>
               <button className="more-options">More Options</button>
-              <button className="cancel">
+              <button className="cancel" onClick={this.cancelOnClick}>
                 <span className="material-icons">close</span>
               </button>
             </div>
