@@ -1,0 +1,78 @@
+@import "../App.scss";
+
+.create-item-background {
+  padding: $item-padding;
+
+  border-radius: $border-radius;
+
+  background: rgba($color: white, $alpha: 0.1);
+}
+
+.create-item-button {
+  @extend .create-item-background;
+  color: white;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.25em;
+
+  font-size: 1.05rem;
+
+  transition: $transition-time;
+
+  &:hover {
+    background: rgba($color: white, $alpha: 0.2);
+  }
+}
+
+.create-item {
+  @extend .create-item-background;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+
+  input,
+  select {
+    padding: 0.35em 1em;
+    font-size: 1.1rem;
+  }
+
+  .create-item-buttons {
+    display: flex;
+    gap: 0.3em;
+
+    button {
+      border: none;
+      padding: 0.2em;
+      cursor: pointer;
+      border-radius: $border-radius;
+      transition: $transition-time;
+    }
+    button:hover {
+      filter: brightness(0.8);
+    }
+    button:disabled {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .create {
+      flex-basis: 75%;
+      background: white;
+      box-shadow: $box-shadow;
+    }
+    .more-options {
+      flex-basis: 20%;
+      background: color(blue);
+      box-shadow: $box-shadow;
+    }
+    .cancel {
+      flex-basis: 5%;
+      color: white;
+      background: color(red);
+      box-shadow: $box-shadow;
+    }
+  }
+}
