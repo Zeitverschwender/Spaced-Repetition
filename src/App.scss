@@ -44,6 +44,10 @@ body {
   font-family: $font-main;
 }
 
+.material-icons {
+  user-select: none;
+}
+
 #root {
   height: 100%;
 }
@@ -56,6 +60,8 @@ body {
 }
 
 header {
+  position: relative;
+
   display: flex;
   justify-content: center;
   background: rgba($color: color(dark), $alpha: 0.8);
@@ -68,6 +74,22 @@ header {
     font-weight: 700;
     color: white;
     letter-spacing: 0.08em;
+  }
+}
+.side-menu-button {
+  position: absolute;
+  top: 0;
+  left: 0.5em;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  color: white;
+  .material-icons {
+    font-size: 2.75em;
   }
 }
 
@@ -187,4 +209,3 @@ footer {
     opacity: 0.4;
   }
 }
-

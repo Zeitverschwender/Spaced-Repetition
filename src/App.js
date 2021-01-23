@@ -10,6 +10,7 @@ import "./App.scss";
 class App extends Component {
   state = {
     repeatingItems: [],
+    isSideMenuShown: false,
   };
 
   componentDidMount() {
@@ -40,6 +41,12 @@ class App extends Component {
     return (
       <div className="main-wrapper">
         <header>
+          <div
+            className="side-menu-button"
+            onClick={() => this.setState({ isSideMenuShown: true })}
+          >
+            <span className="material-icons">menu</span>
+          </div>
           <span className="title">Spaced Repetition</span>
         </header>
         <div className="content">
