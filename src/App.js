@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import {RepeatingItem} from "./models/repeatingitem";
+import { RepeatingItem } from "./models/repeatingitem";
 
 import RepeatingList from "./repeatinglist";
 
@@ -9,25 +9,32 @@ import "./App.scss";
 
 class App extends Component {
   state = {
-    repeatingItems: []
+    repeatingItems: [],
   };
 
   componentDidMount() {
-    axios.get(process.env.REACT_APP_API_URL + 'repeatingitems')
-      .then(res => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "repeatingitems")
+      .then((res) => {
         const items = [];
-        res.data.forEach(item => {
+        res.data.forEach((item) => {
           items.push(Object.assign(new RepeatingItem(), item));
         });
-        this.setState({ repeatingItems:  items});
-      }).catch((err) => {
-          alert(`couldn't get items. error: ${err}`)
+        this.setState({ repeatingItems: items });
       })
+      .catch((err) => {
+        alert(`couldn't get items. error: ${err}`);
+      });
   }
 
-  onAddItem = (item) =>{
-    this.setState({repeatingItems: [...this.state.repeatingItems, Object.assign(new RepeatingItem(), item)]});
-  }
+  onAddItem = (item) => {
+    this.setState({
+      repeatingItems: [
+        ...this.state.repeatingItems,
+        Object.assign(new RepeatingItem(), item),
+      ],
+    });
+  };
 
   render() {
     return (
@@ -36,10 +43,17 @@ class App extends Component {
           <span className="title">Spaced Repetition</span>
         </header>
         <div className="content">
-          <RepeatingList repeatingItems={this.state.repeatingItems} onAddItem={this.onAddItem}></RepeatingList>
+          <RepeatingList
+            repeatingItems={this.state.repeatingItems}
+            onAddItem={this.onAddItem}
+          ></RepeatingList>
         </div>
         <footer>
-          <a href="https://github.com/Zeitverschwender/Spaced-Repetition" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/Zeitverschwender/Spaced-Repetition"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Github
           </a>
         </footer>
