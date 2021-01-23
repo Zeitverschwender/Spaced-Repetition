@@ -84,26 +84,31 @@ export class CreateItem extends Component {
                 })
               }
             />
-            <select
-              defaultValue=""
-              onChange={(e) =>
-                this.setState({
-                  newItem: {
-                    ...this.state.newItem,
-                    interval: e.target.value,
-                  },
-                })
-              }
-            >
-              <option value="" disabled hidden>
-                Interval
-              </option>
-              {this.state.intervals.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.title} ({item.days.toString()})
+            <div className="interval">
+              <select
+                defaultValue=""
+                className={
+                  this.state.newItem.interval ? "" : "select-placeholder"
+                }
+                onChange={(e) =>
+                  this.setState({
+                    newItem: {
+                      ...this.state.newItem,
+                      interval: e.target.value,
+                    },
+                  })
+                }
+              >
+                <option value="" disabled hidden>
+                  Interval
                 </option>
-              ))}
-            </select>
+                {this.state.intervals.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.title} ({item.days.toString()})
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="create-item-buttons">
               <button
                 className="create"
@@ -114,7 +119,9 @@ export class CreateItem extends Component {
               >
                 Create
               </button>
-              <button className="more-options">More Options</button>
+              <button className="more-options">
+                <span className="material-icons">tune</span>
+              </button>
               <button className="cancel" onClick={this.cancelOnClick}>
                 <span className="material-icons">close</span>
               </button>

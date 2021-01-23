@@ -32,47 +32,118 @@
   @extend .create-item-background;
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: 0.35em;
 
   input,
   select {
-    padding: 0.35em 1em;
+    padding: 0.35em 0.1em;
     font-size: 1.1rem;
+    border: 0;
+    border-bottom: 0.18rem solid color(blue);
+    outline: 0;
+    background: transparent;
+    color: white;
+    border-radius: $border-radius;
+
+    font-family: $font-main;
+
+    transition: border-color $transition-time, background $transition-time;
+
+    &:focus {
+      background: rgba($color: white, $alpha: 0.05);
+      border-color: lighten(color(blue), 25%);
+    }
   }
 
-  .create-item-buttons {
-    display: flex;
-    gap: 0.3em;
+  select {
+    appearance: none;
+    width: 100%;
 
-    button {
-      border: none;
-      padding: 0.2em;
-      cursor: pointer;
-      border-radius: $border-radius;
-      transition: $transition-time;
+    option {
+      color: black;
+      font-size: 1.1rem;
+      font-family: $font-main;
     }
-    button:hover {
-      filter: brightness(0.8);
-    }
-    button:disabled {
+  }
+  input::placeholder,
+  .select-placeholder {
+    color: rgba($color: white, $alpha: 0.75);
+    font-family: $font-mono;
+    font-size: 0.75rem;
+  }
+  .select-placeholder {
+    padding: 0.7em 0;
+  }
+}
+
+.interval {
+  position: relative;
+}
+.interval::after {
+  content: "";
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/></svg>");
+  background-repeat: no-repeat;
+
+  position: absolute;
+  top: 0;
+  right: 0.15em;
+
+  transform: translateY(50%);
+  height: 1em;
+  width: 1em;
+
+  pointer-events: none;
+}
+
+@mixin button-on-hover($color) {
+  &:hover {
+    background-color: rgba($color: $color, $alpha: 0.15);
+  }
+}
+.create-item-buttons {
+  display: flex;
+  gap: 0.3em;
+  margin-top: 0.3em;
+
+  button {
+    cursor: pointer;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    transition: $transition-time;
+
+    border: 0.178em solid black;
+    background-color: transparent;
+
+    box-shadow: 5px 8px 1em -0.5em black;
+    border-color: currentColor;
+
+    font-family: $font-main;
+    font-size: 1.05rem;
+    &:disabled {
       pointer-events: none;
-      opacity: 0.8;
+      opacity: 0.45;
     }
-    .create {
-      flex-basis: 75%;
-      background: white;
-      box-shadow: $box-shadow;
+    &:focus {
+      outline: none;
     }
-    .more-options {
-      flex-basis: 20%;
-      background: color(blue);
-      box-shadow: $box-shadow;
-    }
-    .cancel {
-      flex-basis: 5%;
-      color: white;
-      background: color(red);
-      box-shadow: $box-shadow;
-    }
+  }
+  .create {
+    flex-basis: 75%;
+    color: white;
+
+    @include button-on-hover(white);
+  }
+  .more-options {
+    flex-basis: 20%;
+    color: color(blue);
+
+    @include button-on-hover(color(blue));
+  }
+  .cancel {
+    flex-basis: 5%;
+    color: color(red);
+
+    @include button-on-hover(color(red));
   }
 }
