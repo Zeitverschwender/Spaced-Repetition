@@ -40,6 +40,8 @@ body {
   background-image: url("./assets/images/repeat.svg");
   background-size: 18%;
   background-position: center center;
+
+  font-family: $font-main;
 }
 
 #root {
@@ -153,7 +155,7 @@ footer {
   .item-title {
     @extend .one-line-text-trim;
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
