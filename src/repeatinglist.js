@@ -21,7 +21,7 @@ export class RepeatingList extends Component {
         {this.props.repeatingItems.map((item) => (
           <RepeatingItem key={item._id} item={item}></RepeatingItem>
         ))}
-        <CreateItem></CreateItem>
+        <CreateItem onAddItem={this.props.onAddItem}></CreateItem>
       </div>
     );
   }
@@ -29,6 +29,7 @@ export class RepeatingList extends Component {
 
 RepeatingList.propTypes = {
   repeatingItems: PropTypes.array.isRequired,
+  onAddItem: PropTypes.func.isRequired,
 };
 
 export default RepeatingList;

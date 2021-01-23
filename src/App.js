@@ -25,6 +25,10 @@ class App extends Component {
       })
   }
 
+  onAddItem = (item) =>{
+    this.setState({repeatingItems: [...this.state.repeatingItems, Object.assign(new RepeatingItem(), item)]});
+  }
+
   render() {
     return (
       <div className="main-wrapper">
@@ -32,7 +36,7 @@ class App extends Component {
           <span className="title">Spaced Repetition</span>
         </header>
         <div className="content">
-          <RepeatingList repeatingItems={this.state.repeatingItems}></RepeatingList>
+          <RepeatingList repeatingItems={this.state.repeatingItems} onAddItem={this.onAddItem}></RepeatingList>
         </div>
         <footer>
           <a href="https://github.com/Zeitverschwender/Spaced-Repetition" target="_blank" rel="noopener noreferrer">

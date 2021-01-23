@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import "./createitem.scss";
 
@@ -19,17 +20,31 @@ export class CreateItem extends Component {
   }
   componentDidMount() {
     axios
-      .get(process.env.REACT_APP_API_URL + 'repeatingintervals')
+      .get(process.env.REACT_APP_API_URL + "repeatingintervals")
       .then((res) => {
         this.setState({ intervals: res.data });
       })
       .catch((err) => {
-        alert(`couldn't get intervals. error: ${err}`);
+        alert(`couldn't add item. error: ${err}`);
       });
   }
 
-  cancelOnClick = (e) => {
-    e.preventDefault();
+  createOnClick = (e) => {
+    axios
+      .post(process.env.REACT_APP_API_URL + "repeatingitems", {
+        title: this.state.newItem.title,
+        interval: this.state.newItem.interval,
+      })
+      .then((res) => {
+        this.props.onAddItem(res.data);
+        this.exitCreation();
+      })
+      .catch((err) => {
+        alert(`couldn't get intervals. error: ${err}`);
+      });
+  };
+
+  exitCreation = () => {
     this.setState({
       isCreateItemShown: false,
     });
@@ -39,6 +54,11 @@ export class CreateItem extends Component {
         interval: "",
       },
     });
+  };
+
+  cancelOnClick = (e) => {
+    e.preventDefault();
+    this.exitCreation();
   };
   createItemOnClick = (e) => {
     e.preventDefault();
@@ -90,6 +110,7 @@ export class CreateItem extends Component {
                 disabled={
                   !(this.state.newItem.title && this.state.newItem.interval)
                 }
+                onClick={this.createOnClick}
               >
                 Create
               </button>
@@ -109,5 +130,9 @@ export class CreateItem extends Component {
     );
   }
 }
+
+CreateItem.propTypes = {
+  onAddItem: PropTypes.func.isRequired,
+};
 
 export default CreateItem;
