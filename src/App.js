@@ -4,6 +4,7 @@ import axios from "axios";
 import { RepeatingItem } from "./models/repeatingitem";
 
 import RepeatingList from "./repeatinglist";
+import Sidemenu from "./components/sidemenu";
 
 import "./App.scss";
 
@@ -37,6 +38,8 @@ class App extends Component {
     });
   };
 
+  hideSideMenu = () => this.setState({isSideMenuShown: false});
+
   render() {
     return (
       <div className="main-wrapper">
@@ -49,6 +52,7 @@ class App extends Component {
           </div>
           <span className="title">Spaced Repetition</span>
         </header>
+        {this.state.isSideMenuShown && <Sidemenu hideSideMenu={this.hideSideMenu} />}
         <div className="content">
           <RepeatingList
             repeatingItems={this.state.repeatingItems}

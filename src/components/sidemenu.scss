@@ -1,0 +1,69 @@
+@import "../App.scss";
+
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba($color: #000000, $alpha: 0.4);
+
+  .side-menu-back {
+    width: 44%;
+    height: 100%;
+
+    background: #6d6d6d7a;
+
+    display: flex;
+    flex-direction: column;
+
+    .path-link:first-child {
+      margin-top: 3em;
+    }
+    .path-link,
+    .login-button {
+      text-decoration: none;
+      color: white;
+      padding: 2em 1em;
+      background: rgba($color: color(blue), $alpha: 1);
+
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+
+      filter: brightness(0.9);
+
+      transition: $transition-time;
+      &:hover {
+        filter: none;
+        letter-spacing: 0.3em;
+        gap: 0.3em;
+        border-right: 0.4em solid color(primary);
+      }
+    }
+    .user {
+      margin-top: auto;
+
+      .user-icon {
+        color: white;
+        font-size: 8em;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .login-button {
+      padding: 0.7em 1em;
+      img {
+        width: 2em;
+      }
+    }
+  }
+}
