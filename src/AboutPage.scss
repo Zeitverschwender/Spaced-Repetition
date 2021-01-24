@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: rgba($color: white, $alpha: 1);
+  background: rgba($color: rgb(248, 248, 255), $alpha: 0.7);
 
   .hook {
     display: flex;
@@ -31,7 +31,7 @@
   flex-direction: column;
 
   height: 100vh;
-  background: rgba($color: color(blue), $alpha: 1);
+  background: rgba($color: rgb(248, 248, 255), $alpha: 0.7);
 
   .about-product {
     font-size: 1.5em;
@@ -44,7 +44,7 @@
   flex-direction: column;
 
   height: 100vh;
-  background: rgba($color: color(blue-dark), $alpha: 1);
+  background: rgba($color: rgb(248, 248, 255), $alpha: 0.7);
 
   h2 {
     font-size: 3em;

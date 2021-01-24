@@ -10,18 +10,19 @@ import Ebbinghaus from "./assets/images/Ebbinghaus.jpg";
 
 class AboutPage extends Component {
     state = {
-        dummyText : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in diam fermentum, feugiat dui at, bibendum lectus. Nunc mollis imperdiet elit, interdum molestie nunc luctus mollis. Integer molestie turpis non sem malesuada blandit. Proin maximus, odio at vestibulum condimentum, mi augue laoreet justo, in congue sem massa id sapien. Pellentesque id dolor nec enim rutrum porttitor eget id urna. Suspendisse sapien erat, iaculis ac efficitur eu, tristique ut massa. Cras tellus lectus, feugiat eget ipsum at, posuere eleifend libero. Sed sit amet lorem aliquam, faucibus lectus in, venenatis quam. Vestibulum eget mauris non purus sollicitudin interdum. Sed ut tellus et lorem pellentesque feugiat. Nam vulputate ligula at leo facilisis tempus. Maecenas dictum quis felis non dignissim.",
-        dummyTeam : [
-            "Member",
-            "Member",
-            "Member",
-            "Member",
+        productInfo: "Spaced Repetition is an app that helps you remember newly acquired knowledge through a method that was scientifically proven to result in higher rates of learning. It is based on the spaced repetition learning method that was built to help people acquire knowledge (mostly new vocabulary) easily",
+        theoryInfo : "\"I just learned this last week, HOW DID I FORGET IT ALREADY?\". This can happen due to what's called a forgetting curve. Discovered by Hermann Ebbinghaus, the forgetting curve shows how newly acquired information can be lost rather quickly over time. It is said that half the information learned is lost every couple of days if not reviewed. Luckily, the spaced repetition method is able to solve this by reminding you with the required info periodically in a set of intervals to help you save this knowledge and almost never lost it again",
+        team : [
+            "Sameh Amnoun",
+            "Mohamed Said",
+            "Ahmed Sadek",
+            "Remon Isaac",
         ],
     }
     render() {
 
         //var teamMembers = this.state.dummyTeam.map((teamMember,index) => <Zoom duration={1000}><div><img src={githubIcon}></img><span>{teamMember} {index + 1}</span></div></Zoom>)
-        var teamMembers = this.state.dummyTeam.map((teamMember,index) => index%2 == 0? <Fade right duration={1000}><div><img src={githubIcon}></img><span>{teamMember} {index + 1}</span></div></Fade>:<Fade left duration={1000}><div><img src={githubIcon}></img><span>{teamMember} {index + 1}</span></div></Fade>)
+        var teamMembers = this.state.team.map((teamMember,index) => index%2 === 0? <Fade right duration={1000}><div><img src={githubIcon}></img><span>{teamMember}</span></div></Fade>:<Fade left duration={1000}><div><img src={githubIcon}></img><span>{teamMember}</span></div></Fade>)
 
         return (
         <div className="about-main-wrapper">
@@ -29,23 +30,25 @@ class AboutPage extends Component {
                 <span className="title">Spaced Repetition</span>
             </header>
             <div className="about-content">
+                                <div className="about-product-wrapper">
+                <TransitionGroup>
+                        <Zoom opposite={true}>
+                        <h1>About Spaced Repetition</h1>
+                        <p className="about-product">{this.state.productInfo}</p>
+                        </Zoom>
+                </TransitionGroup>
+                </div>
+
                 <div className="hook-wrapper">
                     <TransitionGroup>
-                    <h2>Lorem ipsum much?</h2>
+                    <h1>SCIENCE of remembering</h1>
                     <div  className="hook">
-                        <Fade left duration={2000}><p>{this.state.dummyText}</p></Fade>
-                        <Fade right duration={2000}><img src={Ebbinghaus}></img></Fade>
+                        <Fade left duration={2000}><p>{this.state.theoryInfo}</p></Fade>
+                        <Fade right duration={2000}><img src={Ebbinghaus} alt="Ebbinghaus"></img></Fade>
                     </div>
                     </TransitionGroup>
                 </div>
-                    <TransitionGroup>
-                    <div className="about-product-wrapper">
-                        <Zoom opposite={true}>
-                        <h2>About Lorem ipsum</h2>
-                        <p className="about-product">{this.state.dummyText}</p>
-                        </Zoom>
-                    </div>
-                    </TransitionGroup>
+
                 <div className="about-team-wrapper">
                     <TransitionGroup>
                     <h2>About the team</h2>
