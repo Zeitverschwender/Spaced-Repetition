@@ -12,6 +12,9 @@
 
   background: rgba($color: #000000, $alpha: 0.4);
 
+  // animation: 1 background-entrance ;
+  animation: background-entrance 0.2s ease-in-out;
+
   .side-menu-back {
     width: 44%;
     height: 100%;
@@ -20,6 +23,8 @@
 
     display: flex;
     flex-direction: column;
+
+    animation: side-entrance 0.2s ease-in-out;
 
     .path-link:first-child {
       margin-top: 3em;
@@ -65,5 +70,22 @@
         width: 2em;
       }
     }
+  }
+}
+
+@keyframes background-entrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes side-entrance {
+  from {
+    transform: translateX(-10em);
+  }
+  to {
+    transform: translateX(0);
   }
 }
