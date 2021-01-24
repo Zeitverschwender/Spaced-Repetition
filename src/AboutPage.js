@@ -26,13 +26,10 @@ class AboutPage extends Component {
 
         return (
         <div className="about-main-wrapper">
-            <header>
-                <span className="title">Spaced Repetition</span>
-            </header>
             <div className="about-content">
-                                <div className="about-product-wrapper">
+            <div className="about-product-wrapper">
                 <TransitionGroup>
-                        <Zoom opposite={true}>
+                        <Zoom bottom duration={1000}>
                         <h1>About Spaced Repetition</h1>
                         <p className="about-product">{this.state.productInfo}</p>
                         </Zoom>
@@ -56,11 +53,6 @@ class AboutPage extends Component {
                     </TransitionGroup>
                 </div>
             </div>
-            <footer>
-                <a href="https://github.com/Zeitverschwender/Spaced-Repetition" target="_blank" rel="noopener noreferrer">
-                Github
-                </a>
-            </footer>
         </div>
          );
     }
