@@ -16,9 +16,13 @@ export default function ItemFullDetails(props) {
         <h2 className="full-title"> {props.item.title} </h2>
         <div className="horizontal-sep"></div>
         <div className="details-status-icons">
-          <StatusIcons item={props.item} size="2.75rem"/>
+          <StatusIcons item={props.item} size="2.25rem" />
         </div>
-
+        <div className="item-details-desc">
+          {props.item.description || (
+            <span className="no-desc">No Description...</span>
+          )}
+        </div>
       </div>
     </div>
   );

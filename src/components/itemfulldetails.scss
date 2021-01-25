@@ -42,6 +42,16 @@
   margin: 0.5em 0;
 }
 
+.item-details-desc {
+  padding: 0.5em;
+  background: rgba($color: #000000, $alpha: 0.05);
+}
+.no-desc {
+  font-family: $font-mono;
+  color: rgba($color: black, $alpha: 0.8);
+  font-size: 0.75rem;
+}
+
 @keyframes card-entrance {
   from {
     transform: translateY(1.5em);
