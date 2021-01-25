@@ -230,3 +230,12 @@ $sep-size: 3.18em;
     opacity: 0.4;
   }
 }
+
+@keyframes background-entrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

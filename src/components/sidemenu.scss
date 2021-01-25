@@ -72,14 +72,6 @@
   }
 }
 
-@keyframes background-entrance {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @keyframes side-entrance {
   from {
     transform: translateX(-10em);
