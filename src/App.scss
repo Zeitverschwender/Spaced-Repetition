@@ -143,19 +143,22 @@ footer {
     box-shadow: $box-shadow;
   }
 }
+
 .streak-part {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: $font-mono;
-  .streak {
-    text-transform: uppercase;
-    font-size: 0.75rem;
-  }
-  .streak-count {
-    color: color(blue);
-    font-size: 1.38rem;
-  }
+}
+
+.streak {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.streak-count {
+  color: color(blue);
+  font-size: 1.38rem;
 }
 
 $sep-size: 3.18em;
@@ -204,12 +207,13 @@ $sep-size: 3.18em;
 .item-end {
   margin-left: auto;
 
+  align-self: flex-start;
+  text-align: right;
+}
+.next-notification {
   font-family: $font-mono;
   font-size: 0.75rem;
   font-weight: 400;
-
-  align-self: flex-start;
-  text-align: right;
 }
 
 .item-icons {

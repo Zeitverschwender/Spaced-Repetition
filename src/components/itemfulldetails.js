@@ -33,6 +33,18 @@ export default function ItemFullDetails(props) {
             <span className="no-desc">No Description...</span>
           )}
         </div>
+        <div className="item-details-footer">
+          <div className="horizontal-sep"></div>
+          <div className="item-details-footer-content">
+            <div className="details-streak">
+              <span className="streak">Streak</span>
+              <span className="streak-count">{props.item.getStreak()}</span>
+            </div>
+            <div className="next-notification">
+              After {props.item.getNextNotification()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

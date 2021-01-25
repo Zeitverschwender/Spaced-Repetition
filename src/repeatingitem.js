@@ -18,7 +18,7 @@ export class RepeatingItem extends Component {
           <StatusIcons item={this.props.item} size="1.25rem" />
         </div>
         <div className="item-end">
-          <span>after {this.props.item.getNextNotification()}</span>
+          <span className="next-notification">after {this.props.item.getNextNotification()}</span>
         </div>
       </div>
     );

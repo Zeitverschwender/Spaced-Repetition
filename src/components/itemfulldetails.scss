@@ -32,6 +32,9 @@
   padding: 1em;
 
   animation: card-entrance 0.2s ease-in-out;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .before-sep {
@@ -84,4 +87,22 @@
   to {
     transform: translateY(0);
   }
+}
+
+.item-details-footer {
+  margin-top: auto;
+  .horizontal-sep {
+    margin-bottom: 0.5em;
+  }
+}
+.item-details-footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.details-streak {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
 }
