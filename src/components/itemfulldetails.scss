@@ -34,8 +34,29 @@
   animation: card-entrance 0.2s ease-in-out;
 }
 
+.before-sep {
+  display: flex;
+  align-items: center;
+}
 .full-title {
   font-size: 1.4rem;
+  display: inline-block;
+}
+.details-exit {
+  margin-left: auto;
+
+  color: color(blue-dark);
+  font-size: 2rem;
+
+  border-radius: $border-radius;
+  padding: 0.05em;
+  background: rgba($color: #000000, $alpha: 0.1);
+
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.5);
+  }
 }
 
 .details-status-icons {

@@ -13,7 +13,11 @@ export default function ItemFullDetails(props) {
         className="item-details-content"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="full-title"> {props.item.title} </h2>
+        <div className="before-sep">
+          <h2 className="full-title"> {props.item.title} </h2>
+          <span className="material-icons details-exit">close</span>
+        </div>
+
         <div className="horizontal-sep"></div>
         <div className="details-status-icons">
           <StatusIcons item={props.item} size="2.25rem" />
