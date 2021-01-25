@@ -73,6 +73,12 @@
 .item-details-desc {
   padding: 0.5em;
   background: rgba($color: #000000, $alpha: 0.05);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+
+  margin-bottom: 1em;
 }
 .no-desc {
   font-family: $font-mono;
