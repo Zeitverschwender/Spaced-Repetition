@@ -32,6 +32,19 @@ class App extends Component {
       });
   }
 
+  enableScrolling() {
+    document.body.style.overflow = null;
+    document.body.style.webkitOverflowScrolling = null;
+  }
+  disableScrolling() {
+    document.body.style.overflow = "hidden";
+    document.body.style.webkitOverflowScrolling = "touch";
+  }
+
+  componentWillUnmount() {
+    this.enableScrolling();
+  }
+
   onAddItem = (item) => {
     this.setState({
       repeatingItems: [
@@ -42,13 +55,20 @@ class App extends Component {
   };
   onItemClick = (clickedItem) => {
     this.setState({
-      isFullDetailsShown:true,
-      clickedItem
+      isFullDetailsShown: true,
+      clickedItem,
     });
+    this.disableScrolling();
   };
 
-  hideSideMenu = () => this.setState({isSideMenuShown: false});
-  hideFullDetails = () => this.setState({isFullDetailsShown: false});
+  hideSideMenu = () => {
+    this.setState({ isSideMenuShown: false });
+    this.enableScrolling();
+  };
+  hideFullDetails = () => {
+    this.setState({ isFullDetailsShown: false });
+    this.enableScrolling();
+  };
 
   render() {
     return (
@@ -56,14 +76,24 @@ class App extends Component {
         <header>
           <div
             className="side-menu-button"
-            onClick={() => this.setState({ isSideMenuShown: true })}
+            onClick={() => {
+              this.setState({ isSideMenuShown: true });
+              this.disableScrolling();
+            }}
           >
             <span className="material-icons">menu</span>
           </div>
           <span className="title">Spaced Repetition</span>
         </header>
-        {this.state.isSideMenuShown && <Sidemenu hideSideMenu={this.hideSideMenu} />}
-        {this.state.isFullDetailsShown && <ItemFullDetails item={this.state.clickedItem} hideFullDetails={this.hideFullDetails}/>}
+        {this.state.isSideMenuShown && (
+          <Sidemenu hideSideMenu={this.hideSideMenu} />
+        )}
+        {this.state.isFullDetailsShown && (
+          <ItemFullDetails
+            item={this.state.clickedItem}
+            hideFullDetails={this.hideFullDetails}
+          />
+        )}
         <div className="content">
           <RepeatingList
             repeatingItems={this.state.repeatingItems}
