@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
+import StatusIcons from './components/statusicons';
+
 export class RepeatingItem extends Component {
   render() {
     return (
@@ -13,10 +15,7 @@ export class RepeatingItem extends Component {
         <div className="vertical-sep"></div>
         <div className="item-details">
           <span className="item-title" title={this.props.item.title}>{this.props.item.title}</span>
-          <div className="item-icons">
-            <span className="material-icons">notifications</span>
-            {this.props.item.description && <span className="material-icons">subject</span>}
-          </div>
+          <StatusIcons item={this.props.item} size="1.25rem" />
         </div>
         <div className="item-end">
           <span>after {this.props.item.getNextNotification()}</span>

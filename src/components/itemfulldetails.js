@@ -2,6 +2,8 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
+import StatusIcons from "./statusicons";
+
 import "./itemfulldetails.scss";
 
 export default function ItemFullDetails(props) {
@@ -13,6 +15,9 @@ export default function ItemFullDetails(props) {
       >
         <h2 className="full-title"> {props.item.title} </h2>
         <div className="horizontal-sep"></div>
+        <div className="details-status-icons">
+          <StatusIcons item={props.item} size="2.75rem"/>
+        </div>
 
       </div>
     </div>
