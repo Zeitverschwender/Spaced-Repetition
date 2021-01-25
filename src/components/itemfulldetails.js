@@ -15,7 +15,12 @@ export default function ItemFullDetails(props) {
       >
         <div className="before-sep">
           <h2 className="full-title"> {props.item.title} </h2>
-          <span className="material-icons details-exit">close</span>
+          <span
+            className="material-icons details-exit"
+            onClick={props.hideFullDetails}
+          >
+            close
+          </span>
         </div>
 
         <div className="horizontal-sep"></div>
