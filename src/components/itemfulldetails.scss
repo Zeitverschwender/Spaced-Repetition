@@ -11,28 +11,25 @@
   height: 100%;
 
   background: color(overlay-back);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-details-content {
-    position: relative;
-    top: 50%;
+  width: 75%;
+  height: 30%;
 
-    transform: translateY(-50%);
+  background: color(repeating-item-back);
 
-    width: 75%;
-    height: 30%;
+  box-shadow: 6px 9px 2em 0em black;
 
-    background: color(repeating-item-back);
+  border-radius: $border-radius;
 
-    box-shadow: 6px 9px 2em 0em black;;
-
-    border-radius: $border-radius;
-
-    padding: 1em;
-
-    margin: 0 auto;
+  padding: 1em;
 }
 
-.full-title{
-    font-size: 1.4rem;
+.full-title {
+  font-size: 1.4rem;
 }
