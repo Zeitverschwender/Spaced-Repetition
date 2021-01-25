@@ -13,6 +13,11 @@ $colors: (
       $color: #000000,
       $alpha: 0.5,
     ),
+  overlay-back:
+    rgba(
+      $color: #000000,
+      $alpha: 0.4,
+    ),
   repeating-item-back: whitesmoke,
 );
 
@@ -152,10 +157,26 @@ footer {
     font-size: 1.38rem;
   }
 }
-.vertical-sep {
-  border-left: 0.15em solid black;
-  height: 3.18em;
+
+$sep-size: 3.18em;
+
+.sep {
+  border: 0.15em solid black;
   border-radius: $border-radius;
+}
+
+.vertical-sep {
+  height: 3.18em;
+  @extend .sep;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+.horizontal-sep {
+  @extend .sep;
+  border-left: none;
+  border-right: none;
+  border-top: none;
 }
 
 .x-line-text-trim {

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export class RepeatingItem extends Component {
   render() {
     return (
-      <div className="repeating-item">
+      <div className="repeating-item" onClick={() => this.props.onItemClick(this.props.item)}>
         <div className="streak-part">
           <span className="streak">Streak</span>
           <span className="streak-count">{this.props.item.getStreak()}</span>
@@ -28,6 +28,7 @@ export class RepeatingItem extends Component {
 
 RepeatingItem.propTypes = {
   item: PropTypes.object.isRequired,
+  onItemClick: PropTypes.func,
 };
 
 export default RepeatingItem;

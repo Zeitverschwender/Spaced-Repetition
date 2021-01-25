@@ -1,0 +1,38 @@
+@import "../App.scss";
+
+.item-details-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  background: color(overlay-back);
+}
+
+.item-details-content {
+    position: relative;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 75%;
+    height: 30%;
+
+    background: color(repeating-item-back);
+
+    box-shadow: 6px 9px 2em 0em black;;
+
+    border-radius: $border-radius;
+
+    padding: 1em;
+
+    margin: 0 auto;
+}
+
+.full-title{
+    font-size: 1.4rem;
+}

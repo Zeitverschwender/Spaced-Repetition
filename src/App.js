@@ -5,6 +5,7 @@ import { RepeatingItem } from "./models/repeatingitem";
 
 import RepeatingList from "./repeatinglist";
 import Sidemenu from "./components/sidemenu";
+import ItemFullDetails from "./components/itemfulldetails";
 
 import "./App.scss";
 
@@ -12,6 +13,8 @@ class App extends Component {
   state = {
     repeatingItems: [],
     isSideMenuShown: false,
+    isFullDetailsShown: false,
+    clickedItem: null,
   };
 
   componentDidMount() {
@@ -37,8 +40,15 @@ class App extends Component {
       ],
     });
   };
+  onItemClick = (clickedItem) => {
+    this.setState({
+      isFullDetailsShown:true,
+      clickedItem
+    });
+  };
 
   hideSideMenu = () => this.setState({isSideMenuShown: false});
+  hideFullDetails = () => this.setState({isFullDetailsShown: false});
 
   render() {
     return (
@@ -53,10 +63,12 @@ class App extends Component {
           <span className="title">Spaced Repetition</span>
         </header>
         {this.state.isSideMenuShown && <Sidemenu hideSideMenu={this.hideSideMenu} />}
+        {this.state.isFullDetailsShown && <ItemFullDetails item={this.state.clickedItem} hideFullDetails={this.hideFullDetails}/>}
         <div className="content">
           <RepeatingList
             repeatingItems={this.state.repeatingItems}
             onAddItem={this.onAddItem}
+            onItemClick={this.onItemClick}
           ></RepeatingList>
         </div>
         <footer>
