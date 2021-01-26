@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
@@ -22,12 +23,12 @@ class AboutPage extends Component {
     render() {
 
         //var teamMembers = this.state.dummyTeam.map((teamMember,index) => <Zoom duration={1000}><div><img src={githubIcon}></img><span>{teamMember} {index + 1}</span></div></Zoom>)
-        var teamMembers = this.state.team.map((teamMember,index) => index%2 === 0? <Fade right duration={1000}><div><img src={githubIcon}></img><span>{teamMember}</span></div></Fade>:<Fade left duration={1000}><div><img src={githubIcon}></img><span>{teamMember}</span></div></Fade>)
+        var teamMembers = this.state.team.map((teamMember,index) => index%2 === 0? <Fade right duration={1000}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Fade>:<Fade left duration={1000}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Fade>)
 
         return (
         <div className="about-main-wrapper">
             <div className="about-content">
-            <div className="about-product-wrapper">
+                <div className="about-product-wrapper">
                 <TransitionGroup>
                         <Zoom bottom duration={1000}>
                         <h1>About Spaced Repetition</h1>

@@ -8,8 +8,8 @@ import RepeatingList from "./repeatinglist";
 
 import "./App.scss";
 import AboutPage from "./AboutPage";
+import NotFoundPage from "./NotFoundPage";
 import githubIcon from "./assets/images/github.svg";
-import homeIcon from "./assets/images/home.svg";
 import aboutIcon from "./assets/images/info.svg";
 
 class App extends Component {
@@ -39,22 +39,25 @@ class App extends Component {
           <span className="title">Spaced Repetition</span>
           </Link>
         </header>
-          <switch>
+          <Switch>
             <Route exact path="/">
               <div className="content">
                 <RepeatingList repeatingItems={this.state.repeatingItems}></RepeatingList>
               </div>
             </Route>
-            <Route exact path="/About">
+            <Route path="/About">
               <AboutPage></AboutPage>
             </Route>
-          </switch>
+            <Route>
+              <NotFoundPage></NotFoundPage>
+            </Route>
+          </Switch>
           <footer>
           <a href="https://github.com/Zeitverschwender/Spaced-Repetition" target="_blank" rel="noopener noreferrer">
-            <img src={githubIcon}></img>Github
+            <img src={githubIcon} alt="Loading..."></img>Github
           </a>
           <Link to="/About">
-          <img src={aboutIcon}></img><span>About us</span>
+          <img src={aboutIcon} alt="Loading..."></img><span>About us</span>
           </Link>
         </footer>
         </BrowserRouter>
