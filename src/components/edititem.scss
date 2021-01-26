@@ -1,0 +1,15 @@
+@import "../App.scss";
+
+.title-textbox {
+  font-size: 1.4rem;
+  flex-grow: 1;
+
+  margin: 0.5em 0;
+}
+
+.desc-textbox {
+  width: 100%;
+  height: 100%;
+
+  margin-bottom: 1em;
+}

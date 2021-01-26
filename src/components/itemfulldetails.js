@@ -15,7 +15,12 @@ export default function ItemFullDetails(props) {
       >
         <div className="before-sep">
           <h2 className="full-title"> {props.item.title} </h2>
-          <span className="material-icons details-edit">create</span>
+          <span
+            className="material-icons details-edit"
+            onClick={() => props.showEditDetails()}
+          >
+            create
+          </span>
           <span
             className="material-icons details-buttons"
             onClick={props.hideFullDetails}
@@ -52,4 +57,5 @@ export default function ItemFullDetails(props) {
 ItemFullDetails.propTypes = {
   item: PropTypes.object.isRequired,
   hideFullDetails: PropTypes.func.isRequired,
+  showEditDetails: PropTypes.func.isRequired,
 };

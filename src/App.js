@@ -6,6 +6,7 @@ import { RepeatingItem } from "./models/repeatingitem";
 import RepeatingList from "./repeatinglist";
 import Sidemenu from "./components/sidemenu";
 import ItemFullDetails from "./components/itemfulldetails";
+import EditItem from "./components/edititem";
 
 import "./App.scss";
 
@@ -14,6 +15,7 @@ class App extends Component {
     repeatingItems: [],
     isSideMenuShown: false,
     isFullDetailsShown: false,
+    isEditDetailsShown: false,
     clickedItem: null,
   };
 
@@ -66,8 +68,14 @@ class App extends Component {
     this.enableScrolling();
   };
   hideFullDetails = () => {
-    this.setState({ isFullDetailsShown: false });
+    this.setState({ isFullDetailsShown: false});
     this.enableScrolling();
+  };
+  showEditDetails = () => {
+    this.setState({ isEditDetailsShown: true });
+  };
+  hideEditDetails = () => {
+    this.setState({ isEditDetailsShown: false });
   };
 
   render() {
@@ -92,6 +100,13 @@ class App extends Component {
           <ItemFullDetails
             item={this.state.clickedItem}
             hideFullDetails={this.hideFullDetails}
+            showEditDetails={this.showEditDetails}
+          />
+        )}
+        {this.state.isEditDetailsShown && (
+          <EditItem
+            item={this.state.clickedItem}
+            hideEditDetails={this.hideEditDetails}
           />
         )}
         <div className="content">
