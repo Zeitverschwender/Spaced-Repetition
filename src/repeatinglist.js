@@ -19,9 +19,16 @@ export class RepeatingList extends Component {
           </div>
         )}
         {this.props.repeatingItems.map((item) => (
-          <RepeatingItem key={item._id} item={item} onItemClick={this.props.onItemClick}></RepeatingItem>
+          <RepeatingItem
+            key={item._id}
+            item={item}
+            onItemClick={this.props.onItemClick}
+          ></RepeatingItem>
         ))}
-        <CreateItem onAddItem={this.props.onAddItem}></CreateItem>
+        <CreateItem
+          intervals={this.props.intervals}
+          onAddItem={this.props.onAddItem}
+        ></CreateItem>
       </div>
     );
   }
@@ -31,6 +38,7 @@ RepeatingList.propTypes = {
   repeatingItems: PropTypes.array.isRequired,
   onAddItem: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
+  intervals: PropTypes.array.isRequired,
 };
 
 export default RepeatingList;

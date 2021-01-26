@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
 
 import "./createitem.scss";
 
 export class CreateItem extends Component {
   state = {
-    intervals: [],
     isCreateItemShown: false,
     newItem: {
       title: "",
@@ -18,30 +16,15 @@ export class CreateItem extends Component {
     super(props);
     this.createItemTextbox = React.createRef();
   }
-  componentDidMount() {
-    axios
-      .get(process.env.REACT_APP_API_URL + "repeatingintervals")
-      .then((res) => {
-        this.setState({ intervals: res.data });
-      })
-      .catch((err) => {
-        alert(`couldn't add item. error: ${err}`);
-      });
-  }
 
   createOnClick = (e) => {
-    axios
-      .post(process.env.REACT_APP_API_URL + "repeatingitems", {
+    this.props.onAddItem(
+      {
         title: this.state.newItem.title,
         interval: this.state.newItem.interval,
-      })
-      .then((res) => {
-        this.props.onAddItem(res.data);
-        this.exitCreation();
-      })
-      .catch((err) => {
-        alert(`couldn't get intervals. error: ${err}`);
-      });
+      },
+      () => this.exitCreation()
+    );
   };
 
   exitCreation = () => {
@@ -102,7 +85,7 @@ export class CreateItem extends Component {
                 <option value="" disabled hidden>
                   Interval
                 </option>
-                {this.state.intervals.map((item) => (
+                {this.props.intervals.map((item) => (
                   <option key={item._id} value={item._id}>
                     {item.title} ({item.days.toString()})
                   </option>
@@ -139,6 +122,7 @@ export class CreateItem extends Component {
 }
 
 CreateItem.propTypes = {
+  intervals: PropTypes.array.isRequired,
   onAddItem: PropTypes.func.isRequired,
 };
 

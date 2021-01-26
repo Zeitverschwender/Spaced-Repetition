@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 import { RepeatingItem } from "./models/repeatingitem";
+import Sidemenu from "./components/sidemenu";
 
 import RepeatingList from "./repeatinglist";
-import Sidemenu from "./components/sidemenu";
 import ItemFullDetails from "./components/itemfulldetails";
 import EditItem from "./components/edititem";
+import Backend from "./services/backend";
 
 import "./App.scss";
 
 class App extends Component {
   state = {
     repeatingItems: [],
+    intervals: [],
     isSideMenuShown: false,
     isFullDetailsShown: false,
     isEditDetailsShown: false,
@@ -20,18 +21,14 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get(process.env.REACT_APP_API_URL + "repeatingitems")
-      .then((res) => {
-        const items = [];
-        res.data.forEach((item) => {
-          items.push(Object.assign(new RepeatingItem(), item));
-        });
-        this.setState({ repeatingItems: items });
-      })
-      .catch((err) => {
-        alert(`couldn't get items. error: ${err}`);
-      });
+    this._backend = new Backend();
+    const alertUser = (err) => alert(`couldn't get items. error: ${err}`);
+    this._backend.getRepeatingItems((items) => {
+      this.setState({ repeatingItems: items });
+    }, alertUser);
+    this._backend.getIntervals((data) => {
+      this.setState({ intervals: data });
+    }, alertUser);
   }
 
   enableScrolling() {
@@ -47,13 +44,22 @@ class App extends Component {
     this.enableScrolling();
   }
 
-  onAddItem = (item) => {
-    this.setState({
-      repeatingItems: [
-        ...this.state.repeatingItems,
-        Object.assign(new RepeatingItem(), item),
-      ],
-    });
+  onAddItem = (item, callback) => {
+    this._backend.createItem(
+      item,
+      (item) => {
+        this.setState({
+          repeatingItems: [
+            ...this.state.repeatingItems,
+            Object.assign(new RepeatingItem(), item),
+          ],
+        });
+        callback();
+      },
+      (err) => {
+        alert(`couldn't get intervals. error: ${err}`);
+      }
+    );
   };
   onItemClick = (clickedItem) => {
     this.setState({
@@ -68,7 +74,7 @@ class App extends Component {
     this.enableScrolling();
   };
   hideFullDetails = () => {
-    this.setState({ isFullDetailsShown: false});
+    this.setState({ isFullDetailsShown: false });
     this.enableScrolling();
   };
   showEditDetails = () => {
@@ -114,6 +120,7 @@ class App extends Component {
             repeatingItems={this.state.repeatingItems}
             onAddItem={this.onAddItem}
             onItemClick={this.onItemClick}
+            intervals={this.state.intervals}
           ></RepeatingList>
         </div>
         <footer>
