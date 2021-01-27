@@ -13,15 +13,22 @@ function EditItem(props) {
   };
   let deleteOnClick = (e) => {
     e.preventDefault();
-    props.showConfirmBox(
-      "Are you sure you want to delete this item?",
-      () => {
-        props.deleteItem(props.item);
-      }
-    );
+    props.showConfirmBox("Are you sure you want to delete this item?", () => {
+      props.deleteItem(props.item);
+    });
+  };
+  const onBackClick = (e) => {
+    e.preventDefault();
+    if (dataChanged) {
+      props.showConfirmBox("Are you sure you want to exit without saving?", () => {
+        props.hideEditDetails();
+      });
+    } else {
+      props.hideEditDetails();
+    }
   };
   return (
-    <div className="overaly-back" onClick={props.hideEditDetails}>
+    <div className="overaly-back" onClick={onBackClick}>
       <div className="overaly-content" onClick={(e) => e.stopPropagation()}>
         <div className="before-sep">
           <input
