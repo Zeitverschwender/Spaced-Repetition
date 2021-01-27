@@ -17,8 +17,7 @@ function EditItem(props) {
       "Are you sure you want to delete this item?",
       () => {
         props.deleteItem(props.item);
-      },
-      () => {}
+      }
     );
   };
   return (

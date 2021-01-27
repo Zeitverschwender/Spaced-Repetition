@@ -22,7 +22,7 @@ function ConfirmBox(props) {
           <div
             className="no-button"
             onClick={() => {
-              props.callOnNo();
+              (props.callOnNo || (() => {}))();
               props.hideMe();
             }}
           >
@@ -37,7 +37,7 @@ function ConfirmBox(props) {
 ConfirmBox.propTypes = {
   msg: PropTypes.string.isRequired,
   callOnYes: PropTypes.func.isRequired,
-  callOnNo: PropTypes.func.isRequired,
+  callOnNo: PropTypes.func,
   hideMe: PropTypes.func.isRequired,
 };
 
