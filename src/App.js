@@ -6,6 +6,7 @@ import Sidemenu from "./components/sidemenu";
 import RepeatingList from "./repeatinglist";
 import ItemFullDetails from "./components/itemfulldetails";
 import EditItem from "./components/edititem";
+import ConfirmBox from "./components/confirmbox";
 import Backend from "./services/backend";
 
 import "./App.scss";
@@ -18,6 +19,12 @@ class App extends Component {
     isFullDetailsShown: false,
     isEditDetailsShown: false,
     clickedItem: null,
+    confirmBox: {
+      msg: "",
+      onYes: null,
+      onNo: null,
+      isShown: false,
+    },
   };
 
   componentDidMount() {
@@ -129,6 +136,16 @@ class App extends Component {
     this.setState({ isEditDetailsShown: false });
   };
 
+  showConfirmBox = (msg, onYes, onNo) => {
+    this.setState({
+      confirmBox: {  msg, onYes, onNo, isShown: true },
+    });
+  };
+
+  hideConfirmBox = () => {
+    this.setState({ confirmBox: { ...this.state.confirmBox, isShown: false } });
+  };
+
   render() {
     return (
       <div className="main-wrapper">
@@ -160,6 +177,15 @@ class App extends Component {
             hideEditDetails={this.hideEditDetails}
             editItem={this.editItem}
             deleteItem={this.deleteItem}
+            showConfirmBox={this.showConfirmBox}
+          />
+        )}
+        {this.state.confirmBox.isShown && (
+          <ConfirmBox
+            msg={this.state.confirmBox.msg}
+            callOnYes={this.state.confirmBox.onYes}
+            callOnNo={this.state.confirmBox.onNo}
+            hideMe={this.hideConfirmBox}
           />
         )}
         <div className="content">

@@ -19,6 +19,11 @@ $colors: (
       $alpha: 0.4,
     ),
   repeating-item-back: whitesmoke,
+  button-back:
+    rgba(
+      $color: #000000,
+      $alpha: 0.1,
+    ),
 );
 
 $border-radius: 0.15em;
@@ -244,12 +249,12 @@ $sep-size: 3.18em;
   }
 }
 
-.disabled{
+.disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.overaly-back{
+.overaly-back {
   position: fixed;
   top: 0;
   left: 0;
@@ -268,7 +273,7 @@ $sep-size: 3.18em;
   justify-content: center;
 }
 
-.overaly-content{
+.overaly-content {
   width: 75%;
   height: 45%;
 

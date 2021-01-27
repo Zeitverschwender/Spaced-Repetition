@@ -13,14 +13,17 @@ function EditItem(props) {
   };
   let deleteOnClick = (e) => {
     e.preventDefault();
-    props.deleteItem(props.item);
+    props.showConfirmBox(
+      "Are you sure you want to delete this item?",
+      () => {
+        props.deleteItem(props.item);
+      },
+      () => {}
+    );
   };
   return (
     <div className="overaly-back" onClick={props.hideEditDetails}>
-      <div
-        className="overaly-content"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="overaly-content" onClick={(e) => e.stopPropagation()}>
         <div className="before-sep">
           <input
             type="text"
@@ -90,6 +93,7 @@ EditItem.propTypes = {
   hideEditDetails: PropTypes.func.isRequired,
   editItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  showConfirmBox: PropTypes.func.isRequired,
 };
 
 export default EditItem;
