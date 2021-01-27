@@ -17,12 +17,14 @@ export default function ItemFullDetails(props) {
           <h2 className="full-title"> {props.item.title} </h2>
           <span
             className="material-icons details-edit"
+            title="Edit"
             onClick={() => props.showEditDetails()}
           >
             create
           </span>
           <span
             className="material-icons details-buttons"
+            title="Exit"
             onClick={props.hideFullDetails}
           >
             close

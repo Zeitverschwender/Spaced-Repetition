@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 
 function StatusIcons(props) {
   return (
-    <div className="item-icons" style={{fontSize:props.size}}>
-      <span className="material-icons">notifications</span>
+    <div className="item-icons" style={{ fontSize: props.size }}>
+      <span title="Notifications: On" className="material-icons">
+        notifications
+      </span>
       {props.item.description && (
-        <span className="material-icons">subject</span>
+        <span title="Has Description" className="material-icons">
+          subject
+        </span>
       )}
     </div>
   );
