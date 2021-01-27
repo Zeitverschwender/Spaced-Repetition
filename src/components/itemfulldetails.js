@@ -8,9 +8,9 @@ import "./itemfulldetails.scss";
 
 export default function ItemFullDetails(props) {
   return (
-    <div className="item-details-back" onClick={(e) => props.hideFullDetails()}>
+    <div className="overaly-back" onClick={(e) => props.hideFullDetails()}>
       <div
-        className="item-details-content"
+        className="overaly-content"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="before-sep">

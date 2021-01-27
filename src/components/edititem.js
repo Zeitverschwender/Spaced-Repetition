@@ -16,9 +16,9 @@ function EditItem(props) {
     props.deleteItem(props.item);
   };
   return (
-    <div className="item-details-back" onClick={props.hideEditDetails}>
+    <div className="overaly-back" onClick={props.hideEditDetails}>
       <div
-        className="item-details-content"
+        className="overaly-content"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="before-sep">

@@ -1,42 +1,5 @@
 @import "../App.scss";
 
-.item-details-back {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  z-index: 2;
-
-  width: 100%;
-  height: 100%;
-
-  background: color(overlay-back);
-
-  animation: background-entrance 0.2s ease-in-out;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.item-details-content {
-  width: 75%;
-  height: 45%;
-
-  background: color(repeating-item-back);
-
-  box-shadow: 6px 9px 2em 0em black;
-
-  border-radius: $border-radius;
-
-  padding: 1em;
-
-  animation: card-entrance 0.2s ease-in-out;
-
-  display: flex;
-  flex-direction: column;
-}
-
 .before-sep {
   display: flex;
   align-items: center;
