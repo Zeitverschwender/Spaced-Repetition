@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./edititem.scss";
 
 function EditItem(props) {
-  const newItem = { _id: props.item._id };
+  const [newItem, setnewItem] = useState({ _id: props.item._id })
   const [dataChanged, setDataChanged] = useState(false);
   let saveOnClick = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function EditItem(props) {
             defaultValue={props.item.title}
             className="title-textbox"
             onChange={(e) => {
-              newItem.title = e.target.value.trim();
+              setnewItem({...newItem, title: e.target.value.trim()})
               setDataChanged(true);
             }}
           ></input>
@@ -68,7 +68,7 @@ function EditItem(props) {
           defaultValue={props.item.description}
           maxLength="520"
           onChange={(e) => {
-            newItem.description = e.target.value.trim();
+            setnewItem({...newItem, description: e.target.value.trim()})
             setDataChanged(true);
           }}
         ></textarea>
