@@ -15,6 +15,7 @@ export class RepeatingList extends Component {
             <RepeatingItem
               key={LOADING_ITEM._id}
               item={LOADING_ITEM}
+              onItemClick={() => {}}
             ></RepeatingItem>
           </div>
         )}
