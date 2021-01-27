@@ -11,6 +11,10 @@ function EditItem(props) {
     props.editItem(newItem);
     props.hideEditDetails();
   };
+  let deleteOnClick = (e) => {
+    e.preventDefault();
+    props.deleteItem(props.item);
+  };
   return (
     <div className="item-details-back" onClick={props.hideEditDetails}>
       <div
@@ -37,6 +41,12 @@ function EditItem(props) {
             onClick={saveOnClick}
           >
             save
+          </span>
+          <span
+            className="material-icons details-buttons"
+            onClick={deleteOnClick}
+          >
+            delete
           </span>
           <span
             className="material-icons details-buttons"
@@ -79,6 +89,7 @@ EditItem.propTypes = {
   item: PropTypes.object.isRequired,
   hideEditDetails: PropTypes.func.isRequired,
   editItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 export default EditItem;

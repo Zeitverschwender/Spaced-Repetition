@@ -79,10 +79,7 @@ class App extends Component {
         this.state.repeatingItems.splice(
           editedItemIndex,
           1,
-          Object.assign(
-            this.state.repeatingItems[editedItemIndex],
-            newItem
-          )
+          Object.assign(this.state.repeatingItems[editedItemIndex], newItem)
         );
 
         this.setState({
@@ -91,6 +88,28 @@ class App extends Component {
       },
       (err) => {
         alert(`couldn't get intervals. error: ${err}`);
+      }
+    );
+  };
+
+  deleteItem = (item) => {
+    this._backend.deleteItem(
+      item._id,
+      (data) => {
+        this.state.repeatingItems.splice(
+          this.state.repeatingItems.findIndex(
+            (element) => element._id === item._id
+          ),
+          1
+        );
+        this.setState({
+          repeatingItems: this.state.repeatingItems,
+          isEditDetailsShown: false,
+          isFullDetailsShown: false,
+        });
+      },
+      (err) => {
+        alert(`couldn't delete. error: ${err}`);
       }
     );
   };
@@ -140,6 +159,7 @@ class App extends Component {
             item={this.state.clickedItem}
             hideEditDetails={this.hideEditDetails}
             editItem={this.editItem}
+            deleteItem={this.deleteItem}
           />
         )}
         <div className="content">

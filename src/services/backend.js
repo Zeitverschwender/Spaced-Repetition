@@ -58,5 +58,20 @@ class Backend {
         onFailure(err);
       });
   }
+  deleteItem(id, onSuccess, onFailure) {
+    axios
+      .delete(
+        process.env.REACT_APP_API_URL +
+          ENDPOINT_REPEATING_ITEMS +
+          "/" +
+          id,
+      )
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
 }
 export default Backend;
