@@ -4,6 +4,12 @@ import PropTypes from "prop-types";
 import "./edititem.scss";
 
 function EditItem(props) {
+  const newItem = {_id: props.item._id};
+  let saveOnClick = (e) => {
+    e.preventDefault();
+    props.editItem(newItem);
+    props.hideEditDetails();
+  };
   return (
     <div className="item-details-back" onClick={props.hideEditDetails}>
       <div
@@ -17,8 +23,11 @@ function EditItem(props) {
             minLength="1"
             defaultValue={props.item.title}
             className="title-textbox"
+            onChange={(e) => (newItem.title = e.target.value.trim())}
           ></input>
-          <span className="material-icons details-edit">save</span>
+          <span className="material-icons details-edit" onClick={saveOnClick}>
+            save
+          </span>
           <span
             className="material-icons details-buttons"
             onClick={props.hideEditDetails}
@@ -34,6 +43,7 @@ function EditItem(props) {
             props.item.description ? "" : "A description of your item."
           }
           defaultValue={props.item.description}
+          onChange={(e) => (newItem.description = e.target.value.trim())}
         ></textarea>
         <div className="item-details-footer">
           <div className="horizontal-sep"></div>
@@ -54,6 +64,7 @@ function EditItem(props) {
 EditItem.propTypes = {
   item: PropTypes.object.isRequired,
   hideEditDetails: PropTypes.func.isRequired,
+  editItem: PropTypes.func.isRequired,
 };
 
 export default EditItem;

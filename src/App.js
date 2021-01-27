@@ -69,6 +69,32 @@ class App extends Component {
     this.disableScrolling();
   };
 
+  editItem = (newItem) => {
+    this._backend.editItem(
+      newItem,
+      (data) => {
+        const editedItemIndex = this.state.repeatingItems.findIndex(
+          (element) => element._id === newItem._id
+        );
+        this.state.repeatingItems.splice(
+          editedItemIndex,
+          1,
+          Object.assign(
+            this.state.repeatingItems[editedItemIndex],
+            newItem
+          )
+        );
+
+        this.setState({
+          repeatingItems: this.state.repeatingItems,
+        });
+      },
+      (err) => {
+        alert(`couldn't get intervals. error: ${err}`);
+      }
+    );
+  };
+
   hideSideMenu = () => {
     this.setState({ isSideMenuShown: false });
     this.enableScrolling();
@@ -113,6 +139,7 @@ class App extends Component {
           <EditItem
             item={this.state.clickedItem}
             hideEditDetails={this.hideEditDetails}
+            editItem={this.editItem}
           />
         )}
         <div className="content">

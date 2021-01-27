@@ -42,5 +42,21 @@ class Backend {
         onFailure(err);
       });
   }
+  editItem(editedItem, onSuccess, onFailure) {
+    axios
+      .patch(
+        process.env.REACT_APP_API_URL +
+          ENDPOINT_REPEATING_ITEMS +
+          "/" +
+          editedItem._id,
+        editedItem
+      )
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
 }
 export default Backend;
