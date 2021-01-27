@@ -243,3 +243,8 @@ $sep-size: 3.18em;
     opacity: 1;
   }
 }
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.5;
+}

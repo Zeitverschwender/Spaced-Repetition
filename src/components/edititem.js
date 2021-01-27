@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import "./edititem.scss";
 
 function EditItem(props) {
-  const newItem = {_id: props.item._id};
+  const newItem = { _id: props.item._id };
+  const [dataChanged, setDataChanged] = useState(false);
   let saveOnClick = (e) => {
     e.preventDefault();
     props.editItem(newItem);
@@ -23,9 +24,17 @@ function EditItem(props) {
             minLength="1"
             defaultValue={props.item.title}
             className="title-textbox"
-            onChange={(e) => (newItem.title = e.target.value.trim())}
+            onChange={(e) => {
+              newItem.title = e.target.value.trim();
+              setDataChanged(true);
+            }}
           ></input>
-          <span className="material-icons details-edit" onClick={saveOnClick}>
+          <span
+            className={
+              "material-icons details-edit" + (dataChanged ? "" : " disabled")
+            }
+            onClick={saveOnClick}
+          >
             save
           </span>
           <span
@@ -43,7 +52,10 @@ function EditItem(props) {
             props.item.description ? "" : "A description of your item."
           }
           defaultValue={props.item.description}
-          onChange={(e) => (newItem.description = e.target.value.trim())}
+          onChange={(e) => {
+            newItem.description = e.target.value.trim();
+            setDataChanged(true);
+          }}
         ></textarea>
         <div className="item-details-footer">
           <div className="horizontal-sep"></div>
