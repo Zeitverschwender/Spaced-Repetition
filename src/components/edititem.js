@@ -22,6 +22,7 @@ function EditItem(props) {
             type="text"
             required
             minLength="1"
+            maxLength="128"
             defaultValue={props.item.title}
             className="title-textbox"
             onChange={(e) => {
@@ -52,6 +53,7 @@ function EditItem(props) {
             props.item.description ? "" : "A description of your item."
           }
           defaultValue={props.item.description}
+          maxLength="520"
           onChange={(e) => {
             newItem.description = e.target.value.trim();
             setDataChanged(true);
