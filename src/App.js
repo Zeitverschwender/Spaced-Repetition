@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { RepeatingItem } from "./models/repeatingitem";
 import Sidemenu from "./components/sidemenu";
@@ -10,6 +11,7 @@ import ConfirmBox from "./components/confirmbox";
 import Backend from "./services/backend";
 
 import "./App.scss";
+import LoginRedirect from "./pages/loginredirect";
 
 class App extends Component {
   state = {
@@ -138,7 +140,7 @@ class App extends Component {
 
   showConfirmBox = (msg, onYes, onNo) => {
     this.setState({
-      confirmBox: {  msg, onYes, onNo, isShown: true },
+      confirmBox: { msg, onYes, onNo, isShown: true },
     });
   };
 
@@ -148,64 +150,72 @@ class App extends Component {
 
   render() {
     return (
-      <div className="main-wrapper">
-        <header>
-          <div
-            className="side-menu-button"
-            onClick={() => {
-              this.setState({ isSideMenuShown: true });
-              this.disableScrolling();
-            }}
-          >
-            <span className="material-icons">menu</span>
-          </div>
-          <span className="title">Spaced Repetition</span>
-        </header>
-        {this.state.isSideMenuShown && (
-          <Sidemenu hideSideMenu={this.hideSideMenu} />
-        )}
-        {this.state.isFullDetailsShown && (
-          <ItemFullDetails
-            item={this.state.clickedItem}
-            hideFullDetails={this.hideFullDetails}
-            showEditDetails={this.showEditDetails}
-          />
-        )}
-        {this.state.isEditDetailsShown && (
-          <EditItem
-            item={this.state.clickedItem}
-            hideEditDetails={this.hideEditDetails}
-            editItem={this.editItem}
-            deleteItem={this.deleteItem}
-            showConfirmBox={this.showConfirmBox}
-          />
-        )}
-        {this.state.confirmBox.isShown && (
-          <ConfirmBox
-            msg={this.state.confirmBox.msg}
-            callOnYes={this.state.confirmBox.onYes}
-            callOnNo={this.state.confirmBox.onNo}
-            hideMe={this.hideConfirmBox}
-          />
-        )}
-        <div className="content">
-          <RepeatingList
-            repeatingItems={this.state.repeatingItems}
-            onAddItem={this.onAddItem}
-            onItemClick={this.onItemClick}
-            intervals={this.state.intervals}
-          ></RepeatingList>
+      <Router>
+        <div className="main-wrapper">
+          <header>
+            <div
+              className="side-menu-button"
+              onClick={() => {
+                this.setState({ isSideMenuShown: true });
+                this.disableScrolling();
+              }}
+            >
+              <span className="material-icons">menu</span>
+            </div>
+            <span className="title">Spaced Repetition</span>
+          </header>
+
+          <Switch>
+            <Route path="/loginRedirect" component={LoginRedirect} />
+            <Route path="/">
+              {this.state.isSideMenuShown && (
+                <Sidemenu hideSideMenu={this.hideSideMenu} />
+              )}
+              {this.state.isFullDetailsShown && (
+                <ItemFullDetails
+                  item={this.state.clickedItem}
+                  hideFullDetails={this.hideFullDetails}
+                  showEditDetails={this.showEditDetails}
+                />
+              )}
+              {this.state.isEditDetailsShown && (
+                <EditItem
+                  item={this.state.clickedItem}
+                  hideEditDetails={this.hideEditDetails}
+                  editItem={this.editItem}
+                  deleteItem={this.deleteItem}
+                  showConfirmBox={this.showConfirmBox}
+                />
+              )}
+              {this.state.confirmBox.isShown && (
+                <ConfirmBox
+                  msg={this.state.confirmBox.msg}
+                  callOnYes={this.state.confirmBox.onYes}
+                  callOnNo={this.state.confirmBox.onNo}
+                  hideMe={this.hideConfirmBox}
+                />
+              )}
+              <div className="content">
+                <RepeatingList
+                  repeatingItems={this.state.repeatingItems}
+                  onAddItem={this.onAddItem}
+                  onItemClick={this.onItemClick}
+                  intervals={this.state.intervals}
+                ></RepeatingList>
+              </div>
+            </Route>
+          </Switch>
+          <footer>
+            <a
+              href="https://github.com/Zeitverschwender/Spaced-Repetition"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
+          </footer>
         </div>
-        <footer>
-          <a
-            href="https://github.com/Zeitverschwender/Spaced-Repetition"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github
-          </a>
-        </footer>
-      </div>
+      </Router>
     );
   }
 }
