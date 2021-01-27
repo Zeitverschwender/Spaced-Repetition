@@ -6,12 +6,12 @@ import "./edititem.scss";
 function EditItem(props) {
   const [newItem, setnewItem] = useState({ _id: props.item._id });
   const [dataChanged, setDataChanged] = useState(false);
-  let saveOnClick = (e) => {
+  const saveOnClick = (e) => {
     e.preventDefault();
     props.editItem(newItem);
     props.hideEditDetails();
   };
-  let deleteOnClick = (e) => {
+  const deleteOnClick = (e) => {
     e.preventDefault();
     props.showConfirmBox("Are you sure you want to delete this item?", () => {
       props.deleteItem(props.item);
