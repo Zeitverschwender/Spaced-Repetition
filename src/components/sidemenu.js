@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ENDPOINT_GOOGLE } from "../services/backend";
@@ -10,20 +10,22 @@ import "./sidemenu.scss";
 export default function Sidemenu(props) {
   const backend = new Backend();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  backend.isUserLoggedIn(
-    (data) => {
-      setIsLoggedIn(data);
-    },
-    (err) => {
-      alert(`couldn't check log in. err: ${err}`);
-    }
-  );
+  useEffect(() => {
+    backend.isUserLoggedIn(
+      (data) => {
+        setIsLoggedIn(data);
+      },
+      (err) => {
+        alert(`couldn't check log in. err: ${err}`);
+      }
+    );
+  });
 
   const onLogoutClick = () => {
     backend.logout(
       (data) => {
         setIsLoggedIn(false);
-        backend.setToken('');
+        backend.removeToken();
         window.location.reload();
       },
       (err) => {

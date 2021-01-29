@@ -16,11 +16,10 @@ class Backend {
     localStorage.setItem(TOKEN_LOCATION, token);
   }
   getToken() {
-    const token = localStorage.getItem(TOKEN_LOCATION);
-    if (!token) {
-      alert("Not Logged In");
-    }
-    return token;
+    return localStorage.getItem(TOKEN_LOCATION);
+  }
+  removeToken() {
+    localStorage.removeItem(TOKEN_LOCATION);
   }
 
   getRepeatingItems(onSuccess, onFailure) {
@@ -96,7 +95,7 @@ class Backend {
 
   isUserLoggedIn(onSuccess, onFailure) {
     if (!this.getToken()) {
-      onFailure('No Token Found');
+      onSuccess(false);
     }
     axios
       .get(`${ENDPOINT_USER_STATUS}/${this.getToken()}`)
