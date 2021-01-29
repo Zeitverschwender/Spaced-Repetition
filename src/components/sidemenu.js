@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import backend from '../services/backend';
+
 import googleIcon from "../assets/images/google.svg";
 import "./sidemenu.scss";
 
 export default function Sidemenu(props) {
+  const loginURL = new backend().getLoginURL();
   return (
     <div className="side-menu" onClick={() => props.hideSideMenu()}>
       <div className="side-menu-back" onClick={(e) => e.stopPropagation()}>
@@ -30,7 +33,7 @@ export default function Sidemenu(props) {
           <span className="material-icons user-icon">
             account_circle
           </span>
-          <a href="/" className="login-button">
+          <a href={loginURL} className="login-button">
             <img src={googleIcon} alt="" /> LOGIN
           </a>
         </div>

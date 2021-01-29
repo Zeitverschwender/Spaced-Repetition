@@ -35,8 +35,11 @@ class App extends Component {
     this._backend.getRepeatingItems((items) => {
       this.setState({ repeatingItems: items });
     }, alertUser);
-    this._backend.getIntervals((data) => {
+    this._backend.getDefaultIntervals((data) => {
       this.setState({ intervals: data });
+    }, alertUser);
+    this._backend.getIntervals((data) => {
+      this.setState({ intervals: [...this.state.intervals, ...data] });
     }, alertUser);
   }
 
@@ -66,7 +69,7 @@ class App extends Component {
         callback();
       },
       (err) => {
-        alert(`couldn't get intervals. error: ${err}`);
+        alert(`couldn't add Item. error: ${err}`);
       }
     );
   };
