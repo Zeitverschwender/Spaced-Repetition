@@ -23,6 +23,8 @@ export default function Sidemenu(props) {
     backend.logout(
       (data) => {
         setIsLoggedIn(false);
+        backend.setToken('');
+        window.location.reload();
       },
       (err) => {
         alert(`couldn't log out. err: ${err}`);
