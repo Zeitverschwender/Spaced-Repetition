@@ -56,6 +56,10 @@
     .user {
       margin-top: auto;
 
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+
       .user-icon {
         color: white;
         font-size: 8em;

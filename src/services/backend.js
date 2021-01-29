@@ -9,6 +9,8 @@ const ENDPOINT_REPEATING_INTERVALS =
 export const ENDPOINT_GOOGLE = process.env.REACT_APP_API_URL + "auth/google";
 const ENDPOINT_GOOGLE_LOGOUT = process.env.REACT_APP_API_URL + "auth/logout";
 const ENDPOINT_USER_STATUS = process.env.REACT_APP_API_URL + "user/status";
+const ENDPOINT_USER_NAME = process.env.REACT_APP_API_URL + "user/name";
+const ENDPOINT_USER_PHOTO = process.env.REACT_APP_API_URL + "user/photo";
 
 const TOKEN_LOCATION = "loginToken";
 class Backend {
@@ -110,6 +112,26 @@ class Backend {
   logout(onSuccess, onFailure) {
     axios
       .get(`${ENDPOINT_GOOGLE_LOGOUT}/${this.getToken()}`)
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
+  getUserName(onSuccess, onFailure) {
+    axios
+      .get(`${ENDPOINT_USER_NAME}/${this.getToken()}`)
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
+  getUserPhoto(onSuccess, onFailure) {
+    axios
+      .get(`${ENDPOINT_USER_PHOTO}/${this.getToken()}`)
       .then((res) => {
         onSuccess(res.data);
       })

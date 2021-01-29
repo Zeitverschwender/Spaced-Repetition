@@ -1,38 +1,9 @@
-import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { ENDPOINT_GOOGLE } from "../services/backend";
-import Backend from "../services/backend";
-
-import googleIcon from "../assets/images/google.svg";
 import "./sidemenu.scss";
+import UserSection from "./usersection";
 
 export default function Sidemenu(props) {
-  const backend = new Backend();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    backend.isUserLoggedIn(
-      (data) => {
-        setIsLoggedIn(data);
-      },
-      (err) => {
-        alert(`couldn't check log in. err: ${err}`);
-      }
-    );
-  });
-
-  const onLogoutClick = () => {
-    backend.logout(
-      (data) => {
-        setIsLoggedIn(false);
-        backend.removeToken();
-        window.location.reload();
-      },
-      (err) => {
-        alert(`couldn't log out. err: ${err}`);
-      }
-    );
-  };
   return (
     <div className="side-menu" onClick={() => props.hideSideMenu()}>
       <div className="side-menu-back" onClick={(e) => e.stopPropagation()}>
@@ -55,16 +26,7 @@ export default function Sidemenu(props) {
           ABOUT
         </a>
         <div className="user">
-          <span className="material-icons user-icon">account_circle</span>
-          {isLoggedIn ? (
-            <span onClick={() => onLogoutClick()} className="login-button">
-              LOGOUT
-            </span>
-          ) : (
-            <a href={ENDPOINT_GOOGLE} className="login-button">
-              <img src={googleIcon} alt="temp user icon" /> LOGIN
-            </a>
-          )}
+          <UserSection></UserSection>
         </div>
       </div>
     </div>
