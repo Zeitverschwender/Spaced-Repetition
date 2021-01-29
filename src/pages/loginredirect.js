@@ -1,8 +1,11 @@
 import React from "react";
 import { Redirect, useLocation } from "react-router-dom";
 
+import Backend from "../services/backend";
+
 export default function LoginRedirect() {
-  const query = new URLSearchParams(useLocation().search);
-  localStorage.setItem("loginToken", query.get("token"));
+  new Backend().setToken(
+    new URLSearchParams(useLocation().search).get("token")
+  );
   return <Redirect to="/" />;
 }

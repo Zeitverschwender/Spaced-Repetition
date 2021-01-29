@@ -7,9 +7,14 @@ const ENDPOINT_REPEATING_ITEMS =
 const ENDPOINT_REPEATING_INTERVALS =
   process.env.REACT_APP_API_URL + "repeatingintervals";
 const ENDPOINT_GOOGLE = process.env.REACT_APP_API_URL + "auth/google";
+
+const TOKEN_LOCATION = "loginToken";
 class Backend {
+  setToken(token) {
+    localStorage.setItem(TOKEN_LOCATION, token);
+  }
   getToken() {
-    const token = localStorage.getItem("loginToken");
+    const token = localStorage.getItem(TOKEN_LOCATION);
     if (!token) {
       alert("Not Logged In"); // Doesn't get called
     }
