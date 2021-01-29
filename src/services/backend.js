@@ -6,7 +6,8 @@ const ENDPOINT_REPEATING_ITEMS =
   process.env.REACT_APP_API_URL + "repeatingitems";
 const ENDPOINT_REPEATING_INTERVALS =
   process.env.REACT_APP_API_URL + "repeatingintervals";
-const ENDPOINT_GOOGLE = process.env.REACT_APP_API_URL + "auth/google";
+export const ENDPOINT_GOOGLE = process.env.REACT_APP_API_URL + "auth/google";
+export const ENDPOINT_GOOGLE_LOGOUT = process.env.REACT_APP_API_URL + "auth/logout";
 
 const TOKEN_LOCATION = "loginToken";
 class Backend {
@@ -90,10 +91,6 @@ class Backend {
       .catch((err) => {
         onFailure(err);
       });
-  }
-
-  getLoginURL() {
-    return ENDPOINT_GOOGLE;
   }
 }
 export default Backend;
