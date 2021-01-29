@@ -31,16 +31,27 @@ class App extends Component {
 
   componentDidMount() {
     this._backend = new Backend();
-    const alertUser = (err) => alert(`couldn't get items. error: ${err}`);
-    this._backend.getRepeatingItems((items) => {
-      this.setState({ repeatingItems: items });
-    }, alertUser);
-    this._backend.getDefaultIntervals((data) => {
-      this.setState({ intervals: data });
-    }, alertUser);
-    this._backend.getIntervals((data) => {
-      this.setState({ intervals: [...this.state.intervals, ...data] });
-    }, alertUser);
+    this._backend.isUserLoggedIn(
+      (isLoggedIn) => {
+        if (isLoggedIn) {
+          const alertUser = (err) => alert(`couldn't get items. error: ${err}`);
+          this._backend.getRepeatingItems((items) => {
+            this.setState({ repeatingItems: items });
+          }, alertUser);
+          this._backend.getDefaultIntervals((data) => {
+            this.setState({ intervals: data });
+          }, alertUser);
+          this._backend.getIntervals((data) => {
+            this.setState({ intervals: [...this.state.intervals, ...data] });
+          }, alertUser);
+        } else {
+          alert("Not Logged In");
+        }
+      },
+      (err) => {
+        alert("coudn't check login. error: " + err);
+      }
+    );
   }
 
   enableScrolling() {
