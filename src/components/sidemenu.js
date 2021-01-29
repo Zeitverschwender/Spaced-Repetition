@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {ENDPOINT_GOOGLE, ENDPOINT_GOOGLE_LOGOUT} from '../services/backend';
+import { ENDPOINT_GOOGLE, ENDPOINT_GOOGLE_LOGOUT } from "../services/backend";
+import Backend from "../services/backend";
 
 import googleIcon from "../assets/images/google.svg";
 import "./sidemenu.scss";
 
 export default function Sidemenu(props) {
+  const isUserLoggedIn = (new Backend()).isUserLoggedIn();
   return (
     <div className="side-menu" onClick={() => props.hideSideMenu()}>
       <div className="side-menu-back" onClick={(e) => e.stopPropagation()}>
@@ -29,12 +31,16 @@ export default function Sidemenu(props) {
           ABOUT
         </a>
         <div className="user">
-          <span className="material-icons user-icon">
-            account_circle
-          </span>
-          <a href={ENDPOINT_GOOGLE} className="login-button">
-            <img src={googleIcon} alt="" /> LOGIN
-          </a>
+          <span className="material-icons user-icon">account_circle</span>
+          {isUserLoggedIn ? (
+            <a href={ENDPOINT_GOOGLE_LOGOUT} className="login-button">
+              LOGOUT
+            </a>
+          ) : (
+            <a href={ENDPOINT_GOOGLE} className="login-button">
+              <img src={googleIcon} alt="temp user icon" /> LOGIN
+            </a>
+          )}
         </div>
       </div>
     </div>

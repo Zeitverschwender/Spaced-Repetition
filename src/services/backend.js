@@ -7,7 +7,9 @@ const ENDPOINT_REPEATING_ITEMS =
 const ENDPOINT_REPEATING_INTERVALS =
   process.env.REACT_APP_API_URL + "repeatingintervals";
 export const ENDPOINT_GOOGLE = process.env.REACT_APP_API_URL + "auth/google";
-export const ENDPOINT_GOOGLE_LOGOUT = process.env.REACT_APP_API_URL + "auth/logout";
+export const ENDPOINT_GOOGLE_LOGOUT =
+  process.env.REACT_APP_API_URL + "auth/logout";
+const ENDPOINT_USER_STATUS = process.env.REACT_APP_API_URL + "user/status";
 
 const TOKEN_LOCATION = "loginToken";
 class Backend {
@@ -91,6 +93,18 @@ class Backend {
       .catch((err) => {
         onFailure(err);
       });
+  }
+
+  async isUserLoggedIn() {
+    if (!this.getToken()) {
+      return false;
+    }
+    try {
+      await axios.get(`${ENDPOINT_USER_STATUS}/${this.getToken()}`);
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
 export default Backend;
