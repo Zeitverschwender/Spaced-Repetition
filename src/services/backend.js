@@ -17,7 +17,7 @@ class Backend {
   getToken() {
     const token = localStorage.getItem(TOKEN_LOCATION);
     if (!token) {
-      alert("Not Logged In"); // Doesn't get called
+      alert("Not Logged In");
     }
     return token;
   }
