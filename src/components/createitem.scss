@@ -74,6 +74,28 @@
   .select-placeholder {
     padding: 0.7em 0;
   }
+
+  .is-notifications-on {
+    display: flex;
+    align-items: center;
+
+    margin: 0.4em 0;
+
+    color: white;
+
+    font-family: $font-mono;
+    font-size: 0.85rem;
+
+    cursor: pointer;
+    label {
+      cursor: inherit;
+      width: 100%;
+    }
+    input {
+      cursor: inherit;
+      transform: scale(1.3);
+    }
+  }
 }
 
 .interval {

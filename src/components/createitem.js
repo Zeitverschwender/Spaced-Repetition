@@ -101,11 +101,11 @@ export class CreateItem extends Component {
                   }
                 />
                 <div className="is-notifications-on">
-                  <label htmlFor="isNotificationsOn">Notifications On ? </label>
+                  <label htmlFor="isNotificationsOn">Notifications</label>
                   <input
                     type="checkbox"
                     defaultChecked
-                    name="isNotificationsOn"
+                    id="isNotificationsOn"
                     onChange={(e) =>
                       this.setState({
                         newItem: {
@@ -138,7 +138,9 @@ export class CreateItem extends Component {
                 </span>
               </button>
               <button className="cancel" onClick={this.cancelOnClick}>
-                <span className="material-icons" title="Close">close</span>
+                <span className="material-icons" title="Close">
+                  close
+                </span>
               </button>
             </div>
           </div>
