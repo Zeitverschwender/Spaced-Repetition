@@ -128,12 +128,8 @@ export class CreateItem extends Component {
               >
                 Create
               </button>
-              <button className="more-options">
-                <span
-                  className="material-icons"
-                  onClick={this.toggleAllOptions}
-                  title="Toggle Full Options"
-                >
+              <button className="more-options" onClick={this.toggleAllOptions}>
+                <span className="material-icons" title="Toggle Full Options">
                   tune
                 </span>
               </button>
