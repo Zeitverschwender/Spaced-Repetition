@@ -132,12 +132,13 @@ export class CreateItem extends Component {
                 <span
                   className="material-icons"
                   onClick={this.toggleAllOptions}
+                  title="Toggle Full Options"
                 >
                   tune
                 </span>
               </button>
               <button className="cancel" onClick={this.cancelOnClick}>
-                <span className="material-icons">close</span>
+                <span className="material-icons" title="Close">close</span>
               </button>
             </div>
           </div>
