@@ -60,6 +60,9 @@
       flex-direction: column;
       gap: 0.5em;
 
+      background: color(overlay-back);
+      padding-top: 1em;
+
       .user-icon {
         color: white;
         font-size: 8em;
