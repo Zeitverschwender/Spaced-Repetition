@@ -78,12 +78,19 @@ header {
   padding: 0.75em;
   box-shadow: 0 0 1em -0.15em black;
 
+  a {
+    text-decoration: none;
+  }
   .title {
     font-family: $font-main;
     font-size: 2.3rem;
     font-weight: 700;
     color: white;
     letter-spacing: 0.08em;
+  }
+  img {
+    width: 2em;
+    margin-right: 1.6em;
   }
 }
 .side-menu-button {
@@ -115,6 +122,11 @@ footer {
   padding: 0.5em 1em;
   a {
     color: white;
+    display: flex;
+    gap: 0.3em;
+  }
+  img {
+    width: 1.2em;
   }
 }
 
@@ -239,7 +251,6 @@ $sep-size: 3.18em;
     opacity: 0.4;
   }
 }
-
 @keyframes background-entrance {
   from {
     opacity: 0;
