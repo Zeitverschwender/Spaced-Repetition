@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import { RepeatingItem } from "./models/repeatingitem";
 import Sidemenu from "./components/sidemenu";
@@ -12,6 +12,9 @@ import Backend from "./services/backend";
 
 import "./App.scss";
 import LoginRedirect from "./pages/loginredirect";
+import AboutPage from "./AboutPage";
+import NotFoundPage from "./NotFoundPage";
+import githubIcon from "./assets/images/github.svg";
 
 class App extends Component {
   state = {
@@ -181,7 +184,10 @@ class App extends Component {
 
           <Switch>
             <Route path="/loginRedirect" component={LoginRedirect} />
-            <Route path="/">
+            <Route path="/About">
+              <AboutPage></AboutPage>
+            </Route>
+            <Route exact path="/">
               {this.state.isSideMenuShown && (
                 <Sidemenu hideSideMenu={this.hideSideMenu} />
               )}
@@ -218,6 +224,9 @@ class App extends Component {
                 ></RepeatingList>
               </div>
             </Route>
+            <Route path="*">
+              <NotFoundPage></NotFoundPage>
+            </Route>
           </Switch>
           <footer>
             <a
@@ -225,7 +234,7 @@ class App extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Github
+              <img src={githubIcon} alt="Loading..."></img>Github
             </a>
           </footer>
         </div>

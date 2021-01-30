@@ -1,0 +1,70 @@
+@import "./App.scss";
+
+.view-field {
+  padding: 2em;
+}
+
+.about-main-wrapper {
+  background: linear-gradient(
+    rgba(248, 248, 255, 0.678),
+    rgba(248, 248, 255, 0.863)
+  );
+}
+.hook-wrapper {
+  @extend .view-field;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .hook {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    img {
+      border-radius: 50%;
+      margin-right: 2rem;
+      width: 30%;
+    }
+  }
+}
+
+.about-product-wrapper {
+  @extend .view-field;
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+
+  .about-product {
+    font-size: 1.5em;
+  }
+}
+
+.about-team-wrapper {
+  @extend .view-field;
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+
+  h2 {
+    font-size: 3em;
+  }
+  .about-team {
+    font-size: 2.5em;
+
+    padding-top: 1em;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3.5em;
+
+    div {
+      display: flex;
+      gap: 0.5em;
+      &:nth-child(even) {
+        padding-left: 4em;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.main-404-wrapper {
+  background: rgba($color: #c3e0da, $alpha: 0.75);
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+
+  div {
+    text-align: center;
+  }
+  img {
+  }
+}
