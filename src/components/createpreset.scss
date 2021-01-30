@@ -16,6 +16,17 @@
     margin-left: auto;
   }
 }
+
+.intervals-creation{
+  display: flex;
+  flex-direction: column;
+
+  input[type='text']{
+    height: 2em;
+    font-weight: 600;
+  }
+}
+
 .create-preset-footer {
   margin-top: auto;
 

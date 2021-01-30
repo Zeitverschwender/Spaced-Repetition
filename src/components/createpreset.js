@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import "./createpreset.scss";
 
 function CreatePreset(props) {
+  const [title, setTitle] = useState("");
   return (
     <div className="overaly-back" onClick={props.hideMe}>
       <div
@@ -21,6 +22,15 @@ function CreatePreset(props) {
           </span>
         </div>
         <div className="horizontal-sep" />
+        <div className="intervals-creation">
+          <input
+            type="text"
+            placeholder="Preset title"
+            id="preset-title"
+            maxLength="128"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
         <div className="create-preset-footer">
           <div className="horizontal-sep" />
           <div className="blue-button">CREATE</div>
