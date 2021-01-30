@@ -290,3 +290,36 @@ $sep-size: 3.18em;
   display: flex;
   flex-direction: column;
 }
+
+.text-button {
+  padding: 0.4em 2em;
+  background: color(button-back);
+
+  border-radius: $border-radius;
+
+  cursor: pointer;
+
+  transition: $transition-time;
+
+  font-weight: 700;
+}
+.blue-button {
+  @extend .text-button;
+
+  color: color(blue);
+
+  &:hover {
+    background: color(blue);
+    color: white;
+  }
+}
+.red-button {
+  @extend .text-button;
+
+  color: color(red);
+
+  &:hover {
+    background: color(red);
+    color: white;
+  }
+}

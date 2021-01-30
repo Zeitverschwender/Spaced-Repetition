@@ -11,7 +11,7 @@ function ConfirmBox(props) {
         <div className="horizontal-sep"></div>
         <div className="confirm-box-options">
           <div
-            className="yes-button"
+            className="blue-button"
             onClick={() => {
               props.callOnYes();
               props.hideMe();
@@ -20,7 +20,7 @@ function ConfirmBox(props) {
             YES
           </div>
           <div
-            className="no-button"
+            className="red-button"
             onClick={() => {
               (props.callOnNo || (() => {}))();
               props.hideMe();
