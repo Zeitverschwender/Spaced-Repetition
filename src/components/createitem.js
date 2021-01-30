@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import "./createitem.scss";
+import CreatePreset from "./createpreset";
 
 export class CreateItem extends Component {
   state = {
     isCreateItemShown: false,
     newItem: {},
     isAllOptionsShown: false,
+    isCreatePresetShown: false,
   };
 
   constructor(props) {
@@ -45,6 +47,11 @@ export class CreateItem extends Component {
   render() {
     return (
       <React.Fragment>
+        {this.state.isCreatePresetShown && (
+          <CreatePreset
+            hideMe={() => this.setState({ isCreatePresetShown: false })}
+          ></CreatePreset>
+        )}
         {this.state.isCreateItemShown && (
           <div className="create-item">
             <input
@@ -63,14 +70,20 @@ export class CreateItem extends Component {
                 className={
                   this.state.newItem.interval ? "" : "select-placeholder"
                 }
-                onChange={(e) =>
+                onChange={(e) => {
+                  let value = e.target.value;
+                  if (value === "create-item") {
+                    value = "";
+                    e.target.value = "";
+                    this.setState({ isCreatePresetShown: true });
+                  }
                   this.setState({
                     newItem: {
                       ...this.state.newItem,
                       interval: e.target.value,
                     },
-                  })
-                }
+                  });
+                }}
               >
                 <option value="" disabled hidden>
                   Interval
@@ -80,6 +93,7 @@ export class CreateItem extends Component {
                     {item.title} ({item.days.toString()})
                   </option>
                 ))}
+                <option value="create-item">Create Item ...</option>
               </select>
             </div>
             {this.state.isAllOptionsShown && (
