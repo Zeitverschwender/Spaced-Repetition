@@ -6,25 +6,19 @@ import "./createitem.scss";
 export class CreateItem extends Component {
   state = {
     isCreateItemShown: false,
-    newItem: {
-      title: "",
-      interval: "",
-    },
+    newItem: {},
+    isAllOptionsShown: false,
   };
 
   constructor(props) {
     super(props);
     this.createItemTextbox = React.createRef();
   }
-
+  toggleAllOptions = (e) => {
+    this.setState({ isAllOptionsShown: !this.state.isAllOptionsShown });
+  };
   createOnClick = (e) => {
-    this.props.onAddItem(
-      {
-        title: this.state.newItem.title,
-        interval: this.state.newItem.interval,
-      },
-      () => this.exitCreation()
-    );
+    this.props.onAddItem(this.state.newItem, () => this.exitCreation());
   };
 
   exitCreation = () => {
@@ -92,6 +86,38 @@ export class CreateItem extends Component {
                 ))}
               </select>
             </div>
+            {this.state.isAllOptionsShown && (
+              <React.Fragment>
+                <input
+                  type="text"
+                  placeholder="description"
+                  onChange={(e) =>
+                    this.setState({
+                      newItem: {
+                        ...this.state.newItem,
+                        description: e.target.value,
+                      },
+                    })
+                  }
+                />
+                <div className="is-notifications-on">
+                  <label htmlFor="isNotificationsOn">Notifications On ? </label>
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    name="isNotificationsOn"
+                    onChange={(e) =>
+                      this.setState({
+                        newItem: {
+                          ...this.state.newItem,
+                          isNotificationsOn: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+              </React.Fragment>
+            )}
             <div className="create-item-buttons">
               <button
                 className="create"
@@ -103,7 +129,12 @@ export class CreateItem extends Component {
                 Create
               </button>
               <button className="more-options">
-                <span className="material-icons">tune</span>
+                <span
+                  className="material-icons"
+                  onClick={this.toggleAllOptions}
+                >
+                  tune
+                </span>
               </button>
               <button className="cancel" onClick={this.cancelOnClick}>
                 <span className="material-icons">close</span>
