@@ -24,12 +24,8 @@ export class CreateItem extends Component {
   exitCreation = () => {
     this.setState({
       isCreateItemShown: false,
-    });
-    this.setState({
-      newItem: {
-        title: "",
-        interval: "",
-      },
+      newItem: {},
+      isAllOptionsShown: false,
     });
   };
 
