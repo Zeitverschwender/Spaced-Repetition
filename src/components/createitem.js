@@ -84,8 +84,7 @@ export class CreateItem extends Component {
             </div>
             {this.state.isAllOptionsShown && (
               <div className="all-options">
-                <input
-                  type="text"
+                <textarea
                   placeholder="description"
                   onChange={(e) =>
                     this.setState({

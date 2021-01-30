@@ -35,7 +35,8 @@
   gap: 0.35em;
 
   input,
-  select {
+  select,
+  textarea {
     padding: 0.35em 0.1em;
     font-size: 1.1rem;
     border: 0;
@@ -66,7 +67,8 @@
     }
   }
   input::placeholder,
-  .select-placeholder {
+  .select-placeholder,
+  textarea::placeholder {
     color: rgba($color: white, $alpha: 0.75);
     font-family: $font-mono;
     font-size: 0.75rem;
@@ -151,8 +153,10 @@
 .all-options {
   animation: all-options-entrance 0.35s ease-in-out;
 
-  input[type="text"] {
+  textarea {
     width: 100%;
+    min-width: 15%;
+    max-width: 100%;
   }
 
   .is-notifications-on {
