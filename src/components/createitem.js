@@ -87,7 +87,7 @@ export class CreateItem extends Component {
               </select>
             </div>
             {this.state.isAllOptionsShown && (
-              <React.Fragment>
+              <div className="all-options">
                 <input
                   type="text"
                   placeholder="description"
@@ -116,7 +116,7 @@ export class CreateItem extends Component {
                     }
                   />
                 </div>
-              </React.Fragment>
+              </div>
             )}
             <div className="create-item-buttons">
               <button
