@@ -62,7 +62,7 @@ function EditItem(props) {
           <span
             className="material-icons details-buttons"
             title="Exit"
-            onClick={props.hideEditDetails}
+            onClick={onBackClick}
           >
             close
           </span>
