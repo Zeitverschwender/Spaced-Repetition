@@ -63,8 +63,20 @@ function CreateInterval(props) {
                     defaultValue={number}
                     min="1"
                     max={MAX_VALUE}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      interval[i][0] = Number(e.target.value);
+                      setInterval([...interval]);
+                    }}
                   />
-                  <select defaultValue={unit}>
+                  <select
+                    defaultValue={unit}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      interval[i][1] = e.target.value;
+                      setInterval([...interval]);
+                    }}
+                  >
                     <option value="day">DAY(S)</option>
                     <option value="month">MONTH(S)</option>
                   </select>
