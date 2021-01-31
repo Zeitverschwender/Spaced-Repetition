@@ -3,9 +3,22 @@ import PropTypes from "prop-types";
 
 import "./createinterval.scss";
 
+const MAX_VALUE = 30;
 function CreateInterval(props) {
   const [title, setTitle] = useState("");
   const [interval, setInterval] = useState([[1, "day"]]);
+
+  const getNewItem = () => {
+    const [lastItemNumber, lastItemUnit] = interval[interval.length - 1];
+    if (lastItemUnit === "month") {
+      return [Math.min(MAX_VALUE, lastItemNumber + 1), "month"];
+    } else {
+      return lastItemNumber + 1 > MAX_VALUE
+        ? [1, "month"]
+        : [lastItemNumber + 1, "day"];
+    }
+  };
+
   return (
     <div className="overaly-back" onClick={props.hideMe}>
       <div
@@ -45,7 +58,12 @@ function CreateInterval(props) {
                   <span className="preset-value-start-text">
                     {i === 0 ? "First After" : "Then After"}
                   </span>
-                  <input type="number" defaultValue={number} min="1" max="30" />
+                  <input
+                    type="number"
+                    defaultValue={number}
+                    min="1"
+                    max={MAX_VALUE}
+                  />
                   <select defaultValue={unit}>
                     <option value="day">DAY(S)</option>
                     <option value="month">MONTH(S)</option>
@@ -59,7 +77,10 @@ function CreateInterval(props) {
                 </div>
               );
             })}
-            <div className="create-preset-add-item">
+            <div
+              className="create-preset-add-item"
+              onClick={() => setInterval([...interval, getNewItem()])}
+            >
               <span
                 className="material-icons preset-add-item-icon"
                 title="Add Item"
