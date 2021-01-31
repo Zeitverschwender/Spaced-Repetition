@@ -1,40 +1,53 @@
 @import "../App.scss";
 
 .custom-notification {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    width: 15rem;
-    height:fit-content;
-    padding: $item-padding;
-    border-radius: $border-radius;
-    background-color: rgba($color: color(dark),$alpha: 0.87);
-    color: color(white);
-    .remove-part{
-        align-self: center;
-        padding: 4%;
-        height: auto;
-        color: white;
-        &:hover{
-            background-color: darken($color: color(dark), $amount: 3%);
-        }
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 15rem;
+  height: fit-content;
+  padding: $item-padding;
+  border-radius: $border-radius;
+  background-color: rgba($color: color(dark), $alpha: 0.87);
+  color: color(white);
+  .remove-part {
+    align-self: center;
+    padding: 4%;
+    height: auto;
+    color: white;
+    &:hover {
+      background-color: darken($color: color(dark), $amount: 3%);
     }
-    .vertical-sep-auto {
-        @extend .vertical-sep;
-        height: auto;
-        border-color: white;
+  }
+  .vertical-sep-auto {
+    @extend .vertical-sep;
+    height: auto;
+    border-color: white;
+  }
+  .notification-details {
+    flex-grow: 9;
+    color: white;
+    .notification-title {
+      font-size: 1.05rem;
+      font-weight: bolder;
     }
-    .notification-details{
-        flex-grow: 9;
-        color: white;
-        .notification-title{
-            font-size: 1.05rem;
-            font-weight:bolder;
-        }
-    }
-    -webkit-animation: 0.7s ease 1 both running move_eye;
-    animation: 0.7s ease 1 both running move_eye;
-
+  }
+  -webkit-animation: 0.7s ease 1 both running move_eye;
+  animation: 0.7s ease 1 both running move_eye;
 }
-@-webkit-keyframes move_eye { from { margin-left: 120%; } to { margin-left: 0%; }  }
-        @keyframes move_eye { from { margin-left: 120%; } to { margin-left: 0%; }  }
+@-webkit-keyframes move_eye {
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+@keyframes move_eye {
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
