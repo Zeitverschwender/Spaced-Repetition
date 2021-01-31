@@ -213,52 +213,59 @@ class App extends Component {
             </div>
             <span className="title">Spaced Repetition</span>
           </header>
-          {this.state.isSideMenuShown && (
-                <Sidemenu hideSideMenu={this.hideSideMenu} />
-              )}
-          <Switch>
-            <Route path="/loginRedirect" component={LoginRedirect} />
-            <Route path="/About">
-              <AboutPage></AboutPage>
-            </Route>
-            <Route exact path="/">
-              {this.state.isFullDetailsShown && (
-                <ItemFullDetails
-                  item={this.state.clickedItem}
-                  hideFullDetails={this.hideFullDetails}
-                  showEditDetails={this.showEditDetails}
-                />
-              )}
-              {this.state.isEditDetailsShown && (
-                <EditItem
-                  item={this.state.clickedItem}
-                  hideEditDetails={this.hideEditDetails}
-                  editItem={this.editItem}
-                  deleteItem={this.deleteItem}
-                  showConfirmBox={this.showConfirmBox}
-                />
-              )}
-              {this.state.confirmBox.isShown && (
-                <ConfirmBox
-                  msg={this.state.confirmBox.msg}
-                  callOnYes={this.state.confirmBox.onYes}
-                  callOnNo={this.state.confirmBox.onNo}
-                  hideMe={this.hideConfirmBox}
-                />
-              )}
-              <div className="content">
-                <RepeatingList
-                  repeatingItems={this.state.repeatingItems}
-                  onAddItem={this.onAddItem}
-                  onItemClick={this.onItemClick}
-                  intervals={this.state.intervals}
-                ></RepeatingList>
-              </div>
-            </Route>
-            <Route path="*">
-              <NotFoundPage></NotFoundPage>
-            </Route>
-          </Switch>
+          <NotificationQueueContext.Provider value={this.createNotification}>
+            {this.state.isSideMenuShown && (
+              <Sidemenu hideSideMenu={this.hideSideMenu} />
+            )}
+
+            <Switch>
+              <Route path="/loginRedirect" component={LoginRedirect} />
+              <Route path="/About">
+                <AboutPage></AboutPage>
+              </Route>
+              <Route exact path="/">
+                {this.state.isFullDetailsShown && (
+                  <ItemFullDetails
+                    item={this.state.clickedItem}
+                    hideFullDetails={this.hideFullDetails}
+                    showEditDetails={this.showEditDetails}
+                  />
+                )}
+                {this.state.isEditDetailsShown && (
+                  <EditItem
+                    item={this.state.clickedItem}
+                    hideEditDetails={this.hideEditDetails}
+                    editItem={this.editItem}
+                    deleteItem={this.deleteItem}
+                    showConfirmBox={this.showConfirmBox}
+                  />
+                )}
+                {this.state.confirmBox.isShown && (
+                  <ConfirmBox
+                    msg={this.state.confirmBox.msg}
+                    callOnYes={this.state.confirmBox.onYes}
+                    callOnNo={this.state.confirmBox.onNo}
+                    hideMe={this.hideConfirmBox}
+                  />
+                )}
+                <div className="content">
+                  <RepeatingList
+                    repeatingItems={this.state.repeatingItems}
+                    onAddItem={this.onAddItem}
+                    onItemClick={this.onItemClick}
+                    intervals={this.state.intervals}
+                  ></RepeatingList>
+                </div>
+              </Route>
+              <Route path="*">
+                <NotFoundPage></NotFoundPage>
+              </Route>
+            </Switch>
+            <NotificationQueue
+              notifications={this.state.notifications}
+              onNotificationCloseClick={this.closeNotification}
+            />
+          </NotificationQueueContext.Provider>
           <footer>
             <a
               href="https://github.com/Zeitverschwender/Spaced-Repetition"
