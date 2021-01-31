@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import Fade from 'react-reveal/Fade';
-import Zoom from 'react-reveal/Zoom';
+import {Slide,Zoom} from 'react-awesome-reveal';
 
 import "./AboutPage.scss";
 
@@ -22,36 +20,29 @@ class AboutPage extends Component {
     }
     render() {
 
-        //var teamMembers = this.state.dummyTeam.map((teamMember,index) => <Zoom duration={1000}><div><img src={githubIcon}></img><span>{teamMember} {index + 1}</span></div></Zoom>)
-        var teamMembers = this.state.team.map((teamMember,index) => index%2 === 0? <Fade right duration={1000}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Fade>:<Fade left duration={1000}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Fade>)
+        var teamMembers = this.state.team.map((teamMember,index) => index%2 === 0? <Slide direction="right" duration={1000} key={index}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Slide>:<Slide direction="left" duration={1000} key={index}><div><img src={githubIcon} alt="Loading..."></img><span>{teamMember}</span></div></Slide>)
 
         return (
         <div className="about-main-wrapper">
             <div className="about-content">
                 <div className="about-product-wrapper">
-                <TransitionGroup>
-                        <Zoom bottom duration={1000}>
-                        <h1>About Spaced Repetition</h1>
-                        <p className="about-product">{this.state.productInfo}</p>
-                        </Zoom>
-                </TransitionGroup>
+                    <h1>About Spaced Repetition</h1>
+                    <Zoom direction="up" duration={1000}>
+                    <p className="about-product">{this.state.productInfo}</p>
+                    </Zoom>
                 </div>
 
                 <div className="hook-wrapper">
-                    <TransitionGroup>
                     <h1>SCIENCE of remembering</h1>
                     <div  className="hook">
-                        <Fade left duration={2000}><p>{this.state.theoryInfo}</p></Fade>
-                        <Fade right duration={2000}><img src={Ebbinghaus} alt="Ebbinghaus"></img></Fade>
+                        <Slide direction="left" duration={2000}><p>{this.state.theoryInfo}</p></Slide>
+                        <Slide direction="right" duration={2000}><img src={Ebbinghaus} alt="Ebbinghaus" className="hook-image"></img></Slide>
                     </div>
-                    </TransitionGroup>
                 </div>
 
                 <div className="about-team-wrapper">
-                    <TransitionGroup>
                     <h2>About the team</h2>
                     <div className="about-team">{teamMembers}</div>
-                    </TransitionGroup>
                 </div>
             </div>
         </div>

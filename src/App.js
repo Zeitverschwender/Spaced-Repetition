@@ -181,16 +181,15 @@ class App extends Component {
             </div>
             <span className="title">Spaced Repetition</span>
           </header>
-
+          {this.state.isSideMenuShown && (
+                <Sidemenu hideSideMenu={this.hideSideMenu} />
+              )}
           <Switch>
             <Route path="/loginRedirect" component={LoginRedirect} />
             <Route path="/About">
               <AboutPage></AboutPage>
             </Route>
             <Route exact path="/">
-              {this.state.isSideMenuShown && (
-                <Sidemenu hideSideMenu={this.hideSideMenu} />
-              )}
               {this.state.isFullDetailsShown && (
                 <ItemFullDetails
                   item={this.state.clickedItem}
