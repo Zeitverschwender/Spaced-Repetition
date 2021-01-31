@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import "./createitem.scss";
-import CreatePreset from "./createpreset";
+import CreateInterval from "./createinterval";
 
 export class CreateItem extends Component {
   state = {
     isCreateItemShown: false,
     newItem: {},
     isAllOptionsShown: false,
-    isCreatePresetShown: false,
+    isCreateIntervalShown: false,
   };
 
   constructor(props) {
@@ -47,10 +47,10 @@ export class CreateItem extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.isCreatePresetShown && (
-          <CreatePreset
-            hideMe={() => this.setState({ isCreatePresetShown: false })}
-          ></CreatePreset>
+        {this.state.isCreateIntervalShown && (
+          <CreateInterval
+            hideMe={() => this.setState({ isCreateIntervalShown: false })}
+          ></CreateInterval>
         )}
         {this.state.isCreateItemShown && (
           <div className="create-item">
@@ -75,7 +75,7 @@ export class CreateItem extends Component {
                   if (value === "create-item") {
                     value = "";
                     e.target.value = "";
-                    this.setState({ isCreatePresetShown: true });
+                    this.setState({ isCreateIntervalShown: true });
                   }
                   this.setState({
                     newItem: {

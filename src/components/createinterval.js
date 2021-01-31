@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import "./createpreset.scss";
+import "./createinterval.scss";
 
-function CreatePreset(props) {
+function CreateInterval(props) {
   const [title, setTitle] = useState("");
   const [interval, setInterval] = useState([[1, "day"]]);
   return (
@@ -13,7 +13,7 @@ function CreatePreset(props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="create-preset-header">
-          <span className="create-preset-title">CREATE PRESET</span>
+          <span className="create-preset-title">CREATE INTERVAL</span>
           <span
             className="material-icons details-buttons"
             title="Exit"
@@ -26,7 +26,7 @@ function CreatePreset(props) {
         <div className="intervals-creation">
           <input
             type="text"
-            placeholder="Preset title"
+            placeholder="Interval title"
             id="preset-title"
             maxLength="128"
             onChange={(e) => setTitle(e.target.value)}
@@ -70,8 +70,8 @@ function CreatePreset(props) {
   );
 }
 
-CreatePreset.propTypes = {
+CreateInterval.propTypes = {
   hideMe: PropTypes.func.isRequired,
 };
 
-export default CreatePreset;
+export default CreateInterval;
