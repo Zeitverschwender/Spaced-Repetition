@@ -61,6 +61,15 @@
       font-family: $font-mono;
       font-size: 0.8rem;
     }
+    .preset-remove-item,
+    .preset-reorder-item {
+      color: color(blue-dark);
+
+      transition: $transition-time;
+      &:hover {
+        filter: brightness(2);
+      }
+    }
     .preset-remove-item {
       cursor: pointer;
     }
