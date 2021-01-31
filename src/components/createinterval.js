@@ -104,7 +104,14 @@ function CreateInterval(props) {
         </div>
         <div className="create-preset-footer">
           <div className="horizontal-sep" />
-          <div className="blue-button">CREATE</div>
+          <div
+            className={
+              "blue-button" +
+              (title.length === 0 || interval.length === 0 ? " disabled" : "")
+            }
+          >
+            CREATE
+          </div>
         </div>
       </div>
     </div>
