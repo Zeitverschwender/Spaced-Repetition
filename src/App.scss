@@ -334,3 +334,14 @@ $sep-size: 3.18em;
     color: white;
   }
 }
+
+input,
+select,
+textarea {
+  font-family: $font-main;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: $font-mono;
+}

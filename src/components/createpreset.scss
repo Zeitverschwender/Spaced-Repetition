@@ -1,3 +1,5 @@
+@import "../App.scss";
+
 .create-preset-content {
   display: flex;
   flex-direction: column;
@@ -17,22 +19,60 @@
   }
 }
 
-.intervals-creation{
+.intervals-creation {
   display: flex;
   flex-direction: column;
 
-  input[type='text']{
+  overflow-y: auto;
+  padding-right: 0.25em;
+
+  #preset-title {
     height: 2em;
     font-weight: 600;
+  }
+
+  .create-preset-values {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5em;
+  }
+
+  .create-preset-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+
+    padding: 0.4em 0;
+
+    background: rgba($color: #000000, $alpha: 0.085);
+
+    border-radius: $border-radius;
+
+    input {
+      flex-grow: 1;
+    }
+    select {
+      flex-grow: 4;
+    }
+    .preset-value-start-text {
+      width: 8em;
+      font-family: $font-mono;
+      font-size: 0.8rem;
+    }
+    .preset-remove-item {
+      cursor: pointer;
+    }
   }
 }
 
 .create-preset-footer {
   margin-top: auto;
 
-  .blue-button{
-      margin: 0.5em auto 0 auto;
-      text-align: center;
-      width: 65%;
+  .blue-button {
+    margin: 0.5em auto 0 auto;
+    text-align: center;
+    width: 65%;
   }
 }

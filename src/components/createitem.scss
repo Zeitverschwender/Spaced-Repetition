@@ -46,8 +46,6 @@
     color: white;
     border-radius: $border-radius;
 
-    font-family: $font-main;
-
     transition: border-color $transition-time, background $transition-time;
 
     &:focus {
@@ -70,10 +68,10 @@
   .select-placeholder,
   textarea::placeholder {
     color: rgba($color: white, $alpha: 0.75);
-    font-family: $font-mono;
     font-size: 0.75rem;
   }
   .select-placeholder {
+    font-family: $font-mono;
     padding: 0.7em 0;
   }
 }
