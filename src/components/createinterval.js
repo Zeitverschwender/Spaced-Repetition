@@ -59,6 +59,14 @@ function CreateInterval(props) {
                 </div>
               );
             })}
+            <div className="create-preset-add-item">
+              <span
+                className="material-icons preset-add-item-icon"
+                title="Add Item"
+              >
+                add
+              </span>
+            </div>
           </div>
         </div>
         <div className="create-preset-footer">
