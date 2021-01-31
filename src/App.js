@@ -8,6 +8,7 @@ import RepeatingList from "./repeatinglist";
 import ItemFullDetails from "./components/itemfulldetails";
 import EditItem from "./components/edititem";
 import ConfirmBox from "./components/confirmbox";
+import NotificationQueue, {NotificationQueueContext} from "./components/notificationqueue";
 import Backend from "./services/backend";
 
 import "./App.scss";
@@ -20,6 +21,8 @@ class App extends Component {
   state = {
     repeatingItems: [],
     intervals: [],
+    notifications: [],
+    notificationId: 1,
     isSideMenuShown: false,
     isFullDetailsShown: false,
     isEditDetailsShown: false,
@@ -37,22 +40,21 @@ class App extends Component {
     this._backend.isUserLoggedIn(
       (isLoggedIn) => {
         if (isLoggedIn) {
-          const alertUser = (err) => alert(`couldn't get items. error: ${err}`);
           this._backend.getRepeatingItems((items) => {
             this.setState({ repeatingItems: items });
-          }, alertUser);
+          },  this.createNotification);
           this._backend.getDefaultIntervals((data) => {
             this.setState({ intervals: data });
-          }, alertUser);
+          },  this.createNotification);
           this._backend.getIntervals((data) => {
             this.setState({ intervals: [...this.state.intervals, ...data] });
-          }, alertUser);
+          },  this.createNotification);
         } else {
-          alert("Not Logged In");
+          this.createNotification("Error: ","Not logged in.");
         }
       },
       (err) => {
-        alert("coudn't check login. error: " + err);
+        this.createNotification("Error: ", "Could'nt check log in status.")
       }
     );
   }
@@ -83,7 +85,8 @@ class App extends Component {
         callback();
       },
       (err) => {
-        alert(`couldn't add Item. error: ${err}`);
+        this.createNotification("Error: ", "Could'nt add item.");
+
       }
     );
   };
@@ -113,7 +116,7 @@ class App extends Component {
         });
       },
       (err) => {
-        alert(`couldn't get intervals. error: ${err}`);
+        this.createNotification("Error: ", "Could'nt edit item.")
       }
     );
   };
@@ -135,10 +138,39 @@ class App extends Component {
         });
       },
       (err) => {
-        alert(`couldn't delete. error: ${err}`);
+        this.createNotification("Error: ", "Could'nt delete item.")
       }
     );
   };
+
+  createNotification = (title, msg) => {
+    this.setState({
+      notifications: [
+        ...this.state.notifications,
+        {
+          id: this.state['notificationId'],
+          title: title,
+          msg: msg,
+        },
+      ],
+      notificationId: this.state['notificationId'] + 1,
+    });
+    
+  };
+
+
+  
+  closeNotification = (notificationId) => {
+    this.state.notifications.splice(
+      this.state.notifications.findIndex(
+        (element) => element.id === notificationId
+      ),  
+      1
+    );
+    this.setState({
+      notifications: this.state.notifications,
+    });
+  }
 
   hideSideMenu = () => {
     this.setState({ isSideMenuShown: false });

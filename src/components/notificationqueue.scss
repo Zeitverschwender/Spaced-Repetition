@@ -1,0 +1,11 @@
+@import "../App.scss";
+
+.notification-queue {
+    position: fixed;
+    bottom:6%;
+    right: 1vw;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    height: auto;
+}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import {NotificationQueueContext} from "./notificationqueue";
 
 import { ENDPOINT_GOOGLE } from "../services/backend";
 import Backend from "../services/backend";
@@ -12,13 +13,15 @@ export default function UserSection() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPhoto, setUserPhoto] = useState("");
+  const createNotification = useContext(NotificationQueueContext);
+
   useEffect(() => {
     backend.isUserLoggedIn(
       (data) => {
         setIsLoggedIn(data);
       },
       (err) => {
-        alert(`couldn't check log in. err: ${err}`);
+        createNotification("Error: ", "Could'nt check log in status.");
       }
     );
   });
@@ -30,7 +33,7 @@ export default function UserSection() {
           setUserName(data);
         },
         (err) => {
-          alert(`couldn't get user name. err: ${err}`);
+          createNotification("Error: ", "Couldn't get username.");
         }
       );
       backend.getUserPhoto(
@@ -38,7 +41,7 @@ export default function UserSection() {
           setUserPhoto(data);
         },
         (err) => {
-          alert(`couldn't get user photo. err: ${err}`);
+          createNotification("Error: ", "Couldn't get user photo.");
         }
       );
     }
@@ -51,7 +54,7 @@ export default function UserSection() {
         window.location.reload();
       },
       (err) => {
-        alert(`couldn't log out. err: ${err}`);
+        createNotification("Error: Could'nt log out.", err);
       }
     );
   };
