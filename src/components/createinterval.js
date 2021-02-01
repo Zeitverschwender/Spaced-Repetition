@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import "./createinterval.scss";
 import Backend from "../services/backend";
@@ -8,7 +9,8 @@ import { NotificationQueueContext } from "./notificationqueue";
 const MAX_VALUE = 30;
 function CreateInterval(props) {
   const [title, setTitle] = useState("");
-  const [interval, setInterval] = useState([[1, "day"]]);
+  const [interval, setInterval] = useState([[1, "day", 0]]);
+  const [itemIDCounter, setItemIDCounter] = useState(0);
   const [addingInterval, setAddingInterval] = useState(false);
   const [invalidItems, setInvalidItems] = useState([]);
 
@@ -18,12 +20,17 @@ function CreateInterval(props) {
 
   const getNewItem = () => {
     const [lastItemNumber, lastItemUnit] = interval[interval.length - 1];
+    setItemIDCounter(itemIDCounter + 1);
     if (lastItemUnit === "month") {
-      return [Math.min(MAX_VALUE, lastItemNumber + 1), "month"];
+      return [
+        Math.min(MAX_VALUE, lastItemNumber + 1),
+        "month",
+        itemIDCounter + 1,
+      ];
     } else {
       return lastItemNumber + 1 > MAX_VALUE
-        ? [1, "month"]
-        : [lastItemNumber + 1, "day"];
+        ? [1, "month", itemIDCounter + 1]
+        : [lastItemNumber + 1, "day", itemIDCounter + 1];
     }
   };
 
@@ -81,6 +88,17 @@ function CreateInterval(props) {
     );
   };
 
+  const handleReOrder = (result) => {
+    if (!result.destination) return;
+    const newInterval = [...interval];
+    newInterval.splice(
+      result.destination.index,
+      0,
+      ...newInterval.splice(result.source.index, 1)
+    );
+    setInterval(newInterval);
+  };
+
   return (
     <div className="overaly-back" onClick={props.hideMe}>
       <div
@@ -107,78 +125,98 @@ function CreateInterval(props) {
             onChange={(e) => setTitle(e.target.value)}
           />
           <h3>You will get a notification</h3>
-          <div className="create-preset-values">
-            {interval.map(([number, unit], i) => {
-              return (
+          <DragDropContext onDragEnd={handleReOrder}>
+            <Droppable droppableId="newIntervalItems">
+              {(provided, snapshot) => (
                 <div
-                  key={i}
                   className={
-                    "create-preset-value" +
-                    (invalidItems.indexOf(i) > -1
-                      ? " create-preset-value-invalid"
+                    "create-preset-values" +
+                    (snapshot.isDraggingOver
+                      ? " create-preset-values-dragging"
                       : "")
                   }
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
                 >
-                  <span
-                    className="material-icons preset-reorder-item"
-                    title="Re-order"
+                  {interval.map(([number, unit, id], i) => (
+                    <Draggable key={id} draggableId={id.toString()} index={i}>
+                      {(provided) => (
+                        <div
+                          className={
+                            "create-preset-value" +
+                            (invalidItems.indexOf(i) > -1
+                              ? " create-preset-value-invalid"
+                              : "")
+                          }
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <span
+                            className="material-icons preset-reorder-item"
+                            title="Re-order"
+                          >
+                            drag_indicator
+                          </span>
+                          <span className="preset-value-start-text">
+                            {i === 0 ? "First After" : "Then After"}
+                          </span>
+                          <input
+                            type="number"
+                            defaultValue={number}
+                            min="1"
+                            max={MAX_VALUE}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              interval[i][0] = Number(e.target.value);
+                              setInterval([...interval]);
+                            }}
+                          />
+                          <select
+                            defaultValue={unit}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              interval[i][1] = e.target.value;
+                              setInterval([...interval]);
+                            }}
+                          >
+                            <option value="day">DAY(S)</option>
+                            <option value="month">MONTH(S)</option>
+                          </select>
+                          <span
+                            className={
+                              "material-icons preset-remove-item" +
+                              (i === 0 ? " disabled" : "")
+                            }
+                            title="Remove Item"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              interval.splice(i, 1);
+                              setInterval([...interval]);
+                            }}
+                          >
+                            clear
+                          </span>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                  <div
+                    className="create-preset-add-item"
+                    onClick={() => setInterval([...interval, getNewItem()])}
                   >
-                    drag_indicator
-                  </span>
-                  <span className="preset-value-start-text">
-                    {i === 0 ? "First After" : "Then After"}
-                  </span>
-                  <input
-                    type="number"
-                    defaultValue={number}
-                    min="1"
-                    max={MAX_VALUE}
-                    onChange={(e) => {
-                      e.preventDefault();
-                      interval[i][0] = Number(e.target.value);
-                      setInterval([...interval]);
-                    }}
-                  />
-                  <select
-                    defaultValue={unit}
-                    onChange={(e) => {
-                      e.preventDefault();
-                      interval[i][1] = e.target.value;
-                      setInterval([...interval]);
-                    }}
-                  >
-                    <option value="day">DAY(S)</option>
-                    <option value="month">MONTH(S)</option>
-                  </select>
-                  <span
-                    className={
-                      "material-icons preset-remove-item" +
-                      (i === 0 ? " disabled" : "")
-                    }
-                    title="Remove Item"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      interval.splice(i, 1);
-                      setInterval([...interval]);
-                    }}
-                  >
-                    clear
-                  </span>
+                    <span
+                      className="material-icons preset-add-item-icon"
+                      title="Add Item"
+                    >
+                      add
+                    </span>
+                  </div>
                 </div>
-              );
-            })}
-            <div
-              className="create-preset-add-item"
-              onClick={() => setInterval([...interval, getNewItem()])}
-            >
-              <span
-                className="material-icons preset-add-item-icon"
-                title="Add Item"
-              >
-                add
-              </span>
-            </div>
-          </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
         <div className="create-preset-footer">
           <div className="horizontal-sep" />

@@ -41,6 +41,11 @@ $item-background: rgba(
     flex-direction: column;
 
     gap: 0.5em;
+    transition: background $transition-time;
+  }
+
+  .create-preset-values-dragging {
+    background: rgba($color: color(blue), $alpha: 0.1);
   }
 
   .create-preset-value {
