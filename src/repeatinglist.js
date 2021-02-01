@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { RepeatingItem } from "./repeatingitem";
 import { RepeatingItem as RItem } from "./models/repeatingitem";
-import { CreateItem } from "./components/createitem";
+import CreateItem from "./components/createitem";
 
 const LOADING_ITEM = new RItem(0, "Loading..", "");
 export class RepeatingList extends Component {
