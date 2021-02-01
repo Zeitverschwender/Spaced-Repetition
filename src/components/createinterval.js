@@ -152,8 +152,16 @@ function CreateInterval(props) {
                     <option value="month">MONTH(S)</option>
                   </select>
                   <span
-                    className="material-icons preset-remove-item"
+                    className={
+                      "material-icons preset-remove-item" +
+                      (i === 0 ? " disabled" : "")
+                    }
                     title="Remove Item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      interval.splice(i, 1);
+                      setInterval([...interval]);
+                    }}
                   >
                     clear
                   </span>
@@ -181,7 +189,7 @@ function CreateInterval(props) {
               (title.length === 0 ||
               interval.length === 0 ||
               addingInterval ||
-              (invalidItems.length !== 0)
+              invalidItems.length !== 0
                 ? " disabled"
                 : "")
             }
