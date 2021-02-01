@@ -50,7 +50,14 @@
         filter: none;
         letter-spacing: 0.3em;
         gap: 0.3em;
-        border-right: 0.4em solid color(primary);
+        border-right: 0.6em solid color(primary);
+      }
+    }
+
+    .path-link-active {
+      background: color(primary);
+      &:hover {
+        border-color: color(blue);
       }
     }
     .user {
