@@ -211,9 +211,7 @@ class App extends Component {
 
             <Switch>
               <Route path="/loginRedirect" component={LoginRedirect} />
-              <Route path="/About">
-                <AboutPage></AboutPage>
-              </Route>
+              <Route path="/About" component={AboutPage} />
               <Route exact path="/">
                 {this.state.isFullDetailsShown && (
                   <ItemFullDetails
