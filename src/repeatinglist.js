@@ -27,7 +27,6 @@ export class RepeatingList extends Component {
           ></RepeatingItem>
         ))}
         <CreateItem
-          intervals={this.props.intervals}
           onAddItem={this.props.onAddItem}
         ></CreateItem>
       </div>
@@ -39,7 +38,6 @@ RepeatingList.propTypes = {
   repeatingItems: PropTypes.array.isRequired,
   onAddItem: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
-  intervals: PropTypes.array.isRequired,
 };
 
 export default RepeatingList;

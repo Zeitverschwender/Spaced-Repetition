@@ -1,16 +1,29 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 
 import "./createitem.scss";
 import CreateInterval from "./createinterval";
+
+import { NotificationQueueContext } from "./notificationqueue";
+import Backend from "../services/backend";
 
 export default function CreateItem(props) {
   const [isCreateItemShown, setIsCreateItemShown] = useState(false);
   const [newItem, setNewItem] = useState({});
   const [isAllOptionsShown, setIsAllOptionsShown] = useState(false);
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
+  const [intervals, setIntervals] = useState([]);
 
   const createItemTextbox = useRef(null);
+
+  const createNotification = useContext(NotificationQueueContext);
+  useEffect(() => {
+    const _backend = new Backend();
+    const callback = (data) => setIntervals([...intervals, ...data]);
+    _backend.getDefaultIntervals(callback, createNotification);
+    _backend.getIntervals(callback, createNotification);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (isCreateItemShown) {
@@ -41,6 +54,9 @@ export default function CreateItem(props) {
       {isCreateIntervalShown && (
         <CreateInterval
           hideMe={() => setIsCreateIntervalShown(false)}
+          onAddNewInterval={(newInterval) =>
+            setIntervals([...intervals, newInterval])
+          }
         ></CreateInterval>
       )}
       {isCreateItemShown && (
@@ -68,7 +84,7 @@ export default function CreateItem(props) {
               <option value="" disabled hidden>
                 Interval
               </option>
-              {props.intervals.map((item) => (
+              {intervals.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item.title} ({item.days.toString()})
                 </option>
@@ -131,6 +147,5 @@ export default function CreateItem(props) {
 }
 
 CreateItem.propTypes = {
-  intervals: PropTypes.array.isRequired,
   onAddItem: PropTypes.func.isRequired,
 };

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import "./createinterval.scss";
+import Backend from "../services/backend";
+import { NotificationQueueContext } from "./notificationqueue";
 
 const MAX_VALUE = 30;
 function CreateInterval(props) {
   const [title, setTitle] = useState("");
   const [interval, setInterval] = useState([[1, "day"]]);
+  const [addingInterval, setAddingInterval] = useState(false);
+
+  const backend = new Backend();
+
+  const createNotification = useContext(NotificationQueueContext);
 
   const getNewItem = () => {
     const [lastItemNumber, lastItemUnit] = interval[interval.length - 1];
@@ -17,6 +24,36 @@ function CreateInterval(props) {
         ? [1, "month"]
         : [lastItemNumber + 1, "day"];
     }
+  };
+
+  const createOnClick = (e) => {
+    e.preventDefault();
+
+    setAddingInterval(true);
+
+    const apiIntervalFormat = [];
+    interval.forEach(([itemNumber, itemUnit]) => {
+      const lastValue =
+        apiIntervalFormat.length > 0
+          ? apiIntervalFormat[apiIntervalFormat.length - 1]
+          : 0;
+      apiIntervalFormat.push(
+        lastValue + itemNumber * (itemUnit === "month" ? 30 : 1)
+      );
+    });
+
+    backend.createInterval(
+      { title, days: apiIntervalFormat },
+      (data) => {
+        props.onAddNewInterval(data);
+        createNotification("Success", "Interval was added.");
+        props.hideMe();
+      },
+      (err) => {
+        createNotification("Error", "Couldn't add interval.");
+        setAddingInterval(false);
+      }
+    );
   };
 
   return (
@@ -107,8 +144,11 @@ function CreateInterval(props) {
           <div
             className={
               "blue-button" +
-              (title.length === 0 || interval.length === 0 ? " disabled" : "")
+              (title.length === 0 || interval.length === 0 || addingInterval
+                ? " disabled"
+                : "")
             }
+            onClick={createOnClick}
           >
             CREATE
           </div>
@@ -120,6 +160,7 @@ function CreateInterval(props) {
 
 CreateInterval.propTypes = {
   hideMe: PropTypes.func.isRequired,
+  onAddNewInterval: PropTypes.func.isRequired,
 };
 
 export default CreateInterval;

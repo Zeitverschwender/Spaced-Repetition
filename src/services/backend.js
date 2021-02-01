@@ -139,5 +139,15 @@ class Backend {
         onFailure(err);
       });
   }
+  createInterval(newInterval, onSuccess, onFailure) {
+    axios
+      .post(`${ENDPOINT_REPEATING_INTERVALS}/${this.getToken()}`, newInterval)
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
 }
 export default Backend;

@@ -24,7 +24,6 @@ import Home from "./pages/home";
 class App extends Component {
   state = {
     repeatingItems: [],
-    intervals: [],
     notifications: [],
     notificationId: 1,
     isSideMenuShown: false,
@@ -46,12 +45,6 @@ class App extends Component {
         if (isLoggedIn) {
           this._backend.getRepeatingItems((items) => {
             this.setState({ repeatingItems: items });
-          }, this.createNotification);
-          this._backend.getDefaultIntervals((data) => {
-            this.setState({ intervals: data });
-          }, this.createNotification);
-          this._backend.getIntervals((data) => {
-            this.setState({ intervals: [...this.state.intervals, ...data] });
           }, this.createNotification);
         } else {
           this.createNotification("Error: ", "Not logged in.");
@@ -244,7 +237,6 @@ class App extends Component {
                     repeatingItems={this.state.repeatingItems}
                     onAddItem={this.onAddItem}
                     onItemClick={this.onItemClick}
-                    intervals={this.state.intervals}
                   ></RepeatingList>
                 </div>
               </Route>
