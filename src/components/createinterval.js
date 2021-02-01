@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import "./createinterval.scss";
@@ -35,6 +35,11 @@ function CreateInterval(props) {
     }
     return item1[1] === "month";
   };
+
+  useEffect(() => {
+    updateValidity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [interval]);
 
   const updateValidity = () => {
     const newInvalidItems = [];
@@ -136,7 +141,6 @@ function CreateInterval(props) {
                       e.preventDefault();
                       interval[i][0] = Number(e.target.value);
                       setInterval([...interval]);
-                      updateValidity();
                     }}
                   />
                   <select
@@ -145,7 +149,6 @@ function CreateInterval(props) {
                       e.preventDefault();
                       interval[i][1] = e.target.value;
                       setInterval([...interval]);
-                      updateValidity();
                     }}
                   >
                     <option value="day">DAY(S)</option>
