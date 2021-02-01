@@ -20,6 +20,7 @@ import NotFoundPage from "./NotFoundPage";
 import githubIcon from "./assets/images/github.svg";
 
 import { enableScrolling, disableScrolling } from "./utility/scrolling";
+import Home from "./pages/home";
 class App extends Component {
   state = {
     repeatingItems: [],
@@ -211,6 +212,7 @@ class App extends Component {
 
             <Switch>
               <Route path="/loginRedirect" component={LoginRedirect} />
+              <Route path="/home" component={Home} />
               <Route path="/About" component={AboutPage} />
               <Route exact path="/">
                 {this.state.isFullDetailsShown && (
