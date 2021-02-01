@@ -6,7 +6,7 @@ import UserSection from "./usersection";
 
 export default function Sidemenu(props) {
   return (
-    <div className="side-menu" onClick={() => props.hideSideMenu()}>
+    <div className="side-menu" onClick={() => props.hideSideMenu()} style={props.style}>
       <div className="side-menu-back" onClick={(e) => e.stopPropagation()}>
         <NavLink to="/home" className="path-link" activeClassName="path-link-active">
           <span className="material-icons">home</span>HOME
@@ -36,4 +36,5 @@ export default function Sidemenu(props) {
 
 Sidemenu.propTypes = {
   hideSideMenu: PropTypes.func.isRequired,
+  style: PropTypes.object,
 };

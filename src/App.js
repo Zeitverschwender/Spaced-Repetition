@@ -19,7 +19,6 @@ import AboutPage from "./AboutPage";
 import NotFoundPage from "./NotFoundPage";
 import githubIcon from "./assets/images/github.svg";
 
-
 import { enableScrolling, disableScrolling } from "./utility/scrolling";
 class App extends Component {
   state = {
@@ -205,9 +204,10 @@ class App extends Component {
             <span className="title">Spaced Repetition</span>
           </header>
           <NotificationQueueContext.Provider value={this.createNotification}>
-            {this.state.isSideMenuShown && (
-              <Sidemenu hideSideMenu={this.hideSideMenu} />
-            )}
+            <Sidemenu
+              hideSideMenu={this.hideSideMenu}
+              style={{ display: this.state.isSideMenuShown ? "" : "none" }}
+            />
 
             <Switch>
               <Route path="/loginRedirect" component={LoginRedirect} />
