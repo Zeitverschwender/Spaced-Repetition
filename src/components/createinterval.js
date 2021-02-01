@@ -10,6 +10,7 @@ function CreateInterval(props) {
   const [title, setTitle] = useState("");
   const [interval, setInterval] = useState([[1, "day"]]);
   const [addingInterval, setAddingInterval] = useState(false);
+  const [invalidItems, setInvalidItems] = useState([]);
 
   const backend = new Backend();
 
@@ -24,6 +25,29 @@ function CreateInterval(props) {
         ? [1, "month"]
         : [lastItemNumber + 1, "day"];
     }
+  };
+
+  const isBiggerThanOrEqual = (item1, item2) => {
+    console.log(item1);
+    console.log(item2);
+    if (item1[1] === item2[1]) {
+      return item1[0] - item2[0] > -1;
+    }
+    return item1[1] === "month";
+  };
+
+  const updateValidity = () => {
+    const newInvalidItems = [];
+    for (let i = 1; i < interval.length; i++) {
+      const element = interval[i];
+      const prevElement = interval[i - 1];
+      console.log(`comparing ${i} & ${i - 1}`);
+      if (!isBiggerThanOrEqual(element, prevElement)) {
+        console.log(`addding ${i - 1}`);
+        newInvalidItems.push(i - 1);
+      }
+    }
+    setInvalidItems(newInvalidItems);
   };
 
   const createOnClick = (e) => {
@@ -85,7 +109,15 @@ function CreateInterval(props) {
           <div className="create-preset-values">
             {interval.map(([number, unit], i) => {
               return (
-                <div key={i} className="create-preset-value">
+                <div
+                  key={i}
+                  className={
+                    "create-preset-value" +
+                    (invalidItems.indexOf(i) > -1
+                      ? " create-preset-value-invalid"
+                      : "")
+                  }
+                >
                   <span
                     className="material-icons preset-reorder-item"
                     title="Re-order"
@@ -104,6 +136,7 @@ function CreateInterval(props) {
                       e.preventDefault();
                       interval[i][0] = Number(e.target.value);
                       setInterval([...interval]);
+                      updateValidity();
                     }}
                   />
                   <select
@@ -112,6 +145,7 @@ function CreateInterval(props) {
                       e.preventDefault();
                       interval[i][1] = e.target.value;
                       setInterval([...interval]);
+                      updateValidity();
                     }}
                   >
                     <option value="day">DAY(S)</option>
@@ -144,7 +178,10 @@ function CreateInterval(props) {
           <div
             className={
               "blue-button" +
-              (title.length === 0 || interval.length === 0 || addingInterval
+              (title.length === 0 ||
+              interval.length === 0 ||
+              addingInterval ||
+              (invalidItems.length !== 0)
                 ? " disabled"
                 : "")
             }

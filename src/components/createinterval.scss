@@ -56,9 +56,11 @@ $item-background: rgba(
     border-radius: $border-radius;
 
     input {
+      color: inherit;
       flex-grow: 1;
     }
     select {
+      color: inherit;
       flex-grow: 4;
     }
     .preset-value-start-text {
@@ -66,6 +68,9 @@ $item-background: rgba(
       font-family: $font-mono;
       font-size: 0.8rem;
     }
+  }
+  .create-preset-value-invalid{
+    color: color(red);
   }
 }
 .preset-remove-item,
