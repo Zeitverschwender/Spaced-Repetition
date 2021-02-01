@@ -155,16 +155,15 @@ class App extends Component {
       ],
       notificationId: this.state['notificationId'] + 1,
     });
-    
   };
 
 
-  
+
   closeNotification = (notificationId) => {
     this.state.notifications.splice(
       this.state.notifications.findIndex(
         (element) => element.id === notificationId
-      ),  
+      ),
       1
     );
     this.setState({
