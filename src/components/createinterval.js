@@ -45,7 +45,7 @@ function CreateInterval(props) {
       const element = interval[i];
       const prevElement = interval[i - 1];
       if (!isBiggerThan(element, prevElement)) {
-        newInvalidItems.push(i - 1);
+        newInvalidItems.push(i);
       }
     }
     setInvalidItems(newInvalidItems);
