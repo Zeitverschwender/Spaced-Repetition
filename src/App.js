@@ -19,6 +19,8 @@ import AboutPage from "./AboutPage";
 import NotFoundPage from "./NotFoundPage";
 import githubIcon from "./assets/images/github.svg";
 
+
+import { enableScrolling, disableScrolling } from "./utility/scrolling";
 class App extends Component {
   state = {
     repeatingItems: [],
@@ -61,17 +63,8 @@ class App extends Component {
     );
   }
 
-  enableScrolling() {
-    document.body.style.overflow = null;
-    document.body.style.webkitOverflowScrolling = null;
-  }
-  disableScrolling() {
-    document.body.style.overflow = "hidden";
-    document.body.style.webkitOverflowScrolling = "touch";
-  }
-
   componentWillUnmount() {
-    this.enableScrolling();
+    enableScrolling();
   }
 
   onAddItem = (item, callback) => {
@@ -96,7 +89,7 @@ class App extends Component {
       isFullDetailsShown: true,
       clickedItem,
     });
-    this.disableScrolling();
+    disableScrolling();
   };
 
   editItem = (newItem) => {
@@ -172,11 +165,11 @@ class App extends Component {
 
   hideSideMenu = () => {
     this.setState({ isSideMenuShown: false });
-    this.enableScrolling();
+    enableScrolling();
   };
   hideFullDetails = () => {
     this.setState({ isFullDetailsShown: false });
-    this.enableScrolling();
+    enableScrolling();
   };
   showEditDetails = () => {
     this.setState({ isEditDetailsShown: true });
@@ -204,7 +197,7 @@ class App extends Component {
               className="side-menu-button"
               onClick={() => {
                 this.setState({ isSideMenuShown: true });
-                this.disableScrolling();
+                disableScrolling();
               }}
             >
               <span className="material-icons">menu</span>
