@@ -11,6 +11,7 @@ const ENDPOINT_GOOGLE_LOGOUT = process.env.REACT_APP_API_URL + "auth/logout";
 const ENDPOINT_USER_STATUS = process.env.REACT_APP_API_URL + "user/status";
 const ENDPOINT_USER_NAME = process.env.REACT_APP_API_URL + "user/name";
 const ENDPOINT_USER_PHOTO = process.env.REACT_APP_API_URL + "user/photo";
+axios.defaults.withCredentials = true;
 
 const TOKEN_LOCATION = "loginToken";
 class Backend {
@@ -71,11 +72,9 @@ class Backend {
       });
   }
   editItem(editedItem, onSuccess, onFailure) {
-    console.log(editedItem);
     axios
       .patch(
-        `${ENDPOINT_REPEATING_ITEMS}/${this.getToken()}/${editedItem._id}`,
-        editedItem
+        `${ENDPOINT_REPEATING_ITEMS}/${this.getToken()}/${editedItem._id}`
       )
       .then((res) => {
         onSuccess(res.data);
