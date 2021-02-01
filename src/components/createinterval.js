@@ -28,8 +28,6 @@ function CreateInterval(props) {
   };
 
   const isBiggerThan = (item1, item2) => {
-    console.log(item1);
-    console.log(item2);
     if (item1[1] === item2[1]) {
       return item1[0] - item2[0] > 0;
     }
@@ -46,9 +44,7 @@ function CreateInterval(props) {
     for (let i = 1; i < interval.length; i++) {
       const element = interval[i];
       const prevElement = interval[i - 1];
-      console.log(`comparing ${i} & ${i - 1}`);
       if (!isBiggerThan(element, prevElement)) {
-        console.log(`addding ${i - 1}`);
         newInvalidItems.push(i - 1);
       }
     }
