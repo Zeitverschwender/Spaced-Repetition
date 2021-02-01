@@ -27,11 +27,11 @@ function CreateInterval(props) {
     }
   };
 
-  const isBiggerThanOrEqual = (item1, item2) => {
+  const isBiggerThan = (item1, item2) => {
     console.log(item1);
     console.log(item2);
     if (item1[1] === item2[1]) {
-      return item1[0] - item2[0] > -1;
+      return item1[0] - item2[0] > 0;
     }
     return item1[1] === "month";
   };
@@ -42,7 +42,7 @@ function CreateInterval(props) {
       const element = interval[i];
       const prevElement = interval[i - 1];
       console.log(`comparing ${i} & ${i - 1}`);
-      if (!isBiggerThanOrEqual(element, prevElement)) {
+      if (!isBiggerThan(element, prevElement)) {
         console.log(`addding ${i - 1}`);
         newInvalidItems.push(i - 1);
       }
