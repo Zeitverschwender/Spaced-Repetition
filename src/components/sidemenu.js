@@ -6,15 +6,32 @@ import UserSection from "./usersection";
 
 export default function Sidemenu(props) {
   return (
-    <div className="side-menu" onClick={() => props.hideSideMenu()} style={props.style}>
+    <div
+      className="side-menu"
+      onClick={() => props.hideSideMenu()}
+      style={props.style}
+    >
       <div className="side-menu-back" onClick={(e) => e.stopPropagation()}>
-        <NavLink to="/home" className="path-link" activeClassName="path-link-active">
+        <NavLink
+          to="/home"
+          className="path-link"
+          activeClassName="path-link-active"
+        >
           <span className="material-icons">home</span>HOME
         </NavLink>
-        <NavLink exact to="/" className="path-link" activeClassName="path-link-active">
+        <NavLink
+          exact
+          to="/"
+          className="path-link"
+          activeClassName="path-link-active"
+        >
           <span className="material-icons">list</span>MY ITEMS
         </NavLink>
-        <NavLink to="/About" className="path-link" activeClassName="path-link-active">
+        <NavLink
+          to="/About"
+          className="path-link"
+          activeClassName="path-link-active"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
