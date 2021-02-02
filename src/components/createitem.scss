@@ -34,9 +34,8 @@
   flex-direction: column;
   gap: 0.35em;
 
-  input,
-  select,
-  textarea {
+  .input-stylized,
+  .create-item-select {
     padding: 0.35em 0.1em;
     font-size: 1.1rem;
     border: 0;
@@ -54,7 +53,7 @@
     }
   }
 
-  select {
+  .create-item-select {
     appearance: none;
     width: 100%;
 
@@ -64,9 +63,8 @@
       font-family: $font-main;
     }
   }
-  input::placeholder,
-  .select-placeholder,
-  textarea::placeholder {
+  .input-stylized::placeholder,
+  .select-placeholder {
     color: rgba($color: white, $alpha: 0.75);
     font-size: 0.75rem;
   }
