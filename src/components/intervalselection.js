@@ -8,14 +8,17 @@ import Backend from "../services/backend";
 
 function IntervalSelection(props) {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
+  const [defaultIntervals, setDefaultIntervals] = useState([]);
   const [intervals, setIntervals] = useState([]);
 
   const createNotification = useContext(NotificationQueueContext);
   useEffect(() => {
     const _backend = new Backend();
-    const callback = (data) => setIntervals([...intervals, ...data]);
-    _backend.getDefaultIntervals(callback, createNotification);
-    _backend.getIntervals(callback, createNotification);
+    _backend.getDefaultIntervals(
+      (data) => setDefaultIntervals(data),
+      createNotification
+    );
+    _backend.getIntervals((data) => setIntervals(data), createNotification);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,7 +49,7 @@ function IntervalSelection(props) {
           <option value="" disabled hidden>
             Interval
           </option>
-          {intervals.map((item) => (
+          {[...intervals, ...defaultIntervals].map((item) => (
             <option key={item._id} value={item._id}>
               {item.title} ({item.days.toString()})
             </option>
