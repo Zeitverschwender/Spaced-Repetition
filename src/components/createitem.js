@@ -109,7 +109,7 @@ export default function CreateItem(props) {
                   onChange={(e) =>
                     setNewItem({
                       ...newItem,
-                      isNotificationsOn: e.target.value,
+                      isNotificationsOn: e.target.checked,
                     })
                   }
                 />
