@@ -74,7 +74,8 @@ class Backend {
   editItem(editedItem, onSuccess, onFailure) {
     axios
       .patch(
-        `${ENDPOINT_REPEATING_ITEMS}/${this.getToken()}/${editedItem._id}`
+        `${ENDPOINT_REPEATING_ITEMS}/${this.getToken()}/${editedItem._id}`,
+        editedItem
       )
       .then((res) => {
         onSuccess(res.data);
