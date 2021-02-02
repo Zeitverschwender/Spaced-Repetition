@@ -46,7 +46,16 @@ function CreateInterval(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interval]);
 
-  const updateValidity = () => {
+  const valueBetweenLimits = () => {
+    const newInvalidItems = [];
+    for (let i = 0; i < interval.length; i++) {
+      if (interval[i][0] <= 0 || interval[i][0] > MAX_VALUE) {
+        newInvalidItems.push(i);
+      }
+    }
+    return newInvalidItems;
+  };
+  const correctValueOrder = () => {
     const newInvalidItems = [];
     for (let i = 1; i < interval.length; i++) {
       const element = interval[i];
@@ -55,7 +64,11 @@ function CreateInterval(props) {
         newInvalidItems.push(i);
       }
     }
-    setInvalidItems(newInvalidItems);
+    return newInvalidItems;
+  };
+
+  const updateValidity = () => {
+    setInvalidItems([...valueBetweenLimits(), ...correctValueOrder()]);
   };
 
   const createOnClick = (e) => {
