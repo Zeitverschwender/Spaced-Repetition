@@ -30,6 +30,13 @@ function EditItem(props) {
       props.hideEditDetails();
     }
   };
+
+  const updateNewItem = (key, value) => {
+    const editedItem = { ...newItem };
+    editedItem[key] = value;
+    setnewItem(editedItem);
+    setDataChanged(true);
+  };
   return (
     <div className="overaly-back" onClick={onBackClick}>
       <div className="overaly-content" onClick={(e) => e.stopPropagation()}>
@@ -41,10 +48,7 @@ function EditItem(props) {
             maxLength="128"
             defaultValue={props.item.title}
             className="title-textbox"
-            onChange={(e) => {
-              setnewItem({ ...newItem, title: e.target.value.trim() });
-              setDataChanged(true);
-            }}
+            onChange={(e) => updateNewItem("title", e.target.value.trim())}
           ></input>
           <span
             className={
@@ -79,10 +83,7 @@ function EditItem(props) {
           }
           defaultValue={props.item.description}
           maxLength="520"
-          onChange={(e) => {
-            setnewItem({ ...newItem, description: e.target.value.trim() });
-            setDataChanged(true);
-          }}
+          onChange={(e) => updateNewItem("description", e.target.value.trim())}
         ></textarea>
         <div className="item-details-footer">
           <div className="horizontal-sep"></div>
