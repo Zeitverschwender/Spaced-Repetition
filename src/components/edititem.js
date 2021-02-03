@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import "./edititem.scss";
+import IntervalSelection from "./intervalselection";
 
 function EditItem(props) {
   const [newItem, setnewItem] = useState({ _id: props.item._id });
@@ -88,12 +89,15 @@ function EditItem(props) {
         <div className="item-details-footer">
           <div className="horizontal-sep"></div>
           <div className="item-details-footer-content">
-            Preset
-            <select defaultValue="">
-              <option value="" disabled hidden>
-                Interval
-              </option>
-            </select>
+            <span className="preset-text">INTERVAL</span>
+            <IntervalSelection
+              onIntervalChange={(interval) =>
+                updateNewItem("interval", interval)
+              }
+              className="edit-item-interval"
+              selectClassName="edit-item-interval-select"
+              defaultValue={props.item.interval}
+            />
           </div>
         </div>
       </div>
