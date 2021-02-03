@@ -78,6 +78,8 @@ const IntervalSelection = forwardRef((props, ref) => {
 IntervalSelection.propTypes = {
   onIntervalChange: PropTypes.func.isRequired,
   defaultValue: PropTypes.string,
+  className: PropTypes.string,
+  selectClassName: PropTypes.string,
 };
 
 IntervalSelection.defaultProps={
