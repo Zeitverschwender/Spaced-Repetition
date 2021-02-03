@@ -20,9 +20,12 @@ function EditItem(props) {
   const onBackClick = (e) => {
     e.preventDefault();
     if (dataChanged) {
-      props.showConfirmBox("Are you sure you want to exit without saving?", () => {
-        props.hideEditDetails();
-      });
+      props.showConfirmBox(
+        "Are you sure you want to exit without saving?",
+        () => {
+          props.hideEditDetails();
+        }
+      );
     } else {
       props.hideEditDetails();
     }
