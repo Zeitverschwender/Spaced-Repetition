@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 function StatusIcons(props) {
   return (
     <div className="item-icons" style={{ fontSize: props.size }}>
-      <span title="Notifications: On" className="material-icons">
+      <span
+        title="Notifications: On"
+        className={"material-icons " + props.notificationsClass}
+        onClick={() => props.onNotificationClick()}
+      >
         notifications
       </span>
       {props.item.description && (
@@ -19,6 +23,12 @@ function StatusIcons(props) {
 StatusIcons.propTypes = {
   item: PropTypes.object.isRequired,
   size: PropTypes.string.isRequired,
+  onNotificationClick: PropTypes.func,
+  notificationsClass: PropTypes.string,
+};
+StatusIcons.defaultProps = {
+  onNotificationClick: () => {},
+  notificationsClass: "",
 };
 
 export default StatusIcons;

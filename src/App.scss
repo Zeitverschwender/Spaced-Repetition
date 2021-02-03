@@ -345,3 +345,11 @@ input::placeholder,
 textarea::placeholder {
   font-family: $font-mono;
 }
+
+.status-icon-clickable {
+  cursor: pointer;
+}
+
+.status-icon-disabled {
+  opacity: 0.8;
+}

@@ -3,9 +3,16 @@ import PropTypes from "prop-types";
 
 import "./edititem.scss";
 import IntervalSelection from "./intervalselection";
+import StatusIcons from "./statusicons";
 
 function EditItem(props) {
-  const [newItem, setnewItem] = useState({ _id: props.item._id });
+  const [newItem, setnewItem] = useState({
+    _id: props.item._id,
+    isNotificationsOn:
+      props.item.isNotificationsOn === null
+        ? true
+        : props.item.isNotificationsOn,
+  });
   const [dataChanged, setDataChanged] = useState(false);
   const saveOnClick = (e) => {
     e.preventDefault();
@@ -76,7 +83,20 @@ function EditItem(props) {
           </span>
         </div>
         <div className="horizontal-sep"></div>
-        <div className="details-status-icons"></div>
+        <div className="details-status-icons">
+          <StatusIcons
+            item={props.item}
+            size="2.25rem"
+            onNotificationClick={() =>
+              updateNewItem("isNotificationsOn", !newItem.isNotificationsOn)
+            }
+            notificationsClass={
+              newItem.isNotificationsOn
+                ? "status-icon-clickable"
+                : "status-icon-disabled"
+            }
+          />
+        </div>
         <textarea
           className="desc-textbox"
           placeholder={
