@@ -16,7 +16,7 @@ const IntervalSelection = forwardRef((props, ref) => {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
   const [defaultIntervals, setDefaultIntervals] = useState([]);
   const [intervals, setIntervals] = useState([]);
-  const [currentValue, setCurrentValue] = useState("");
+  const [currentValue, setCurrentValue] = useState(props.defaultValue);
 
   const createNotification = useContext(NotificationQueueContext);
   useEffect(() => {
@@ -77,6 +77,11 @@ const IntervalSelection = forwardRef((props, ref) => {
 
 IntervalSelection.propTypes = {
   onIntervalChange: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string,
 };
+
+IntervalSelection.defaultProps={
+  defaultValue: ''
+}
 
 export default IntervalSelection;
