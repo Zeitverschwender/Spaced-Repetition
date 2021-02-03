@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import PropTypes from "prop-types";
 
 import CreateInterval from "./createinterval";
@@ -6,10 +12,11 @@ import CreateInterval from "./createinterval";
 import { NotificationQueueContext } from "./notificationqueue";
 import Backend from "../services/backend";
 
-function IntervalSelection(props) {
+const IntervalSelection = forwardRef((props, ref) => {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
   const [defaultIntervals, setDefaultIntervals] = useState([]);
   const [intervals, setIntervals] = useState([]);
+  const [currentValue, setCurrentValue] = useState("");
 
   const createNotification = useContext(NotificationQueueContext);
   useEffect(() => {
@@ -21,6 +28,12 @@ function IntervalSelection(props) {
     _backend.getIntervals((data) => setIntervals(data), createNotification);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useImperativeHandle(ref, () => ({
+    clear() {
+      setCurrentValue("");
+    },
+  }));
 
   return (
     <React.Fragment>
@@ -34,8 +47,8 @@ function IntervalSelection(props) {
       )}
       <div className={props.className}>
         <select
-          defaultValue=""
           className={props.selectClassName}
+          value={currentValue}
           onChange={(e) => {
             let value = e.target.value;
             if (value === "create-item") {
@@ -43,7 +56,8 @@ function IntervalSelection(props) {
               e.target.value = "";
               setIsCreateIntervalShown(true);
             }
-            props.onIntervalChange(e.target.value);
+            props.onIntervalChange(value);
+            setCurrentValue(value);
           }}
         >
           <option value="" disabled hidden>
@@ -59,7 +73,7 @@ function IntervalSelection(props) {
       </div>
     </React.Fragment>
   );
-}
+});
 
 IntervalSelection.propTypes = {
   onIntervalChange: PropTypes.func.isRequired,

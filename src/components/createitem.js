@@ -11,6 +11,7 @@ export default function CreateItem(props) {
   const [isAllOptionsShown, setIsAllOptionsShown] = useState(false);
 
   const titleTextbox = useRef(null);
+  const intervalSelection = useRef(null);
 
   useEffect(() => {
     if (isCreateItemShown) {
@@ -20,9 +21,10 @@ export default function CreateItem(props) {
 
   const exitCreation = () => {
     titleTextbox.current.value = "";
-    setIsCreateItemShown(false);
+    intervalSelection.current.clear();
     setNewItem({});
     setIsAllOptionsShown(false);
+    setIsCreateItemShown(false);
   };
   const toggleAllOptions = (e) => setIsAllOptionsShown(!isAllOptionsShown);
   const createOnClick = (e) => {
@@ -51,6 +53,7 @@ export default function CreateItem(props) {
           onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
         />
         <IntervalSelection
+          ref={intervalSelection}
           onIntervalChange={(interval) => setNewItem({ ...newItem, interval })}
           className="interval"
           selectClassName={
