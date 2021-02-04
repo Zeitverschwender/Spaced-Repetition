@@ -21,9 +21,12 @@ import githubIcon from "./assets/images/github.svg";
 
 import { enableScrolling, disableScrolling } from "./utility/scrolling";
 import Home from "./pages/home";
+
+export const IntervalsContext = React.createContext({});
 class App extends Component {
   state = {
     repeatingItems: [],
+    intervals: [],
     notifications: [],
     notificationId: 1,
     isSideMenuShown: false,
@@ -45,6 +48,17 @@ class App extends Component {
         if (isLoggedIn) {
           this._backend.getRepeatingItems((items) => {
             this.setState({ repeatingItems: items });
+          }, this.createNotification);
+
+          this._backend.getIntervals((data) => {
+            this._backend.getDefaultIntervals(
+              (dataDefault) =>
+                this.setState({
+                  ...this.state,
+                  intervals: [...data, ...dataDefault],
+                }),
+              this.createNotification
+            );
           }, this.createNotification);
         } else {
           this.createNotification("Error: ", "Not logged in.");
@@ -105,7 +119,7 @@ class App extends Component {
       (err) => {
         this.setState({
           repeatingItems: oldRepeatingItems,
-        })
+        });
         this.createNotification("Error: ", "Could'nt edit item.");
       }
     );
@@ -186,11 +200,11 @@ class App extends Component {
   resetStreak = (item) => {
     item.resetStreak();
     this.editItem(item);
-  }
+  };
   continueStreak = (item) => {
     item.continueStreak();
     this.editItem(item);
-  }
+  };
 
   render() {
     return (
@@ -209,60 +223,69 @@ class App extends Component {
             <span className="title">Spaced Repetition</span>
           </header>
           <NotificationQueueContext.Provider value={this.createNotification}>
-            <Sidemenu
-              hideSideMenu={this.hideSideMenu}
-              style={{ display: this.state.isSideMenuShown ? "" : "none" }}
-            />
+            <IntervalsContext.Provider
+              value={{
+                intervals: this.state.intervals,
+                setIntervals: (intervals) => {
+                  this.setState({ ...this.state, intervals });
+                },
+              }}
+            >
+              <Sidemenu
+                hideSideMenu={this.hideSideMenu}
+                style={{ display: this.state.isSideMenuShown ? "" : "none" }}
+              />
 
-            <Switch>
-              <Route path="/loginRedirect" component={LoginRedirect} />
-              <Route path="/home" component={Home} />
-              <Route path="/About" component={AboutPage} />
-              <Route exact path="/">
-                {this.state.isFullDetailsShown && (
-                  <ItemFullDetails
-                    item={this.state.clickedItem}
-                    hideFullDetails={this.hideFullDetails}
-                    showEditDetails={this.showEditDetails}
-                    onResetStreak={this.resetStreak}
-                    onContinueStreak={this.continueStreak}
-                  />
-                )}
-                {this.state.isEditDetailsShown && (
-                  <EditItem
-                    item={this.state.clickedItem}
-                    hideEditDetails={this.hideEditDetails}
-                    editItem={this.editItem}
-                    deleteItem={this.deleteItem}
-                    showConfirmBox={this.showConfirmBox}
-                  />
-                )}
-                {this.state.confirmBox.isShown && (
-                  <ConfirmBox
-                    msg={this.state.confirmBox.msg}
-                    callOnYes={this.state.confirmBox.onYes}
-                    callOnNo={this.state.confirmBox.onNo}
-                    hideMe={this.hideConfirmBox}
-                  />
-                )}
-                <div className="content">
-                  <RepeatingList
-                    repeatingItems={this.state.repeatingItems}
-                    onAddItem={this.onAddItem}
-                    onItemClick={this.onItemClick}
-                    onResetStreak={this.resetStreak}
-                    onContinueStreak={this.continueStreak}
-                  ></RepeatingList>
-                </div>
-              </Route>
-              <Route path="*">
-                <NotFoundPage></NotFoundPage>
-              </Route>
-            </Switch>
-            <NotificationQueue
-              notifications={this.state.notifications}
-              onNotificationCloseClick={this.closeNotification}
-            />
+              <Switch>
+                <Route path="/loginRedirect" component={LoginRedirect} />
+                <Route path="/home" component={Home} />
+                <Route path="/About" component={AboutPage} />
+                <Route exact path="/">
+                  {this.state.isFullDetailsShown && (
+                    <ItemFullDetails
+                      item={this.state.clickedItem}
+                      hideFullDetails={this.hideFullDetails}
+                      showEditDetails={this.showEditDetails}
+                      onResetStreak={this.resetStreak}
+                      onContinueStreak={this.continueStreak}
+                    />
+                  )}
+                  {this.state.isEditDetailsShown && (
+                    <EditItem
+                      item={this.state.clickedItem}
+                      hideEditDetails={this.hideEditDetails}
+                      editItem={this.editItem}
+                      deleteItem={this.deleteItem}
+                      showConfirmBox={this.showConfirmBox}
+                    />
+                  )}
+                  {this.state.confirmBox.isShown && (
+                    <ConfirmBox
+                      msg={this.state.confirmBox.msg}
+                      callOnYes={this.state.confirmBox.onYes}
+                      callOnNo={this.state.confirmBox.onNo}
+                      hideMe={this.hideConfirmBox}
+                    />
+                  )}
+                  <div className="content">
+                    <RepeatingList
+                      repeatingItems={this.state.repeatingItems}
+                      onAddItem={this.onAddItem}
+                      onItemClick={this.onItemClick}
+                      onResetStreak={this.resetStreak}
+                      onContinueStreak={this.continueStreak}
+                    ></RepeatingList>
+                  </div>
+                </Route>
+                <Route path="*">
+                  <NotFoundPage></NotFoundPage>
+                </Route>
+              </Switch>
+              <NotificationQueue
+                notifications={this.state.notifications}
+                onNotificationCloseClick={this.closeNotification}
+              />
+            </IntervalsContext.Provider>
           </NotificationQueueContext.Provider>
           <footer>
             <a

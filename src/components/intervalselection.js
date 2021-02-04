@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useEffect,
   useContext,
   forwardRef,
   useImperativeHandle,
@@ -9,25 +8,13 @@ import PropTypes from "prop-types";
 
 import CreateInterval from "./createinterval";
 
-import { NotificationQueueContext } from "./notificationqueue";
-import Backend from "../services/backend";
+import { IntervalsContext } from "../App";
 
 const IntervalSelection = forwardRef((props, ref) => {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
-  const [defaultIntervals, setDefaultIntervals] = useState([]);
-  const [intervals, setIntervals] = useState([]);
   const [currentValue, setCurrentValue] = useState(props.defaultValue);
 
-  const createNotification = useContext(NotificationQueueContext);
-  useEffect(() => {
-    const _backend = new Backend();
-    _backend.getDefaultIntervals(
-      (data) => setDefaultIntervals(data),
-      createNotification
-    );
-    _backend.getIntervals((data) => setIntervals(data), createNotification);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { intervals, setIntervals } = useContext(IntervalsContext);
 
   useImperativeHandle(ref, () => ({
     clear() {
@@ -41,7 +28,7 @@ const IntervalSelection = forwardRef((props, ref) => {
         <CreateInterval
           hideMe={() => setIsCreateIntervalShown(false)}
           onAddNewInterval={(newInterval) =>
-            setIntervals([...intervals, newInterval])
+            setIntervals([newInterval, ...intervals])
           }
         ></CreateInterval>
       )}
@@ -63,7 +50,7 @@ const IntervalSelection = forwardRef((props, ref) => {
           <option value="" disabled hidden>
             Interval
           </option>
-          {[...intervals, ...defaultIntervals].map((item) => (
+          {intervals.map((item) => (
             <option key={item._id} value={item._id}>
               {item.title} ({item.days.toString()})
             </option>
@@ -82,8 +69,8 @@ IntervalSelection.propTypes = {
   selectClassName: PropTypes.string,
 };
 
-IntervalSelection.defaultProps={
-  defaultValue: ''
-}
+IntervalSelection.defaultProps = {
+  defaultValue: "",
+};
 
 export default IntervalSelection;
