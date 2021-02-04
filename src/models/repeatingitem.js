@@ -40,7 +40,7 @@ export class RepeatingItem {
     this.phase = phase;
     this.streakPassed = false;
 
-    if (streakStart === null) {
+    if (!streakStart) {
       this.streak = 0;
     } else {
       this.updateStreak();
