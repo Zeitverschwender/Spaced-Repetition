@@ -78,3 +78,10 @@
   align-items: center;
   gap: 0.4em;
 }
+
+.continue-streak-details{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 0.5rem;
+}
