@@ -9,7 +9,8 @@ function EditItem(props) {
   const [newItem, setnewItem] = useState({
     _id: props.item._id,
     isNotificationsOn:
-      props.item.isNotificationsOn === null
+      props.item.isNotificationsOn === null ||
+      props.item.isNotificationsOn === undefined
         ? true
         : props.item.isNotificationsOn,
   });
