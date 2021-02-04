@@ -46,8 +46,8 @@ function EditItem(props) {
     setDataChanged(true);
   };
   return (
-    <div className="overaly-back" onClick={onBackClick}>
-      <div className="overaly-content" onClick={(e) => e.stopPropagation()}>
+    <div className="overlay-back" onClick={onBackClick}>
+      <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
         <div className="before-sep">
           <input
             type="text"

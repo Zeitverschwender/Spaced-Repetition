@@ -113,9 +113,9 @@ function CreateInterval(props) {
   };
 
   return (
-    <div className="overaly-back" onClick={props.hideMe}>
+    <div className="overlay-back" onClick={props.hideMe}>
       <div
-        className="overaly-content create-preset-content"
+        className="overlay-content create-preset-content"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="create-preset-header">

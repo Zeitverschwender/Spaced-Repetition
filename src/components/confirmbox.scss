@@ -1,7 +1,7 @@
 @import "../App.scss";
 
 .confirm-box-content {
-  @extend .overaly-content;
+  @extend .overlay-content;
   height: auto;
   min-height: 10%;
   max-height: 30%;
