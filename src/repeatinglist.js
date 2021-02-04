@@ -5,7 +5,7 @@ import { RepeatingItem } from "./repeatingitem";
 import { RepeatingItem as RItem } from "./models/repeatingitem";
 import CreateItem from "./components/createitem";
 
-const LOADING_ITEM = new RItem(0, "Loading..", "");
+const LOADING_ITEM = new RItem({ _id: 0, title: "LOADING", description: "" });
 export class RepeatingList extends Component {
   render() {
     return (
@@ -28,9 +28,7 @@ export class RepeatingList extends Component {
             onContinueStreak={this.props.onContinueStreak}
           ></RepeatingItem>
         ))}
-        <CreateItem
-          onAddItem={this.props.onAddItem}
-        ></CreateItem>
+        <CreateItem onAddItem={this.props.onAddItem}></CreateItem>
       </div>
     );
   }
