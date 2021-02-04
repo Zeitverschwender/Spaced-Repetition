@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
+@import "media.scss";
+
 $colors: (
   primary: #43a680,
   dark: darken(#43a680, 25%),
@@ -30,6 +32,7 @@ $border-radius: 0.15em;
 $transition-time: 0.19s;
 $box-shadow: 6px 9px 1em -0.3em black;
 $item-padding: 0.85em 1.25em;
+$item-padding-mobile: 0.85em 0.7em;
 
 $font-main: "Roboto", sans-serif;
 $font-mono: "Roboto Mono", sans-serif;
@@ -37,6 +40,7 @@ $font-mono: "Roboto Mono", sans-serif;
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
+
 html,
 body {
   height: 100%;
@@ -48,10 +52,13 @@ body {
   color: color(text-color);
 
   background-image: url("./assets/images/repeat.svg");
-  background-size: 18%;
   background-position: center center;
 
   font-family: $font-main;
+
+  @include media(mobile) {
+    background-size: 18%;
+  }
 }
 
 .material-icons {
@@ -87,6 +94,9 @@ header {
     font-weight: 700;
     color: white;
     letter-spacing: 0.08em;
+    @include media(mobile) {
+      font-size: 2rem;
+    }
   }
   img {
     width: 2em;
@@ -113,6 +123,10 @@ header {
 .content {
   width: 80%;
   margin: 2em auto;
+
+  @include media(desktop) {
+    width: 45%;
+  }
 }
 
 footer {
@@ -145,6 +159,10 @@ footer {
 .repeating-item {
   background: color(repeating-item-back);
   padding: $item-padding;
+  @include media(mobile) {
+    padding: $item-padding-mobile;
+    gap: 0.75em;
+  }
 
   border-radius: $border-radius;
 
@@ -218,6 +236,10 @@ $sep-size: 3.18em;
     @extend .one-line-text-trim;
     font-size: 1rem;
     font-weight: 700;
+
+    @include media(mobile) {
+      font-size: 0.95rem;
+    }
   }
 }
 
@@ -226,6 +248,8 @@ $sep-size: 3.18em;
 
   align-self: flex-start;
   text-align: right;
+
+  flex-basis: 15%;
 }
 .next-notification {
   font-family: $font-mono;
@@ -288,6 +312,11 @@ $sep-size: 3.18em;
   width: 75%;
   height: 45%;
 
+  @include media(desktop) {
+    width: 40%;
+    height: 60%;
+  }
+
   background: color(repeating-item-back);
 
   box-shadow: 6px 9px 2em 0em black;
@@ -313,6 +342,8 @@ $sep-size: 3.18em;
   transition: $transition-time;
 
   font-weight: 700;
+
+  text-align: center;
 }
 .blue-button {
   @extend .text-button;

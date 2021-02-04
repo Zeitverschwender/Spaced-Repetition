@@ -6,6 +6,10 @@
   min-height: 10%;
   max-height: 30%;
   width: 55%;
+  @include media(desktop) {
+    max-height: 45%;
+    width: 20%;
+  }
 
   gap: 1em;
 
@@ -25,5 +29,11 @@
 
   display: flex;
   justify-content: space-around;
-}
 
+  gap: 1em;
+
+  .red-button,
+  .blue-button {
+    flex-basis: 20%;
+  }
+}

@@ -1,0 +1,24 @@
+$mobile-width: 667px;
+$desktop-width: 1050px;
+$media-queries: (
+  mobile: "(max-width: #{$mobile-width})",
+  tablet:
+    "(min-width: #{$mobile-width + 1} ) and (max-width: #{$desktop-width  - 1})",
+  desktop: "(min-width: #{$desktop-width})",
+  landscape: "(orientation:landscape) ",
+  portrait: "(orientation:portrait) ",
+);
+
+@mixin media($breakpoints) {
+  $conditions: ();
+  @each $breakpoint in $breakpoints {
+    $conditions: append(
+      $conditions,
+      unquote("only screen and " + map-get($media-queries, $breakpoint)),
+      comma
+    );
+  }
+  @media #{$conditions} {
+    @content;
+  }
+}
