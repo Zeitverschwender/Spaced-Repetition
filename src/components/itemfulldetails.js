@@ -9,10 +9,7 @@ import "./itemfulldetails.scss";
 export default function ItemFullDetails(props) {
   return (
     <div className="overaly-back" onClick={(e) => props.hideFullDetails()}>
-      <div
-        className="overaly-content"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="overaly-content" onClick={(e) => e.stopPropagation()}>
         <div className="before-sep">
           <h2 className="full-title"> {props.item.title} </h2>
           <span
@@ -30,7 +27,6 @@ export default function ItemFullDetails(props) {
             close
           </span>
         </div>
-
         <div className="horizontal-sep"></div>
         <div className="details-status-icons">
           <StatusIcons item={props.item} size="2.25rem" />
@@ -41,14 +37,18 @@ export default function ItemFullDetails(props) {
           )}
         </div>
         <div className="item-details-footer">
+          <div className={`continue-streak-details ${props.item.streakPassed? "":"hidden"}`}>
+            <div className="blue-button" onClick={() => {props.onContinueStreak(props.item)}}>Continue Streak</div>
+            <div className="red-button" onClick={() => {props.onResetStreak(props.item)}}>Reset Streak</div>
+          </div>
           <div className="horizontal-sep"></div>
           <div className="item-details-footer-content">
             <div className="details-streak">
               <span className="streak">Streak</span>
-              <span className="streak-count">{props.item.getStreak()}</span>
+              <span className={`streak-count ${props.item.streakPassed? "streak-passed":""}`}>{props.item.streak.toString()}</span>
             </div>
-            <div className="next-notification">
-              After {props.item.getNextNotification()}
+            <div className={`next-notification ${props.item.streakPassed? "streak-passed":""}`}>
+              {props.item.nextNotification}
             </div>
           </div>
         </div>
@@ -60,4 +60,6 @@ ItemFullDetails.propTypes = {
   item: PropTypes.object.isRequired,
   hideFullDetails: PropTypes.func.isRequired,
   showEditDetails: PropTypes.func.isRequired,
+  onResetStreak: PropTypes.func.isRequired,
+  onContinueStreak: PropTypes.func.isRequired,
 };

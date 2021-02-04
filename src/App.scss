@@ -178,6 +178,26 @@ footer {
   font-size: 1.38rem;
 }
 
+
+.continue-streak-items{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 0.5rem;
+  background-color: darken(color(repeating-item-back), 12%);
+  margin-top: -0.2rem;
+  padding-top: 0.6rem;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+.streak-passed{
+  color: color(red);
+  font-weight: bold;
+}
+
+.hidden{
+  display: none;
+}
 $sep-size: 3.18em;
 
 .sep {

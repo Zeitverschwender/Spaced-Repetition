@@ -31,7 +31,7 @@ class Backend {
       .then((res) => {
         const items = [];
         res.data.forEach((item) => {
-          items.push(Object.assign(new RepeatingItem(), item));
+          items.push(new RepeatingItem(item));
         });
         onSuccess(items);
       })

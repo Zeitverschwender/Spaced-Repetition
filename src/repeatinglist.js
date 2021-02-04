@@ -24,6 +24,8 @@ export class RepeatingList extends Component {
             key={item._id}
             item={item}
             onItemClick={this.props.onItemClick}
+            onResetStreak={this.props.onResetStreak}
+            onContinueStreak={this.props.onContinueStreak}
           ></RepeatingItem>
         ))}
         <CreateItem
@@ -38,6 +40,8 @@ RepeatingList.propTypes = {
   repeatingItems: PropTypes.array.isRequired,
   onAddItem: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
+  onResetStreak: PropTypes.func.isRequired,
+  onContinueStreak: PropTypes.func.isRequired,
 };
 
 export default RepeatingList;

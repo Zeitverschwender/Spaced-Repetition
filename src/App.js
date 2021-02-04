@@ -67,7 +67,7 @@ class App extends Component {
         this.setState({
           repeatingItems: [
             ...this.state.repeatingItems,
-            Object.assign(new RepeatingItem(), item),
+            new RepeatingItem(item),
           ],
         });
         callback();
@@ -86,23 +86,26 @@ class App extends Component {
   };
 
   editItem = (newItem) => {
+    const oldRepeatingItems = this.state.repeatingItems;
+    const editedItemIndex = this.state.repeatingItems.findIndex(
+      (element) => element._id === newItem._id
+    );
+    this.state.repeatingItems.splice(
+      editedItemIndex,
+      1,
+      Object.assign(this.state.repeatingItems[editedItemIndex], newItem)
+    );
+
+    this.setState({
+      repeatingItems: this.state.repeatingItems,
+    });
     this._backend.editItem(
       newItem,
-      (data) => {
-        const editedItemIndex = this.state.repeatingItems.findIndex(
-          (element) => element._id === newItem._id
-        );
-        this.state.repeatingItems.splice(
-          editedItemIndex,
-          1,
-          Object.assign(this.state.repeatingItems[editedItemIndex], newItem)
-        );
-
-        this.setState({
-          repeatingItems: this.state.repeatingItems,
-        });
-      },
+      (data) => {},
       (err) => {
+        this.setState({
+          repeatingItems: oldRepeatingItems,
+        })
         this.createNotification("Error: ", "Could'nt edit item.");
       }
     );
@@ -180,6 +183,14 @@ class App extends Component {
   hideConfirmBox = () => {
     this.setState({ confirmBox: { ...this.state.confirmBox, isShown: false } });
   };
+  resetStreak = (item) => {
+    item.resetStreak();
+    this.editItem(item);
+  }
+  continueStreak = (item) => {
+    item.continueStreak();
+    this.editItem(item);
+  }
 
   render() {
     return (
@@ -213,6 +224,8 @@ class App extends Component {
                     item={this.state.clickedItem}
                     hideFullDetails={this.hideFullDetails}
                     showEditDetails={this.showEditDetails}
+                    onResetStreak={this.resetStreak}
+                    onContinueStreak={this.continueStreak}
                   />
                 )}
                 {this.state.isEditDetailsShown && (
@@ -237,6 +250,8 @@ class App extends Component {
                     repeatingItems={this.state.repeatingItems}
                     onAddItem={this.onAddItem}
                     onItemClick={this.onItemClick}
+                    onResetStreak={this.resetStreak}
+                    onContinueStreak={this.continueStreak}
                   ></RepeatingList>
                 </div>
               </Route>
