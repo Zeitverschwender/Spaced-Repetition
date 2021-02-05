@@ -119,7 +119,7 @@ function CreateInterval(props) {
     backend.deleteInterval(
       props.defaultItem._id,
       (data) => {
-        props.onAddNewInterval(data);
+        props.onDeleteNewInterval(props.defaultItem._id);
         createNotification("Success", "Interval was deleted.");
         props.hideMe();
       },
@@ -297,6 +297,7 @@ function CreateInterval(props) {
 CreateInterval.propTypes = {
   hideMe: PropTypes.func.isRequired,
   onAddNewInterval: PropTypes.func.isRequired,
+  onDeleteNewInterval: PropTypes.func,
   defaultItem: PropTypes.object,
   isEdit: PropTypes.bool,
 };

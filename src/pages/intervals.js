@@ -33,6 +33,14 @@ export default function Intervals() {
             ] = editedItem;
             setIntervals(newIntervals);
           }}
+          onDeleteNewInterval={(itemID) => {
+            const newIntervals = [...intervals];
+            newIntervals.splice(
+              newIntervals.findIndex((item) => item._id === itemID),
+              1
+            );
+            setIntervals(newIntervals);
+          }}
           isEdit={true}
         />
       )}
