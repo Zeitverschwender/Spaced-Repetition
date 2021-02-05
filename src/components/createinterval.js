@@ -169,7 +169,10 @@ function CreateInterval(props) {
             </span>
           )}
           <span
-            className="material-icons details-buttons"
+            className={
+              "material-icons details-buttons " +
+              (props.isEdit ? "" : "first-button")
+            }
             title="Exit"
             onClick={props.hideMe}
           >
