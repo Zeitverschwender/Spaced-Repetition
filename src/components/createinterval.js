@@ -19,6 +19,7 @@ function CreateInterval(props) {
   );
   const [addingInterval, setAddingInterval] = useState(false);
   const [invalidItems, setInvalidItems] = useState([]);
+  const [wasEdited, setWasEdited] = useState(false);
 
   const backend = new Backend();
 
@@ -147,10 +148,23 @@ function CreateInterval(props) {
       ...newInterval.splice(result.source.index, 1)
     );
     setInterval(newInterval);
+    setWasEdited(true);
+  };
+
+  const attemptExit = () => {
+    if (wasEdited) {
+      showConfirmBox(
+        "Are you sure you want to exit without saving?",
+        () => props.hideMe(),
+        () => {}
+      );
+    } else {
+      props.hideMe();
+    }
   };
 
   return (
-    <div className="overlay-back" onClick={props.hideMe}>
+    <div className="overlay-back" onClick={attemptExit}>
       <div
         className="overlay-content create-preset-content"
         onClick={(e) => e.stopPropagation()}
@@ -174,7 +188,7 @@ function CreateInterval(props) {
               (props.isEdit ? "" : "first-button")
             }
             title="Exit"
-            onClick={props.hideMe}
+            onClick={attemptExit}
           >
             close
           </span>
@@ -187,7 +201,10 @@ function CreateInterval(props) {
             defaultValue={title}
             id="preset-title"
             maxLength="128"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setWasEdited(true);
+            }}
           />
           <h3>You will get a notification</h3>
           <DragDropContext onDragEnd={handleReOrder}>
@@ -235,6 +252,7 @@ function CreateInterval(props) {
                               e.preventDefault();
                               interval[i][0] = Number(e.target.value);
                               setInterval([...interval]);
+                              setWasEdited(true);
                             }}
                           />
                           <select
@@ -243,6 +261,7 @@ function CreateInterval(props) {
                               e.preventDefault();
                               interval[i][1] = e.target.value;
                               setInterval([...interval]);
+                              setWasEdited(true);
                             }}
                           >
                             <option value="day">DAY(S)</option>
@@ -258,6 +277,7 @@ function CreateInterval(props) {
                               e.preventDefault();
                               interval.splice(i, 1);
                               setInterval([...interval]);
+                              setWasEdited(true);
                             }}
                           >
                             clear
@@ -269,7 +289,10 @@ function CreateInterval(props) {
                   {provided.placeholder}
                   <div
                     className="create-preset-add-item"
-                    onClick={() => setInterval([...interval, getNewItem()])}
+                    onClick={() => {
+                      setInterval([...interval, getNewItem()]);
+                      setWasEdited(true);
+                    }}
                   >
                     <span
                       className="material-icons preset-add-item-icon"
