@@ -15,16 +15,17 @@ const getFormattedDays = (days) => {
 };
 
 export default function Intervals() {
-  const [iscreateIntervalShown, setIsCreateIntervalShown] = useState(false);
+  const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
+  const [isEditIntervalShown, setIsEditIntervalShown] = useState(false);
   const [clickedItem, setClickedItem] = useState();
   const { intervals, defaultIntervals, setIntervals } = useContext(
     IntervalsContext
   );
   return (
     <React.Fragment>
-      {iscreateIntervalShown && clickedItem && (
+      {isEditIntervalShown && clickedItem && (
         <CreateInterval
-          hideMe={() => setIsCreateIntervalShown(false)}
+          hideMe={() => setIsEditIntervalShown(false)}
           defaultItem={clickedItem}
           onAddNewInterval={(editedItem) => {
             const newIntervals = [...intervals];
@@ -44,6 +45,14 @@ export default function Intervals() {
           isEdit={true}
         />
       )}
+      {isCreateIntervalShown && (
+        <CreateInterval
+          hideMe={() => setIsCreateIntervalShown(false)}
+          onAddNewInterval={(newInterval) =>
+            setIntervals([newInterval, ...intervals])
+          }
+        ></CreateInterval>
+      )}
       <div className="content">
         {intervals.length === 0 ? (
           <div className="repeating-list">
@@ -59,7 +68,7 @@ export default function Intervals() {
                   className="repeating-item"
                   onClick={() => {
                     setClickedItem(item);
-                    setIsCreateIntervalShown(true);
+                    setIsEditIntervalShown(true);
                   }}
                 >
                   <span className="interval-list-title">{item.title}</span>
@@ -68,6 +77,12 @@ export default function Intervals() {
                   ).join(", ")}`}</span>
                 </div>
               ))}
+              <div
+                className="create-item-button"
+                onClick={() => setIsCreateIntervalShown(true)}
+              >
+                <span className="material-icons">add</span> Create Interval
+              </div>
             </div>
             <h2 className="my-intervals-titles">GLOBAL INTERVALS</h2>
             <div className="repeating-list">
