@@ -36,7 +36,7 @@ class Backend {
         onSuccess(items);
       })
       .catch((err) => {
-        onFailure("Error: ", "Could'nt get items.");
+        onFailure("Error: ", "Couldn't get items.");
       });
   }
 
@@ -47,7 +47,7 @@ class Backend {
         onSuccess(res.data);
       })
       .catch((err) => {
-        onFailure("Error: ", "Could'nt get default intervals.");
+        onFailure("Error: ", "Couldn't get default intervals.");
       });
   }
   getIntervals(onSuccess, onFailure) {
@@ -57,7 +57,7 @@ class Backend {
         onSuccess(res.data);
       })
       .catch((err) => {
-        onFailure("Error: ", "Could'nt get your custom intervals.");
+        onFailure("Error: ", "Couldn't get your custom intervals.");
       });
   }
 

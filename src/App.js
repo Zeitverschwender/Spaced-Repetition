@@ -74,7 +74,7 @@ class App extends Component {
         }
       },
       (err) => {
-        this.createNotification("Error: ", "Could'nt check log in status.");
+        this.createNotification("Error: ", "Couldn't check log in status.");
       }
     );
   }
@@ -96,7 +96,7 @@ class App extends Component {
         callback();
       },
       (err) => {
-        this.createNotification("Error: ", "Could'nt add item.");
+        this.createNotification("Error: ", "Couldn't add item.");
       }
     );
   };
@@ -129,7 +129,7 @@ class App extends Component {
         this.setState({
           repeatingItems: oldRepeatingItems,
         });
-        this.createNotification("Error: ", "Could'nt edit item.");
+        this.createNotification("Error: ", "Couldn't edit item.");
       }
     );
   };
@@ -151,7 +151,7 @@ class App extends Component {
         });
       },
       (err) => {
-        this.createNotification("Error: ", "Could'nt delete item.");
+        this.createNotification("Error: ", "Couldn't delete item.");
       }
     );
   };

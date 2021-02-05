@@ -21,7 +21,7 @@ export default function UserSection() {
         setIsLoggedIn(data);
       },
       (err) => {
-        createNotification("Error: ", "Could'nt check log in status.");
+        createNotification("Error: ", "Couldn't check log in status.");
       }
     );
   });
@@ -54,7 +54,7 @@ export default function UserSection() {
         window.location.reload();
       },
       (err) => {
-        createNotification("Error: Could'nt log out.", err);
+        createNotification("Error: Couldn't log out.", err);
       }
     );
   };
