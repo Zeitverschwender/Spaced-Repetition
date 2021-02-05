@@ -10,11 +10,13 @@
 
   align-items: center;
 
+  gap: 0.25em;
+
   .create-preset-title {
     font-weight: 700;
     font-size: 1.2rem;
   }
-  .details-buttons {
+  .first-button {
     margin-left: auto;
   }
 }

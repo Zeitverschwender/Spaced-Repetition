@@ -113,6 +113,21 @@ function CreateInterval(props) {
     }
   };
 
+  const deleteOnClick = () => {
+    backend.deleteInterval(
+      props.defaultItem._id,
+      (data) => {
+        props.onAddNewInterval(data);
+        createNotification("Success", "Interval was deleted.");
+        props.hideMe();
+      },
+      (err) => {
+        createNotification("Error", "Couldn't delete interval.");
+        setAddingInterval(false);
+      }
+    );
+  };
+
   const handleReOrder = (result) => {
     if (!result.destination) return;
     const newInterval = [...interval];
@@ -134,6 +149,15 @@ function CreateInterval(props) {
           <span className="create-preset-title">
             {props.isEdit ? "EDIT" : "CREATE"} INTERVAL
           </span>
+          {props.isEdit && (
+            <span
+              className="material-icons details-buttons first-button"
+              title="Delete"
+              onClick={deleteOnClick}
+            >
+              delete
+            </span>
+          )}
           <span
             className="material-icons details-buttons"
             title="Exit"

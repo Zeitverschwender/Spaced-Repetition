@@ -164,5 +164,15 @@ class Backend {
         onFailure(err);
       });
   }
+  deleteInterval(id, onSuccess, onFailure) {
+    axios
+      .delete(`${ENDPOINT_REPEATING_INTERVALS}/${this.getToken()}/${id}`)
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
 }
 export default Backend;
