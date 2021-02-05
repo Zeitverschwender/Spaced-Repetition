@@ -149,5 +149,20 @@ class Backend {
         onFailure(err);
       });
   }
+  editInterval(editedInterval, onSuccess, onFailure) {
+    axios
+      .patch(
+        `${ENDPOINT_REPEATING_INTERVALS}/${this.getToken()}/${
+          editedInterval._id
+        }`,
+        editedInterval
+      )
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onFailure(err);
+      });
+  }
 }
 export default Backend;

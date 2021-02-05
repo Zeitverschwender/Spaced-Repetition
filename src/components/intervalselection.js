@@ -14,7 +14,9 @@ const IntervalSelection = forwardRef((props, ref) => {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
   const [currentValue, setCurrentValue] = useState(props.defaultValue);
 
-  const { intervals, setIntervals } = useContext(IntervalsContext);
+  const { intervals, defaultIntervals, setIntervals } = useContext(
+    IntervalsContext
+  );
 
   useImperativeHandle(ref, () => ({
     clear() {
@@ -50,7 +52,7 @@ const IntervalSelection = forwardRef((props, ref) => {
           <option value="" disabled hidden>
             Interval
           </option>
-          {intervals.map((item) => (
+          {[...intervals, ...defaultIntervals].map((item) => (
             <option key={item._id} value={item._id}>
               {item.title} ({item.days.toString()})
             </option>

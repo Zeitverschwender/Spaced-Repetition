@@ -117,7 +117,7 @@ function EditItem(props) {
               }
               className="edit-item-interval"
               selectClassName="edit-item-interval-select"
-              defaultValue={props.item.interval}
+              defaultValue={props.item.interval._id}
             />
           </div>
         </div>

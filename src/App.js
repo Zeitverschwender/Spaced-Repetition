@@ -28,6 +28,7 @@ class App extends Component {
   state = {
     repeatingItems: [],
     intervals: [],
+    defaultIntervals: [],
     notifications: [],
     notificationId: 1,
     isSideMenuShown: false,
@@ -51,16 +52,22 @@ class App extends Component {
             this.setState({ repeatingItems: items });
           }, this.createNotification);
 
-          this._backend.getIntervals((data) => {
-            this._backend.getDefaultIntervals(
-              (dataDefault) =>
-                this.setState({
-                  ...this.state,
-                  intervals: [...data, ...dataDefault],
-                }),
-              this.createNotification
-            );
-          }, this.createNotification);
+          this._backend.getIntervals(
+            (data) =>
+              this.setState({
+                ...this.state,
+                intervals: data,
+              }),
+            this.createNotification
+          );
+          this._backend.getDefaultIntervals(
+            (data) =>
+              this.setState({
+                ...this.state,
+                defaultIntervals: data,
+              }),
+            this.createNotification
+          );
         } else {
           this.createNotification("Error: ", "Not logged in.");
         }
@@ -227,6 +234,7 @@ class App extends Component {
             <IntervalsContext.Provider
               value={{
                 intervals: this.state.intervals,
+                defaultIntervals: this.state.defaultIntervals,
                 setIntervals: (intervals) => {
                   this.setState({ ...this.state, intervals });
                 },

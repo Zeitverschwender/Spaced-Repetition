@@ -5,12 +5,15 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./createinterval.scss";
 import Backend from "../services/backend";
 import { NotificationQueueContext } from "./notificationqueue";
+import { convertCumulativeDaysToDayMonth } from "../utility/intervals";
 
 const MAX_VALUE = 30;
 function CreateInterval(props) {
-  const [title, setTitle] = useState("");
-  const [interval, setInterval] = useState([[1, "day", 0]]);
-  const [itemIDCounter, setItemIDCounter] = useState(0);
+  const [title, setTitle] = useState(props.defaultItem.title);
+  const [interval, setInterval] = useState(convertCumulativeDaysToDayMonth(props.defaultItem.days));
+  const [itemIDCounter, setItemIDCounter] = useState(
+    props.defaultItem.days.length
+  );
   const [addingInterval, setAddingInterval] = useState(false);
   const [invalidItems, setInvalidItems] = useState([]);
 
@@ -86,19 +89,28 @@ function CreateInterval(props) {
         lastValue + itemNumber * (itemUnit === "month" ? 30 : 1)
       );
     });
-
-    backend.createInterval(
-      { title, days: apiIntervalFormat },
-      (data) => {
-        props.onAddNewInterval(data);
-        createNotification("Success", "Interval was added.");
-        props.hideMe();
-      },
-      (err) => {
-        createNotification("Error", "Couldn't add interval.");
-        setAddingInterval(false);
-      }
-    );
+    const getOnSuccessFunction = (msg) => (data) => {
+      props.onAddNewInterval(data);
+      createNotification("Success", msg);
+      props.hideMe();
+    };
+    const getOnFailureFunction = (msg) => (data) => {
+      createNotification("Error", msg);
+      setAddingInterval(false);
+    };
+    if (props.isEdit) {
+      backend.editInterval(
+        { _id: props.defaultItem._id, title, days: apiIntervalFormat },
+        getOnSuccessFunction("Interval was edited."),
+        getOnFailureFunction("Couldn't edit interval.")
+      );
+    } else {
+      backend.createInterval(
+        { title, days: apiIntervalFormat },
+        getOnSuccessFunction("Interval was added."),
+        getOnFailureFunction("Couldn't add interval.")
+      );
+    }
   };
 
   const handleReOrder = (result) => {
@@ -119,7 +131,9 @@ function CreateInterval(props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="create-preset-header">
-          <span className="create-preset-title">CREATE INTERVAL</span>
+          <span className="create-preset-title">
+            {props.isEdit ? "EDIT" : "CREATE"} INTERVAL
+          </span>
           <span
             className="material-icons details-buttons"
             title="Exit"
@@ -133,6 +147,7 @@ function CreateInterval(props) {
           <input
             type="text"
             placeholder="Interval title"
+            defaultValue={title}
             id="preset-title"
             maxLength="128"
             onChange={(e) => setTitle(e.target.value)}
@@ -245,7 +260,7 @@ function CreateInterval(props) {
             }
             onClick={createOnClick}
           >
-            CREATE
+            {props.isEdit ? "EDIT" : "CREATE"}
           </div>
         </div>
       </div>
@@ -256,6 +271,12 @@ function CreateInterval(props) {
 CreateInterval.propTypes = {
   hideMe: PropTypes.func.isRequired,
   onAddNewInterval: PropTypes.func.isRequired,
+  defaultItem: PropTypes.object,
+  isEdit: PropTypes.bool,
+};
+CreateInterval.defaultProps = {
+  defaultItem: { title: "", days: [1] },
+  isEdit: false,
 };
 
 export default CreateInterval;
