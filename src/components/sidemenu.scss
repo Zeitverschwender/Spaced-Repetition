@@ -40,6 +40,9 @@
       background: rgba($color: color(blue), $alpha: 1);
 
       font-size: 1.2rem;
+      @include media(mobile) {
+        font-size: 1rem;
+      }
       font-weight: 700;
       letter-spacing: 0.05em;
 
