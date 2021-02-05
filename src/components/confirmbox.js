@@ -5,7 +5,7 @@ import "./confirmbox.scss";
 
 function ConfirmBox(props) {
   return (
-    <div className="overlay-back" onClick={() => props.hideMe()}>
+    <div className="confirm-box-back" onClick={() => props.hideMe()}>
       <div className="confirm-box-content" onClick={(e) => e.stopPropagation()}>
         <div className="confirm-box-msg">{props.msg}</div>
         <div className="horizontal-sep"></div>

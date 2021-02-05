@@ -6,6 +6,7 @@ import "./createinterval.scss";
 import Backend from "../services/backend";
 import { NotificationQueueContext } from "./notificationqueue";
 import { convertCumulativeDaysToDayMonth } from "../utility/intervals";
+import { ConfirmBoxContext } from "../App";
 
 const MAX_VALUE = 30;
 function CreateInterval(props) {
@@ -22,6 +23,7 @@ function CreateInterval(props) {
   const backend = new Backend();
 
   const createNotification = useContext(NotificationQueueContext);
+  const showConfirmBox = useContext(ConfirmBoxContext);
 
   const getNewItem = () => {
     const [lastItemNumber, lastItemUnit] = interval[interval.length - 1];
@@ -116,17 +118,23 @@ function CreateInterval(props) {
   };
 
   const deleteOnClick = () => {
-    backend.deleteInterval(
-      props.defaultItem._id,
-      (data) => {
-        props.onDeleteNewInterval(props.defaultItem._id);
-        createNotification("Success", "Interval was deleted.");
-        props.hideMe();
+    showConfirmBox(
+      "Are you sure you want to delete this interval?",
+      () => {
+        backend.deleteInterval(
+          props.defaultItem._id,
+          (data) => {
+            props.onDeleteNewInterval(props.defaultItem._id);
+            createNotification("Success", "Interval was deleted.");
+            props.hideMe();
+          },
+          (err) => {
+            createNotification("Error", "Couldn't delete interval.");
+            setAddingInterval(false);
+          }
+        );
       },
-      (err) => {
-        createNotification("Error", "Couldn't delete interval.");
-        setAddingInterval(false);
-      }
+      () => {}
     );
   };
 

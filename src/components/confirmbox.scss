@@ -1,5 +1,10 @@
 @import "../App.scss";
 
+.confirm-box-back {
+  @extend .overlay-back;
+  z-index: 100;
+}
+
 .confirm-box-content {
   @extend .overlay-content;
   height: auto;
