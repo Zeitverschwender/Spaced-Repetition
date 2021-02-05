@@ -36,6 +36,7 @@ export default function Sidemenu(props) {
             className="path-link"
             activeClassName="path-link-active"
             onClick={() => props.hideSideMenu()}
+            key={path}
           >
             {img}
             {text}
