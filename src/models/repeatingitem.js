@@ -59,7 +59,6 @@ export class RepeatingItem {
   }
   resetStreak() {
     this.streakStart = Date.now();
-    console.log(Date.now());
     this.phase = 1;
     this.streakPassed = false;
     this.updateStreak();
