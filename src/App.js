@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import { RepeatingItem } from "./models/repeatingitem";
 import Sidemenu from "./components/sidemenu";
@@ -42,6 +47,7 @@ class App extends Component {
       onNo: null,
       isShown: false,
     },
+    isUserLoggedIn: true,
   };
 
   componentDidMount() {
@@ -70,7 +76,7 @@ class App extends Component {
             this.createNotification
           );
         } else {
-          this.createNotification("Error: ", "Not logged in.");
+          this.setState({ ...this.state, isUserLoggedIn: false });
         }
       },
       (err) => {
@@ -258,8 +264,11 @@ class App extends Component {
                   <Route path="/loginRedirect" component={LoginRedirect} />
                   <Route path="/home" component={Home} />
                   <Route path="/About" component={AboutPage} />
-                  <Route path="/intervals" component={Intervals} />
+                  <Route path="/intervals" component={Intervals}>
+                    {!this.state.isUserLoggedIn && <Redirect to="/home" />}
+                  </Route>
                   <Route exact path="/">
+                    {!this.state.isUserLoggedIn && <Redirect to="/home" />}
                     {this.state.isFullDetailsShown && (
                       <ItemFullDetails
                         item={this.state.clickedItem}
