@@ -102,7 +102,7 @@ class Backend {
     axios
       .get(`${ENDPOINT_USER_STATUS}/${this.getToken()}`)
       .then((res) => {
-        onSuccess(res.data === 'Logged In');
+        onSuccess(res.data === "Logged In");
       })
       .catch((err) => {
         onFailure(err);

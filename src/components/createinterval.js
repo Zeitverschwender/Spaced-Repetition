@@ -10,7 +10,9 @@ import { convertCumulativeDaysToDayMonth } from "../utility/intervals";
 const MAX_VALUE = 30;
 function CreateInterval(props) {
   const [title, setTitle] = useState(props.defaultItem.title);
-  const [interval, setInterval] = useState(convertCumulativeDaysToDayMonth(props.defaultItem.days));
+  const [interval, setInterval] = useState(
+    convertCumulativeDaysToDayMonth(props.defaultItem.days)
+  );
   const [itemIDCounter, setItemIDCounter] = useState(
     props.defaultItem.days.length
   );
