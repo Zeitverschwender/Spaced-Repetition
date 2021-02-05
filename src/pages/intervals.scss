@@ -1,0 +1,15 @@
+@import "../App.scss";
+
+.interval-list-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.interval-list-info {
+  margin-left: auto;
+  flex-basis: 20%;
+
+  font-family: $font-mono;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba($color: black, $alpha: 0.75);
+}

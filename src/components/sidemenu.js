@@ -7,6 +7,7 @@ import UserSection from "./usersection";
 const navLinks = [
   ["home", <span className="material-icons">home</span>, "HOME"],
   ["", <span className="material-icons">list</span>, "MY ITEMS"],
+  ["intervals", <span className="material-icons">update</span>, "MY INTERVALS"],
   [
     "About",
     <svg

@@ -21,6 +21,7 @@ import githubIcon from "./assets/images/github.svg";
 
 import { enableScrolling, disableScrolling } from "./utility/scrolling";
 import Home from "./pages/home";
+import Intervals from "./pages/intervals";
 
 export const IntervalsContext = React.createContext({});
 class App extends Component {
@@ -240,6 +241,7 @@ class App extends Component {
                 <Route path="/loginRedirect" component={LoginRedirect} />
                 <Route path="/home" component={Home} />
                 <Route path="/About" component={AboutPage} />
+                <Route path="/intervals" component={Intervals} />
                 <Route exact path="/">
                   {this.state.isFullDetailsShown && (
                     <ItemFullDetails
