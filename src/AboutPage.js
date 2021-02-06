@@ -27,7 +27,7 @@ class AboutPage extends Component {
             <div className="about-content">
                 <div className="about-product-wrapper">
                     <h1>About Spaced Repetition</h1>
-                    <Zoom direction="up" duration={1000}>
+                    <Zoom direction="up" duration={800}>
                     <p className="about-product">{this.state.productInfo}</p>
                     </Zoom>
                 </div>
@@ -35,8 +35,8 @@ class AboutPage extends Component {
                 <div className="hook-wrapper">
                     <h1>SCIENCE of remembering</h1>
                     <div  className="hook">
-                        <Slide direction="left" duration={2000}><p>{this.state.theoryInfo}</p></Slide>
-                        <Slide direction="right" duration={2000}><img src={Ebbinghaus} alt="Ebbinghaus" className="hook-image"></img></Slide>
+                        <Slide direction="left" duration={1500}><p>{this.state.theoryInfo}</p></Slide>
+                        <Slide direction="right" duration={1500}><img src={Ebbinghaus} alt="Ebbinghaus" className="hook-image"></img></Slide>
                     </div>
                 </div>
 
