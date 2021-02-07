@@ -57,27 +57,32 @@ class App extends Component {
     this._backend.isUserLoggedIn(
       (isLoggedIn) => {
         if (isLoggedIn) {
-          this._backend.getRepeatingItems((items) => {
-            this.setState({ repeatingItems: items, repeatingItemsReceived: true });
-          }, this.createNotification);
+          this._backend.getRepeatingItems(
+            (items) =>
+              this.setState({
+                repeatingItems: items,
+                repeatingItemsReceived: true,
+              }),
+            this.createNotification
+          );
 
-          this._backend.getIntervals((data) => {
-            this.setState({
-              ...this.state,
-              intervals: data,
-            });
-            this.setState({ ...this.state, intervalsReceived: true });
-          }, this.createNotification);
+          this._backend.getIntervals(
+            (data) =>
+              this.setState({
+                intervals: data,
+                intervalsReceived: true,
+              }),
+            this.createNotification
+          );
           this._backend.getDefaultIntervals(
             (data) =>
               this.setState({
-                ...this.state,
                 defaultIntervals: data,
               }),
             this.createNotification
           );
         } else {
-          this.setState({ ...this.state, isUserLoggedIn: false });
+          this.setState({ isUserLoggedIn: false });
         }
       },
       (err) => {
@@ -245,7 +250,7 @@ class App extends Component {
                 intervalsReceived: this.state.intervalsReceived,
                 defaultIntervals: this.state.defaultIntervals,
                 setIntervals: (intervals) => {
-                  this.setState({ ...this.state, intervals });
+                  this.setState({ intervals });
                 },
               }}
             >
@@ -292,7 +297,9 @@ class App extends Component {
                     <div className="content">
                       <RepeatingList
                         repeatingItems={this.state.repeatingItems}
-                        repeatingItemsReceived={this.state.repeatingItemsReceived}
+                        repeatingItemsReceived={
+                          this.state.repeatingItemsReceived
+                        }
                         onAddItem={this.onAddItem}
                         onItemClick={this.onItemClick}
                         onResetStreak={this.resetStreak}
