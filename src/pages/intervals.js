@@ -18,9 +18,12 @@ export default function Intervals() {
   const [isCreateIntervalShown, setIsCreateIntervalShown] = useState(false);
   const [isEditIntervalShown, setIsEditIntervalShown] = useState(false);
   const [clickedItem, setClickedItem] = useState();
-  const { intervals, defaultIntervals, setIntervals } = useContext(
-    IntervalsContext
-  );
+  const {
+    intervals,
+    intervalsReceived,
+    defaultIntervals,
+    setIntervals,
+  } = useContext(IntervalsContext);
   return (
     <React.Fragment>
       {isEditIntervalShown && clickedItem && (
@@ -54,14 +57,12 @@ export default function Intervals() {
         ></CreateInterval>
       )}
       <div className="content">
-        {intervals.length === 0 ? (
-          <div className="repeating-list">
+        <h2 className="my-intervals-titles">MY INTERVALS</h2>
+        <div className="repeating-list">
+          {!intervalsReceived ? (
             <div className="repeating-item loading-item">LOADING...</div>
-          </div>
-        ) : (
-          <React.Fragment>
-            <h2 className="my-intervals-titles">MY INTERVALS</h2>
-            <div className="repeating-list">
+          ) : (
+            <React.Fragment>
               {intervals.map((item) => (
                 <div
                   key={item._id}
@@ -77,29 +78,31 @@ export default function Intervals() {
                   ).join(", ")}`}</span>
                 </div>
               ))}
+
               <div
                 className="create-item-button"
                 onClick={() => setIsCreateIntervalShown(true)}
               >
                 <span className="material-icons">add</span> Create Interval
               </div>
-            </div>
-            <h2 className="my-intervals-titles">GLOBAL INTERVALS</h2>
-            <div className="repeating-list">
-              {defaultIntervals.map((item) => (
-                <div
-                  key={item._id}
-                  className="repeating-item no-pointer-cursor"
-                >
-                  <span className="interval-list-title">{item.title}</span>
-                  <span className="interval-list-info">{`${getFormattedDays(
-                    item.days
-                  ).join(", ")}`}</span>
-                </div>
-              ))}
-            </div>
-          </React.Fragment>
-        )}
+            </React.Fragment>
+          )}
+        </div>
+        <h2 className="my-intervals-titles">GLOBAL INTERVALS</h2>
+        <div className="repeating-list">
+          {!intervalsReceived ? (
+            <div className="repeating-item loading-item">LOADING...</div>
+          ) : (
+            defaultIntervals.map((item) => (
+              <div key={item._id} className="repeating-item no-pointer-cursor">
+                <span className="interval-list-title">{item.title}</span>
+                <span className="interval-list-info">{`${getFormattedDays(
+                  item.days
+                ).join(", ")}`}</span>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </React.Fragment>
   );

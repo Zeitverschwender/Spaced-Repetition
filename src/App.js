@@ -35,6 +35,7 @@ class App extends Component {
     repeatingItems: [],
     intervals: [],
     defaultIntervals: [],
+    intervalsReceived: false,
     notifications: [],
     notificationId: 1,
     isSideMenuShown: false,
@@ -59,14 +60,13 @@ class App extends Component {
             this.setState({ repeatingItems: items });
           }, this.createNotification);
 
-          this._backend.getIntervals(
-            (data) =>
-              this.setState({
-                ...this.state,
-                intervals: data,
-              }),
-            this.createNotification
-          );
+          this._backend.getIntervals((data) => {
+            this.setState({
+              ...this.state,
+              intervals: data,
+            });
+            this.setState({ ...this.state, intervalsReceived: true });
+          }, this.createNotification);
           this._backend.getDefaultIntervals(
             (data) =>
               this.setState({
@@ -241,6 +241,7 @@ class App extends Component {
             <IntervalsContext.Provider
               value={{
                 intervals: this.state.intervals,
+                intervalsReceived: this.state.intervalsReceived,
                 defaultIntervals: this.state.defaultIntervals,
                 setIntervals: (intervals) => {
                   this.setState({ ...this.state, intervals });
