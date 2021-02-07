@@ -33,6 +33,7 @@ export const ConfirmBoxContext = React.createContext({});
 class App extends Component {
   state = {
     repeatingItems: [],
+    repeatingItemsReceived: false,
     intervals: [],
     defaultIntervals: [],
     intervalsReceived: false,
@@ -57,7 +58,7 @@ class App extends Component {
       (isLoggedIn) => {
         if (isLoggedIn) {
           this._backend.getRepeatingItems((items) => {
-            this.setState({ repeatingItems: items });
+            this.setState({ repeatingItems: items, repeatingItemsReceived: true });
           }, this.createNotification);
 
           this._backend.getIntervals((data) => {
@@ -291,6 +292,7 @@ class App extends Component {
                     <div className="content">
                       <RepeatingList
                         repeatingItems={this.state.repeatingItems}
+                        repeatingItemsReceived={this.state.repeatingItemsReceived}
                         onAddItem={this.onAddItem}
                         onItemClick={this.onItemClick}
                         onResetStreak={this.resetStreak}

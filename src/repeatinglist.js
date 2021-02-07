@@ -10,7 +10,7 @@ export class RepeatingList extends Component {
   render() {
     return (
       <div className="repeating-list">
-        {this.props.repeatingItems.length === 0 && (
+        {!this.props.repeatingItemsReceived ? (
           <div className="loading-item">
             <RepeatingItem
               key={LOADING_ITEM._id}
@@ -18,16 +18,17 @@ export class RepeatingList extends Component {
               onItemClick={() => {}}
             ></RepeatingItem>
           </div>
+        ) : (
+          this.props.repeatingItems.map((item) => (
+            <RepeatingItem
+              key={item._id}
+              item={item}
+              onItemClick={this.props.onItemClick}
+              onResetStreak={this.props.onResetStreak}
+              onContinueStreak={this.props.onContinueStreak}
+            ></RepeatingItem>
+          ))
         )}
-        {this.props.repeatingItems.map((item) => (
-          <RepeatingItem
-            key={item._id}
-            item={item}
-            onItemClick={this.props.onItemClick}
-            onResetStreak={this.props.onResetStreak}
-            onContinueStreak={this.props.onContinueStreak}
-          ></RepeatingItem>
-        ))}
         <CreateItem onAddItem={this.props.onAddItem}></CreateItem>
       </div>
     );
@@ -36,6 +37,7 @@ export class RepeatingList extends Component {
 
 RepeatingList.propTypes = {
   repeatingItems: PropTypes.array.isRequired,
+  repeatingItemsReceived: PropTypes.bool.isRequired,
   onAddItem: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onResetStreak: PropTypes.func.isRequired,
